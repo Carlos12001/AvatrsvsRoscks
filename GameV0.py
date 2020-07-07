@@ -21,6 +21,7 @@ screen = pygame.display.set_mode(size)
 font = pygame.font.SysFont("Times New Roman", 50)
 font2 = pygame.font.SysFont("Times New Roman", 30)
 
+clock = pygame.time.Clock()
 # --------------------------------------------- Funciones ---------------------------------------------- #
 # -------------------------------------- Funcion para crear texto -------------------------------------- #
         
