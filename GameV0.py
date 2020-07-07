@@ -24,8 +24,8 @@ font2 = pygame.font.SysFont("Times New Roman", 30)
 # --------------------------------------------- Funciones ---------------------------------------------- #
 # -------------------------------------- Funcion para crear texto -------------------------------------- #
         
-def text (text, font, color, surface, x , y):
-    txtobj = font.render(text, 1, color)
+def text (text, font, color, surface, x , y,backgrounf=None):
+    txtobj = font.render(text, 1, color,backgrounf)
     txtrect = txtobj.get_rect()
     txtrect.center = (x, y)
     surface.blit (txtobj, txtrect)
@@ -47,53 +47,13 @@ def start ():
                 sys.exit()
             if event.type == pygame.KEYUP:
                 run = False
+                from Ventanas import ventana_nuevo_nombre
 
-# ---------------------- Ventana dodne el jugador digita su nombre por primera vez --------------------- #
 
-def name ():
-    screen.fill (dark) # color la ventana
-    text("Ingrese su nombre", font, darkpurple, screen, 505, 105)
-    text("Ingrese su nombre", font, green, screen, 500, 100)
-    pygame.display.flip()
-    run = True
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYUP:
-                run = False
-        # entrada texto del nombre 
-        # escribir el nombre del jugador en un txt
-        
-# ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 
-def menu():
-    screen.fill(green) # color de la ventana
-    text('Jugar', font2, screen, 500,150)
-    text('Configuración', font2, screen, 500,150)
-    text('Salon de la fama', font2, screen, 500,150)
-    text('Ayuda', font2, screen, 500,150)
 
-    pygame.display.flip()
-    run = True
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-                
-                
-# ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
-def juego():
-    screen.fill(white)
-    #Imagen de fondos
-    #Por ahorita es el fondo blanco
-    #background = pygame.image.load('fonfo.png').convert()
-    #screen.fill(background,[0,0])
 
-    pygame.draw.rect(screen, purple, (125, 0, 750, 800))
-    
+
 
 # ----------------------------------------------- CLASES ----------------------------------------------- #
 # --------------------------------------- Clase entrada de texto --------------------------------------- #
@@ -117,7 +77,8 @@ class Entry:
                     sys.exit()
                 elif action.key == K_BACKSPACE:
                     if self.letters[self.lineas] == "" and self.lineas > 0:
-                        self.letters =
+                        #self.letters =
+                        pass
     def mensaje (self, surface):
         pass
 
@@ -129,5 +90,5 @@ class Entry:
 
   
 start()
-name()
+
 
