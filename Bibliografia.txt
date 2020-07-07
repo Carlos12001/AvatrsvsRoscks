@@ -19,7 +19,9 @@ http://conocepython.blogspot.com/p/la-funcion-main.html#:~:text=la%20funci%C3%B3
 
 https://blog.depositphotos.com/15-cyberpunk-color-palettes-for-dystopian-designs.html
 
+#Comando para volver a cargar funciones
+https://www.codigofuente.org/crear-e-importar-modulos-python/       #Reload('funcion')
+
 # comando para instalar Pygame
     # En la cmd
     
-pip install Pygame
