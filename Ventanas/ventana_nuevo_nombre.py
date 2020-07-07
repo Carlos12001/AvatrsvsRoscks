@@ -95,8 +95,7 @@ def name():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYUP:
-                run = False
+            #if event.type == pygame.KEYUP:
                 from Ventanas import ventana_de_menu
                 #run = False
         name_entry.keys(pygame.event.get())
