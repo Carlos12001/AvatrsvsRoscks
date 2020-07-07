@@ -3,7 +3,7 @@ import pygame
 from GameV0 import *
 
 white = (255, 255, 255)
-
+ pos_rool = [type, x, y]
 class Rooks (pygame.sprite.Sprite):
     def __init__(self, pos_rook):
         super().__init__()
@@ -75,12 +75,12 @@ class Rooks (pygame.sprite.Sprite):
                 # posicionar cada self.type_rook en un a posicion estandar
                 self.rect.x = 250
                 self.rect.y = 45
-                self.rect = self.image.set_rect((rect.x, rect.y)) # verificar si esto esta bien
+                self.rect = self.image.set_rect((self.rect.x, self.rect.y)) # verificar si esto esta bien
             elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
                 # posicionar cada self.type_rook en un a posicion estandar
                 self.rect.x = 350
-                self.rect.y = 45
-                self.rect = self.image.set_rect((rect.x, rect.y))  # verificar si esto esta bien
+                self.rect.y = 45 # cambiar set rect por center
+                self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
             elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
                 # posicionar cada self.type_rook en un a posicion estandar
                 self.rect.x = 450
