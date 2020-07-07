@@ -67,9 +67,9 @@ class Rooks (pygame.sprite.Sprite):
                 self.pa = 8
                 cost_water = 150
 
-        mouse_pos = pygame.mouse.get_pos
-        mouse_click = pygame.mouse.get_pressed()
-        def position (self, mouse_pos, mouse_click):
+        def position (self):
+            mouse_pos = pygame.mouse.get_pos
+            mouse_click = pygame.mouse.get_pressed()
             # primer fila
             if 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
                 # posicionar cada self.type_rook en un a posicion estandar
