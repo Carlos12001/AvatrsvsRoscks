@@ -12,9 +12,18 @@ def text(text, font, color, surface, x, y):
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
 
+# REVISAR EL FUNCIONAMIENTO DE ESTA FUNCION, NO ESCRIBE
+def save_name (name):
+    ruta = "player_name.txt"
+    file = open(ruta,"w")
+    file.write(name)
+    file.write('\n')
+    file.write("Tiempo" + '\n')
+    file.write("000")
+    file.write('\n')
+    file.close()
 
 # ---------------------- Ventana dodne el jugador digita su nombre por primera vez --------------------- #
-
 
 def name():
     entrybox = pygame.Rect(400,300,200,50)
@@ -31,7 +40,7 @@ def name():
                 if entrybox.collidepoint(event.pos):
                     active = True
                 elif button.collidepoint(event.pos) and user_name != "":
-                    # agregar la escritura del nombre 
+                    save_name(user_name)
                     run = False
                     from Ventanas import ventana_de_menu
                 else:
