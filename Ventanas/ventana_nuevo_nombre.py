@@ -62,7 +62,7 @@ class Entry:
                         self.letters = self.letters[0: -1]
                         self.line -= 1
                     else:
-                        self.letters[self.line] = self.letters[self.line][0:-1]
+                        self.letters[self.line] += self.letters[self.line][0:-1]
                 else:
                     self.letters[self.line] = strg(self.letters[self.line] + event.unicode)
     def mensaje (self, surface):
@@ -84,22 +84,31 @@ def text(text, font, color, surface, x, y):
 
 
 def name():
-    name_entry = Entry(300,400)
-    screen.fill(dark)  # color la ventana
-    text("Ingrese su nombre", font, darkpurple, screen, 505, 105)
-    text("Ingrese su nombre", font, green, screen, 500, 100)
-    pygame.display.flip()
+    entrybox = pygame.Rect(400,300,200,50)
+    user_name = ""
     run = True
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            #if event.type == pygame.KEYUP:
-                from Ventanas import ventana_de_menu
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    user_name = user_name [0:-1]
+                else:
+                    user_name += event.unicode
+                #from Ventanas import ventana_de_menu
                 #run = False
-        name_entry.keys(pygame.event.get())
-        name_entry.mensaje(screen)
+
+        screen.fill(dark)  # color la ventana
+        pygame.draw.rect(screen, brown,entrybox)
+        text("Ingrese su nombre", font, darkpurple, screen, 505, 105)
+        text("Ingrese su nombre", font, green, screen, 500, 100)
+        text(user_name, font2, white,screen, entrybox.x + 100, entrybox.y + 25)
+
+        
+        pygame.display.flip()
+
 
 
 
