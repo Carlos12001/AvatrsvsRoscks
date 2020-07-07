@@ -21,7 +21,7 @@ def menu():
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()
 
-        print(mouse_pos)
+
         #Verificar si presiona algun cartel
         if 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 125< mouse_pos[1] < 175:
             from Ventanas import ventana_de_juego
