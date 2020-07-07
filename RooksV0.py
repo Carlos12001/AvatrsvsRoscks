@@ -5,6 +5,9 @@ class Rooks ():
         self.y = y
         self.type = type
 
+    # Rook de arena
+    if type == 1:
+        
 
     def position (self, )
         # rango del mouse
