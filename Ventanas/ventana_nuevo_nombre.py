@@ -3,10 +3,6 @@ from GameV0 import *
 
 # --------------------------------------------- Clases ---------------------------------------#
 
-class Entry():
-    def __init__ (self, x, y, width, height, text = ""):
-        self.rect = pygame
-
 # --------------------------------------------- Funciones ---------------------------------------------- #
 # -------------------------------------- Funcion para crear texto -------------------------------------- #
 
@@ -16,23 +12,66 @@ def text(text, font, color, surface, x, y):
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
 
+# REVISAR EL FUNCIONAMIENTO DE ESTA FUNCION, NO ESCRIBE
+def save_name (name):
+    ruta = "player_name.txt"
+    file = open(ruta,"w")
+    file.write(name)
+    file.write('\n')
+    file.write("Tiempo" + '\n')
+    file.write("000")
+    file.write('\n')
+    file.close()
 
 # ---------------------- Ventana dodne el jugador digita su nombre por primera vez --------------------- #
 
 def name():
-    screen.fill(dark)  # color la ventana
-    text("Ingrese su nombre", font, darkpurple, screen, 505, 105)
-    text("Ingrese su nombre", font, green, screen, 500, 100)
-    pygame.display.flip()
+    entrybox = pygame.Rect(400,300,200,50)
+    button = pygame.Rect(440, 400, 140, 50)
+    user_name = ""
+    active = False
     run = True
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYUP:
-                run = False
-                from Ventanas import ventana_de_menu
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if entrybox.collidepoint(event.pos):
+                    active = True
+                elif button.collidepoint(event.pos) and user_name != "":
+                    save_name(user_name)
+                    run = False
+                    from Ventanas import ventana_de_menu
+                else:
+                    active = False
+
+            elif event.type == pygame.KEYDOWN:
+                if active == True:
+                    if event.key == pygame.K_BACKSPACE:
+                        user_name = user_name [0:-1]
+                    elif event.key == pygame.K_TAB:
+                        user_name = user_name
+                    #elif event.key == pygame.K_
+                    else:
+                        user_name += event.unicode
+
+                #from Ventanas import ventana_de_menu
+                #run = False
+        screen.fill(dark)  # color la ventana
+        pygame.draw.rect(screen, brown,entrybox)
+        pygame.draw.rect(screen, green, button)
+        text("Ingrese su nombre", font, darkpurple, screen, 505, 105)
+        text("Ingrese su nombre", font, green, screen, 500, 100)
+        text(user_name, font2, white,screen, entrybox.x + 100, entrybox.y + 25)
+        text("Guardar", font2, dark, screen, button.x + 70, button.y + 25)
+
+
+        pygame.display.flip()
+
+
+
+
         # entrada texto del nombre
         # escribir el nombre del jugador en un txt
 

@@ -77,11 +77,18 @@ class Entry:
                     pygame.quit()
                     sys.exit()
                 elif action.key == K_BACKSPACE:
-                    if self.letters[self.lineas] == "" and self.lineas > 0:
-                        #self.letters =
-                        pass
+                    if self.letters[self.line] == "" and self.line > 0:
+                        self.letters = self.letters[0: -1]
+                        self.line -= 1
+                    else:
+                        self.letters[self.line] = self.letters[self.line][0:-1]
+                else:
+                    self.letters[self.line] = srt(self.letters[self.line] + accion.unicode)
     def mensaje (self, surface):
-        pass
+        screen.fill(brown)
+        for self.line in len(self.letters):
+            letter_render = self.font.render(self.letters[self.line], True, dark)
+            screen.blit(letter_render, self.posX, self.posY + self.distance * self.line)
 
 
 
