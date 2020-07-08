@@ -2,9 +2,11 @@ import pygame,sys,random
 from GameV0 import *
 from Objetos import AvartsV0
 
+#Variables Globales a Necesitar
+
 
 #Matriz de posiciones de juego
-global MATRIZ, all_sprites_matriz_list
+global MATRIZ, all_sprites_matriz_list, time_to_start, time_last_time_new_enemy
 MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
@@ -16,6 +18,22 @@ MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    [
               ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]]   ]
 
 all_sprites_matriz_list =  pygame.sprite.Group ()
+
+time_to_start = pygame.time.get_ticks()/1000
+
+time_last_time_new_enemy = time_to_start
+
+
+
+
+
+
+
+
+#Parte Funcional del Juego
+
+
+
 
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 def juego():
@@ -34,7 +52,10 @@ def juego():
 
 
     #Conjunto de enemigos
-    avatar_list = pygame.sprite.Group ()
+    global avatar_list
+    avatar_list = []
+    avatar_list_in_game = pygame.sprite.Group ()
+    list_ramdom_secs = []
 
     level_1 = True
     level_2 = False
@@ -42,9 +63,13 @@ def juego():
 
     #Creacion de Avatars segun el nivel que se encuentra
     if level_1:
+        # Tiempo de apracion de avatar entre 5 15
+        list_ramdom_secs = range(5,15)
         for i in range(50):
             avatar = AvartsV0.New_Avart(random.randint(1,4))
-            avatar_list.add(avatar)
+            avatar_list.append(avatar)
+
+
 
     game_over=False
     while not game_over:
@@ -56,24 +81,56 @@ def juego():
         if level_1:
             screen.blit(matriz_0_dibujo, [250, 0])
 
-            for enemy in avatar_list:
-                for estado in MATRIZ[ len(MATRIZ)-5 : ] :
-                    if estado[0] == 'Vacio' and enemy.posicion_get() [0] == estado [1] [0]:
-                        screen.blit(enemy.image_get(),enemy.posicion_get())
-                        estado[0] = enemy.type_get()
+            draw_objetcs_matriz()
 
-                    else:
-                        pass
+            put_new_enemy(list_ramdom_secs)
 
 
 
 
-        clock.tick(1)
+
+
+
+        clock.tick(60)
         pygame.display.flip()
 
+def put_new_enemy(list_ramdom_secs):
+    global time_last_time_new_enemy
+    random.choice(list_ramdom_secs)
+    if 15 == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
+        print('Han pasado',int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy), 'Totalmente',pygame.time.get_ticks()//1000 )
+        time_last_time_new_enemy = pygame.time.get_ticks()//1000
+        return put_new_enemy_aux()
+
+def put_new_enemy_aux():
+
+    global avatar_list
+    done = False
+    print()
+    print('Me llamaron')
+    for enemy in avatar_list:
+        for estado in MATRIZ[len(MATRIZ) - 5:]:
+            if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
+                estado[0] = enemy
+                avatar_list = avatar_list[1:]
+                print('enemigo puesto','Quedan en total sin poner',len(avatar_list))
+                done = True
+            else:
+                #print('Estoy lleno')
+                pass
+
+        if done:
+            print('termine de poner enemigo')
+            print()
+            break
 
 def draw_objetcs_matriz():
-    global all_sprites_matriz_list
-    for draw in all_sprites_matriz_list:
-        screen.draw
+    global all_sprites_matriz_list,MATRIZ
+    for cuadrito in MATRIZ:
+        object = cuadrito[0]
+        if object != 'Vacio':
+            object.draw_me()
+
+
+
 juego()

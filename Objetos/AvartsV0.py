@@ -97,3 +97,5 @@ class New_Avart ( pygame.sprite.Sprite ):
     #Movimiento
     def update(self):
         self.rect.y -= 100
+    def draw_me(self):
+        screen.blit(self.image, self.posicion_get())
