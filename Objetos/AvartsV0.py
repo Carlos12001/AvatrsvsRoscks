@@ -91,7 +91,6 @@ class New_Avart ( pygame.sprite.Sprite ):
         elif self.type_avatar == 4:
             return 'Canival'
 
-
     #Obtener imagen
     def image_get(self):
         return self.image

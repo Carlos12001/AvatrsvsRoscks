@@ -5,15 +5,15 @@ from Objetos import AvartsV0
 
 #Matriz de posiciones de juego
 global MATRIZ, all_sprites_matriz_list
-MATRIZ = [    ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
-              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0]   ]
+MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]]   ]
 
 all_sprites_matriz_list =  pygame.sprite.Group ()
 
@@ -57,18 +57,18 @@ def juego():
             screen.blit(matriz_0_dibujo, [250, 0])
 
             for enemy in avatar_list:
-                for estado in MATRIZ[len(MATRIZ)-5:] :
-
-                    if estado[0] == 'Vacio':
+                for estado in MATRIZ[ len(MATRIZ)-5 : ] :
+                    if estado[0] == 'Vacio' and enemy.posicion_get() [0] == estado [1] [0]:
                         screen.blit(enemy.image_get(),enemy.posicion_get())
                         estado[0] = enemy.type_get()
+
                     else:
                         pass
 
 
 
 
-        clock.tick(5)
+        clock.tick(1)
         pygame.display.flip()
 
 
