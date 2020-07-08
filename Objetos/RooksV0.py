@@ -4,7 +4,7 @@ from GameV0 import *
 
 white = (255, 255, 255)
 
-class Rooks (pygame.sprite.Sprite):
+class New_Rooks (pygame.sprite.Sprite):
     def __init__(self, pos_rook):
         super().__init__()
             self.type_rook = pos_rook[0]
