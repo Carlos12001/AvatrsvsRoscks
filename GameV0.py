@@ -47,8 +47,15 @@ def start ():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYUP:
-                run = False
-                from Ventanas import ventana_nuevo_nombre
+
+                if event.type != 3:
+                    run = False
+                    from Ventanas import ventana_nuevo_nombre
+
+                else:
+                    run = False
+                    from Ventanas import ventana_de_juego
+
 
 
 
