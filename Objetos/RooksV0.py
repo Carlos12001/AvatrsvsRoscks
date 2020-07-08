@@ -5,11 +5,11 @@ from GameV0 import *
 white = (255, 255, 255)
 #pos_rook = [type, x, y]
 class Rooks (pygame.sprite.Sprite):
-    def __init__(self, pos_rook):
+    def __init__(self, tipo):
         super().__init__()
-        self.type_rook = pos_rook[0]
-        self.x = pos_rook[1][0]
-        self.y = pos_rook[1][0]
+        self.type_rook = tipo
+        #self.x = 0
+        #self.y = 0
 
         #if self.type_rook == 5:
         # Rook de arena
@@ -18,8 +18,8 @@ class Rooks (pygame.sprite.Sprite):
             self.image = pygame.image.load("resource/rook_sand.png").convert()
             self.image.set_colorkey(white)
             self.rect = self.image.get_rect()
-            self.rect.x = self.x
-            self.rect.y = self.y
+            #self.rect.x = self.x
+            #self.rect.y = self.y
 
             # Caracteristicas del sand rook
             self.ps = 7
@@ -32,8 +32,8 @@ class Rooks (pygame.sprite.Sprite):
             self.image = pygame.image.load("resource/rook_rock.png").convert()
             self.image.set_colorkey(white)
             self.rect = self.image.get_rect()
-            self.rect.x = self.x
-            self.rect.y = self.y
+            #self.rect.x = self.x
+            #self.rect.y = self.y
 
             # Caracteristicas del sand rook
             self.ps = 14
@@ -46,8 +46,8 @@ class Rooks (pygame.sprite.Sprite):
             self.image = pygame.image.load("resource/rook_fire.png").convert()
             self.image.set_colorkey(white)
             self.rect = self.image.get_rect()
-            self.rect.x = self.x
-            self.rect.y = self.y
+            #self.rect.x = self.x
+            #self.rect.y = self.y
 
             # Caracteristicas del sand rook
             self.ps = 16
@@ -60,8 +60,8 @@ class Rooks (pygame.sprite.Sprite):
             self.image = pygame.image.load("resource/rook_water.png").convert()
             self.image.set_colorkey(white)
             self.rect = self.image.get_rect()
-            self.rect.x = self.x
-            self.rect.y = self.y
+            #self.rect.x = self.x
+            #self.rect.y = self.y
 
             # Caracteristicas del sand rook
             self.ps = 16

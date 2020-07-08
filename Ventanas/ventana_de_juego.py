@@ -2,6 +2,7 @@ import pygame,sys,random
 from GameV0 import *
 from Objetos import AvartsV0
 from Objetos import RooksV0
+from Objetos import CoinsV0
 
 #Variables Globales a Necesitar
 
@@ -26,7 +27,12 @@ time_last_time_new_enemy = time_to_start
 
 
 
-
+# funcion texto
+def text(text, font, color, surface, x, y):
+    txtobj = font.render(text, 1, color)
+    txtrect = txtobj.get_rect()
+    txtrect.center = (x, y)
+    surface.blit(txtobj, txtrect)
 
 
 
@@ -37,7 +43,8 @@ time_last_time_new_enemy = time_to_start
 
 
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
-coins = 500
+
+
 def juego():
 
 
@@ -58,14 +65,26 @@ def juego():
     rock_button = pygame.Rect(0,580,100,80)
     fire_button = pygame.Rect(0,660,100,80)
     water_button =pygame.Rect(0,740,100,80)
+
     #Conjunto de enemigos
     global avatar_list
     avatar_list = []
     avatar_list_in_game = pygame.sprite.Group ()
     list_ramdom_secs = []
 
-    # Conjunto de rooks
-    rook_list = pygame.sprite.Group()
+    # Conjunto rooks
+    global rook_list
+    rook_list = []
+    rook_list_in_game = pygame.sprite.Group()
+
+    # Conjunto de monedas
+
+    coin_list = pygame.sprite.Group()
+    #ramdom_secs_coin = random.randint(5, 15)
+    for i in range(20):
+        coin = CoinsV0.New_Coin(1)
+        coin_list.add(coin)
+
 
     level_1 = True
     level_2 = False
@@ -79,42 +98,28 @@ def juego():
             avatar = AvartsV0.New_Avart(random.randint(1,4))
             avatar_list.append(avatar)
 
-
-
-    # Tienda
-
-
     # Creacion de Rooks segun donde es presionado
 
-    def new_rook(coins, pos_rook):
-        if coins == 0:
-            print("sin fondos")# hacer una texto que diga sin monedas
-        elif coins >= 50 and pos_rook[0] == 5:
-            coins -= 50
-            print(coins)
-            # colocar el rook de arena
-            rook = RooksV0.Rooks(pos_rook)
-            rook.position()
-            print(rook)
-            rook_list.add(rook)
+    def new_rook( tipo):
+        if tipo == 5:
+            rook = RooksV0.Rooks(tipo)
+            rook_list.append(rook)
             print(rook_list)
-        elif coins >= 100 and pos_rook[0] == 6:
-            coins -= 100
-            # colocar el rook de roca
-            rook = RooksV0.Rooks(pos_rook)
-            rook_list.add(rook)
-        elif coins >= 150 and pos_rook[0] == 7:
-            coins -= 150
-            # colocar el rook de fuego
-            rook = RooksV0.Rooks(pos_rook)
-            rook_list.add(rook)
-        elif coins >= 150 and pos_rook[0] == 8:
-            coins -= 150
-            print(coins)
-            # colocar el rook de agua
-            rook = RooksV0.Rooks(pos_rook)
-            rook_list.add(rook)
+        elif tipo == 6:
+            rook = RooksV0.Rooks(tipo)
+            rook_list.append(rook)
+            print(rook_list)
+        elif tipo == 7:
+            rook = RooksV0.Rooks(tipo)
+            rook_list.append(rook)
+            print(rook_list)
+        elif tipo == 8:
+            rook = RooksV0.Rooks(tipo)
+            rook_list.append(rook)
+            print(rook_list)
 
+
+    coins = 500
     game_over=False
     while not game_over:
         for event in pygame.event.get():
@@ -122,29 +127,42 @@ def juego():
                 game_over=True
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if sand_button.collidepoint(event.pos):
-                    pos_rook = [5, [event.pos[0], event.pos[1]]]  # revisar coordenadas
-                    print("sand")
-                    new_rook(coins, pos_rook)
-                elif rock_button.collidepoint(event.pos):
-                    pos_rook = [6, [event.pos[0], event.pos[1]]]  # revisar coordenadas
-                    print("rock")
-                    new_rook(coins, pos_rook)
-                elif fire_button.collidepoint(event.pos):
-                    pos_rook = [7, [event.pos[0], event.pos[1]]]  # revisar coordenadas
-                    print("fire")
-                    new_rook(coins, pos_rook)
-                elif water_button.collidepoint(event.pos):
-                    pos_rook = [8, [event.pos[0], event.pos[1]]]  # revisar coordenadas
-                    print(pos_rook)
-                    print("water")
-                    new_rook(coins, pos_rook)
+                if coins > 0:
+                    if coins >= 50 and sand_button.collidepoint(event.pos):
+                        coins -= 50
+                        tipo = 5  # revisar coordenadas
+                        print("sand")
+                        new_rook(tipo)
+                    elif coins >= 100 and rock_button.collidepoint(event.pos):
+                        coins -= 100
+                        tipo = 6  # revisar coordenadas
+                        print("rock")
+                        new_rook(tipo)
+                    elif coins >= 150 and fire_button.collidepoint(event.pos):
+                        coins -= 150
+                        tipo = 7  # revisar coordenadas
+                        print("fire")
+                        new_rook(tipo)
+                    elif coins >= 150 and water_button.collidepoint(event.pos):
+                        coins -= 150
+                        tipo = 8  # revisar coordenadas
+                        print("water")
+                        new_rook(tipo)
+                    else:
+                        coins = coins
+                else:
+                    coins = 0
+
 
         screen.fill(white)
+
         pygame.draw.rect(screen, brown, sand_button)
         pygame.draw.rect(screen, lightgreen, rock_button)
         pygame.draw.rect(screen, green, fire_button)
         pygame.draw.rect(screen, purple, water_button)
+        text(str(coins), font2,brown, screen,100,50)
+
+
 
         if level_1:
             screen.blit(matriz_0_dibujo, [250, 0])
@@ -153,19 +171,7 @@ def juego():
 
             put_new_enemy(list_ramdom_secs)
 
-
-            for rook in rook_list:
-                for i in range(len(MATRIZ)):
-                    for j in MATRIZ[i]:
-                        if j[0] == "Vacio":
-                            screen.blit(rook.image_get(), rook.position())
-                        else:
-                            pass
-
-
-
-
-
+        draw_coins(coin_list)
 
         clock.tick(60)
         pygame.display.flip()
@@ -200,12 +206,28 @@ def put_new_enemy_aux():
             print()
             break
 
+def put_new_rook_aux():
+    global rook_list
+    for rook in rook_list:
+        for i in MATRIZ:
+            for estado in MATRIZ[i]:
+                if estado[0] == "Vacio":
+                    estado[0] = rook
+                    rook_list = rook_list[1:]
+
+
 def draw_objetcs_matriz():
     global all_sprites_matriz_list,MATRIZ
     for cuadrito in MATRIZ:
         object = cuadrito[0]
         if object != 'Vacio':
             object.draw_me()
+
+def draw_coins (coin_list):
+    for coin in coin_list:
+        coin.draw_me()
+
+
 
 
 
