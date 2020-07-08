@@ -1,6 +1,6 @@
 import pygame,sys,random
 from GameV0 import *
-from Objetos import avatars_file
+from Objetos import AvartsV0
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 def juego():
 
@@ -12,7 +12,7 @@ def juego():
 
 
     #Matriz del juego
-    matriz_0 = pygame.image.load('resource/matriz_0.png').convert()
+    matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
 
 
 
@@ -29,7 +29,7 @@ def juego():
     #Creacion de Avatars segun el nivel que se encuentra
     if level_1:
         for i in range(51):
-            avatar = avatars_file.New_Avart(random.randint(1,4))
+            avatar = AvartsV0.New_Avart(random.randint(1,4))
 
             all_sprites_list.add(avatar)
             avatar_list.add(avatar)
@@ -42,7 +42,7 @@ def juego():
                 exit()
         screen.fill(white)
         if level_1:
-            screen.blit(matriz_0, [250, 0])
+            screen.blit(matriz_0_dibujo, [250, 0])
 
             avatar_list.draw(screen)
 
