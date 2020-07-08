@@ -324,18 +324,19 @@ class Rooks (pygame.sprite.Sprite):
 
 
 
-def new_rook ():
+def new_rook (coins):
     if coins == 0:
          #hacer una texto que diga sin monedas
     elif coins >= 50 and pos_rook[0] == 5:
         coins -= 50
-         #colocar el rook
+         #colocar el rook de arena
     elif coins >= 100 and pos_rook[0] == 6:
         coins -= 100
-        #colocar el rook
+        #colocar el rook de roca
     elif coins >= 150 and pos_rook[0] == 7:
         coins -= 150
-        # colocar el rook
+        # colocar el rook de fuego
     elif coins >= 150 and pos_rook[0] == 8:
         coins -= 150
+        #colocar el rook de agua
 
