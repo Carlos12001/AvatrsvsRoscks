@@ -1,9 +1,27 @@
 import pygame,sys,random
 from GameV0 import *
 from Objetos import AvartsV0
+
+
+#Matriz de posiciones de juego
+global MATRIZ, all_sprites_matriz_list
+MATRIZ = [    ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0],
+              ['Vacio', 0, 0],    ['Vacio', 0, 0],   ['Vacio', 0, 0],    ['Vacio', 0, 0],    ['Vacio', 0, 0]   ]
+
+all_sprites_matriz_list =  pygame.sprite.Group ()
+
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 def juego():
 
+
+    global MATRIZ
 
     #Imagen de fondos
     #Por ahorita es el fondo blanco
@@ -11,16 +29,12 @@ def juego():
     #screen.fill(background,[0,0])
 
 
-    #Matriz del juego
+    #Matriz de imagen
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
 
 
-
-
-    all_sprites_list =  pygame.sprite.Group ()
-
+    #Conjunto de enemigos
     avatar_list = pygame.sprite.Group ()
-
 
     level_1 = True
     level_2 = False
@@ -28,10 +42,8 @@ def juego():
 
     #Creacion de Avatars segun el nivel que se encuentra
     if level_1:
-        for i in range(51):
+        for i in range(50):
             avatar = AvartsV0.New_Avart(random.randint(1,4))
-
-            all_sprites_list.add(avatar)
             avatar_list.add(avatar)
 
     game_over=False
@@ -44,8 +56,24 @@ def juego():
         if level_1:
             screen.blit(matriz_0_dibujo, [250, 0])
 
-            avatar_list.draw(screen)
+            for enemy in avatar_list:
+                for estado in MATRIZ[len(MATRIZ)-5:] :
 
-        clock.tick(60)
+                    if estado[0] == 'Vacio':
+                        screen.blit(enemy.image_get(),enemy.posicion_get())
+                        estado[0] = enemy.type_get()
+                    else:
+                        pass
+
+
+
+
+        clock.tick(5)
         pygame.display.flip()
+
+
+def draw_objetcs_matriz():
+    global all_sprites_matriz_list
+    for draw in all_sprites_matriz_list:
+        screen.draw
 juego()
