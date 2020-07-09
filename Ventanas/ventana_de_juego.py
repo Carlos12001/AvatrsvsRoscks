@@ -79,12 +79,12 @@ def juego():
     rook_list_in_game = pygame.sprite.Group()
 
     # Conjunto de monedas
+    global coins
+    coins = 0
     global coin_list
-    #coin_list = pygame.sprite.Group()
     coin_list = []
     for i in range(20):
-        coin = CoinsV0.New_Coin(random.randint(1,4))
-        #coin_list.add(coin)
+        coin = CoinsV0.New_Coin(random.randint(1, 3))
         coin_list.append(coin)
 
 
@@ -95,9 +95,9 @@ def juego():
     #Creacion de Avatars segun el nivel que se encuentra
     if level_1:
         # Tiempo de apracion de avatar entre 5 15
-        list_ramdom_secs = range(5,15)
+        list_ramdom_secs = range(5, 15)
         for i in range(50):
-            avatar = AvartsV0.New_Avart(random.randint(1,4))
+            avatar = AvartsV0.New_Avart(random.randint(1, 4))
             avatar_list.append(avatar)
 
     # Creacion de Rooks segun donde es presionado
@@ -121,7 +121,7 @@ def juego():
             print(rook_list)
 
 
-    coins = 500
+    #coins = 0
     game_over=False
     while not game_over:
         for event in pygame.event.get():
@@ -175,13 +175,13 @@ def juego():
 
             put_new_coin()
             draw_coins()
-
+            kill_coins()
         clock.tick(60)
         pygame.display.flip()
 
 def put_new_enemy(list_ramdom_secs):
     global time_last_time_new_enemy
-    time = random.randint(1,15)
+    time = random.randint(5,15)
     if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
         time_last_time_new_enemy = pygame.time.get_ticks()//1000
         return put_new_enemy_aux()
@@ -230,7 +230,7 @@ def draw_objetcs_matriz():
 def put_new_coin():
     global time_last_time_new_coin
     global coin_list
-    time = random.randint(1,10)
+    time = random.randint(5,10)
     if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_coin) :
         time_last_time_new_coin = pygame.time.get_ticks()//1000
         return put_new_coin_aux()
@@ -259,16 +259,36 @@ def put_new_coin_aux():
 
 def draw_coins ():
     global matrizcoin
-    #print(matrizcoin)
     for moneda in matrizcoin:
         coins = moneda[0]
         if coins != None:
-            #print(coins.type_get(),coins.posicion_get())
             coins.draw_me()
 
-#def draw_coins (coin_list):
- #   for coin in coin_list:
-  #      coin.draw_me()
+def kill_coins ():
+    global matrizcoin
+    global coins
+    mouse_pos = pygame.mouse.get_pos()
+    mouse_click = pygame.mouse.get_pressed()
+    for moneda in matrizcoin:
+        coin_obj = moneda[0]
+        if coin_obj == None:
+            pass
+        elif coin_obj != None:
+            coin_pos = coin_obj.posicion_get()
+            coin_value = coin_obj.value_get()
+            if coin_pos[0] <= mouse_pos[0] <= coin_pos[0] + 50 and mouse_click[0] == 1 and coin_pos[1] <= mouse_pos[1] <= coin_pos[1] + 50:
+                if coin_value == 25:
+                    moneda[0] = None
+                    coins += 25
+                    break
+                elif coin_value == 50:
+                    moneda[0] = None
+                    coins += 50
+                    break
+                elif coin_value == 100:
+                    moneda[0] = None
+                    coins += 100
+                    break
 
 
 

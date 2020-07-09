@@ -65,7 +65,7 @@ class New_Coin (pygame.sprite.Sprite):
 
     #Obtener posicion en X, y
     def posicion_get(self):
-        return (self.rect.x,self.rect.y)
+        return [self.rect.x,self.rect.y]
 
     #Obtener nombre del tipo de enemigo
     def type_get(self):
