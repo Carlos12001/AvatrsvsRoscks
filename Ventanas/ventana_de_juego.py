@@ -136,5 +136,6 @@ def move_enemy():
             if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
             or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
                 cuadrito[0].update()
+                cuadrito[0] = 'Vacio'
 
 juego()
