@@ -24,20 +24,24 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.rect.x = random.choice( range( 250, 750 ,100 ) )
             self.rect.y = size[1]-100
 
+
+            #carrete de imagenes
+            self.image_list = [self.image]
+
             #Caracteristicas del arquero
             self.ps = 5
             self.pa = 5
 
             self.speed_walk = 2
-            self.speed_atack = 1.25
+            self.speed_atack = 2
 
         #Escudero
         elif self.type_avatar == 2 :
             # Craracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_escudero.png').convert()
-            self.image.set_colorkey(white)
+            self.image = pygame.image.load( 'resource/avatar_escudero.png' ).convert()
+            self.image.set_colorkey( white )
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice(range(250, 750, 100))
+            self.rect.x = random.choice( range( 250, 750, 100 ) )
             self.rect.y = size[1] - 100
 
             # Caracteristicas del escudero
@@ -45,15 +49,15 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.pa = 5
 
             self.speed_walk = 10
-            self.speed_atack = 1.25
+            self.speed_atack = 2
 
         #Lenador
         elif self.type_avatar == 3 :
             # Craracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_lenador.png').convert()
-            self.image.set_colorkey(white)
+            self.image = pygame.image.load( 'resource/avatar_lenador.png' ).convert()
+            self.image.set_colorkey( white )
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice(range(250, 750, 100))
+            self.rect.x = random.choice( range( 250, 750, 100 ) )
             self.rect.y = size[1] - 100
 
             # Caracteristicas del lenador
@@ -61,15 +65,15 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.pa = 5
 
             self.speed_walk = 40
-            self.speed_atack = 1.25
+            self.speed_atack = 2
 
         #Canival
         elif self.type_avatar == 4:
             # Craracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_canival.png').convert()
+            self.image = pygame.image.load( 'resource/avatar_canival.png' ).convert()
             self.image.set_colorkey(white)
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice(range(250, 750, 100))
+            self.rect.x = random.choice( range( 250, 750, 100 ) )
             self.rect.y = size[1] - 100
 
             # Caracteristicas del canival
@@ -77,27 +81,27 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.pa = 5
 
             self.speed_walk = 30
-            self.speed_atack = 1.25
+            self.speed_atack = 2
 
     #Obtener posicion en X, y
-    def posicion_get(self):
-        return (self.rect.x,self.rect.y)
+    def posicion_get( self ):
+        return ( self.rect.x, self.rect.y)
     #Obtener nombre del tipo de enemigo
     def type_get(self):
-        if self.type_avatar == 1:
+        if self.type_avatar == 1 :
             return 'Arquero'
-        elif self.type_avatar == 2:
+        elif self.type_avatar == 2 :
             return 'Escudero'
-        elif self.type_avatar == 3:
+        elif self.type_avatar == 3 :
             return 'Lenador'
-        elif self.type_avatar == 4:
+        elif self.type_avatar == 4 :
             return 'Canival'
 
     #Obtener imagen
-    def image_get(self):
+    def image_get( self ):
         return self.image
     #Movimiento
-    def update(self,time_now,choice):
+    def update( self, time_now, choice, espacio=None):
         if choice == 'move':
             if (time_now - self.last_time_move) // 1000 == self.speed_walk:
                 self.last_time_move = time_now
@@ -105,12 +109,79 @@ class New_Avart ( pygame.sprite.Sprite ):
                 return True
             else:
                 return False
+
+
+        if choice == 'atack':
+
+            #Revisa el tiempo de ataque
+            if (time_now - self.last_time_move) // 1000 == self.speed_atack:
+                self.last_time_atack = time_now
+
+                #Quien realiza el ataque
+                if self.type_avatar == 1:
+                    #Logica de cambio de sprite
+                    atack = Attack_Avatar( self.type_avatar, self.posicion_get(), )
+
+                if self.type_avatar == 2:
+                    # Logica de cambio de sprite
+                    atack = Attack_Avatar(self.type_avatar, self.posicion_get(), )
+
+                if self.type_avatar == 3:
+                    # Logica de cambio de sprite
+                    atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
+
+                if self.type_avatar == 4:
+                    # Logica de cambio de sprite
+                    atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
+
+                    pass
+                return ('Bala')
+            else:
+                return ('')
+
     #Dibuja el men en pantalla
-    def draw_me(self,time_now):
+    def draw_me( self, time_now ):
         if self.last_time_move == 0 :
             self.last_time_move = time_now
             self.last_time_atack =  time_now
         screen.blit(self.image, self.posicion_get())
 
-    def getus(self):
-        return  self.last_time_move
+#Atacks
+class Attack_Avatar( pygame.sprite.Sprite ):
+    def __init__( self, type, pos, rook=None):
+        super.__init__()
+        self.type = type
+        #Flechador
+        if self.type == 1:
+            self.image = pygame.image.load('resource/bala.png').convert()
+            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            self.rect = self.image.get_rect()
+
+            self.speed = 2
+            self.rect.top = pos(0)
+            self.rect.left = pos(1)
+
+            #carrete imagenes
+        elif self.type == 2:
+            self.image = pygame.image.load('resource/bala.png').convert()
+            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            self.rect = self.image.get_rect()
+
+            self.speed = 2
+            self.rect.top = pos(0)
+            self.rect.left = pos(1)
+
+        elif self.type == 3:
+            pass
+
+        elif self.type == 4:
+            pass
+    def trayect( self):
+        self.rect.top = self.rect.top - self.speed
+
+    def dibujar( self):
+        screen.blit( self.image, self.rect )
+
+
