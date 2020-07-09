@@ -80,6 +80,24 @@ class Rooks (pygame.sprite.Sprite):
     def image_get(self):
         return self.image
 
+        # Obtener posicion en X, y
+    def posicion_get(self):
+        return (self.rect.x, self.rect.y)
+
+        # Obtener nombre del tipo de enemigo
+    def type_get(self):
+        if self.type_rook == 5:
+            return 'Sand'
+        elif self.type_rook == 6:
+            return 'Rock'
+        elif self.type_rook == 7:
+            return 'fire'
+        elif self.type_rook == 8:
+            return 'water'
+
+    def draw_me(self):
+        screen.blit(self.image, self.posicion_get())
+
     def position (self):
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()
@@ -88,27 +106,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 45
-            self.rect = self.image.center((self.rect.x, self.rect.y)) # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((self.rect.x, self.rect.y)) # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 45
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 45
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 45
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 45
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # segunda fila
 
@@ -116,27 +139,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 134
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 134
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 134
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 134
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 134
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # tercera fila
 
@@ -144,27 +172,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 223
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 223
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 223
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 223
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 223
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # cuarta fila
 
@@ -172,27 +205,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 312
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 312
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 312
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 312
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 312
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # quinta fila
 
@@ -200,27 +238,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 401
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 401
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 401
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 401
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 401
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # sexta fila
 
@@ -228,27 +271,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 490
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 490
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 490
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 490
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 490
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # septima fila
 
@@ -256,27 +304,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 589
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 589
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 589
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 589
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 589
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # octava fila
 
@@ -284,27 +337,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 678
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 678
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 678
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 678
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 678
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
         # novena fila
 
@@ -312,27 +370,32 @@ class Rooks (pygame.sprite.Sprite):
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 250
             self.rect.y = 767
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 350
             self.rect.y = 767
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 450
             self.rect.y = 767
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 550
             self.rect.y = 767
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
         elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
             self.rect.x = 650
             self.rect.y = 767
-            self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            return (self.rect.x, self.rect.y)
+            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
 
 
 

@@ -17,7 +17,7 @@ MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    [
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]]   ]
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]]]
 
 matrizcoin = [[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None]]
 all_sprites_matriz_list =  pygame.sprite.Group ()
@@ -76,7 +76,7 @@ def juego():
     # Conjunto rooks
     global rook_list
     rook_list = []
-    rook_list_in_game = pygame.sprite.Group()
+    #rook_list_in_game = pygame.sprite.Group()
 
     # Conjunto de monedas
     global coins
@@ -102,7 +102,7 @@ def juego():
 
     # Creacion de Rooks segun donde es presionado
 
-    def new_rook( tipo):
+    def new_rook(tipo):
         if tipo == 5:
             rook = RooksV0.Rooks(tipo)
             rook_list.append(rook)
@@ -176,6 +176,7 @@ def juego():
             put_new_coin()
             draw_coins()
             kill_coins()
+            #put_new_rook_aux2()
         clock.tick(60)
         pygame.display.flip()
 
@@ -218,6 +219,28 @@ def put_new_rook_aux():
     else:
         print("no compro rook, compre!!")
 
+#def put_new_rook_aux2():
+ #   global rook_list
+  #  i = 0
+   # j = 0
+    #if rook_list != []:
+     #   for rook in rook_list:
+      #      rook_pos = rook.position()
+       #     rook_type = rook.type_get()
+        #    for i in MATRIZ:
+         #       print("Fila revisada")
+          #      for j in i:
+           #         print("Columna revisada")
+            #        if j[0] == "Vacio":
+             #           j[0] = rook
+              #          rook_list = rook_list[1:]
+               #         done = True
+                #        break
+                #else:
+                 #   pass
+
+            #else:
+                #pass
 
 def draw_objetcs_matriz():
     global all_sprites_matriz_list,MATRIZ
@@ -226,7 +249,7 @@ def draw_objetcs_matriz():
         if object != 'Vacio':
             object.draw_me()
 
-
+# Funciones para el funcionamiento de las monedas
 def put_new_coin():
     global time_last_time_new_coin
     global coin_list
@@ -239,22 +262,16 @@ def put_new_coin_aux():
     global  matrizcoin
     global coin_list
     done = False
-    #print('Me llamaron')
     for coin in coin_list:
         for coin2 in matrizcoin:
-            #print("1234")
             if coin2[0] == None:
                 coin2[0] = coin
                 coin_list = coin_list[1:]
-                print('moneda puesto', 'Quedan en total sin poner', len(coin_list))
                 done = True
                 break
             else:
-                #print('Estoy lleno')
                 pass
-
         if done:
-            print('termine de poner moneda')
             break
 
 def draw_coins ():
