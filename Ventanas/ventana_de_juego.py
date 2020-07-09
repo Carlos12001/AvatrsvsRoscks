@@ -8,7 +8,7 @@ from Objetos import CoinsV0
 
 
 #Matriz de posiciones de juego
-global MATRIZ, all_sprites_matriz_list, time_to_start, time_last_time_new_enemy
+global MATRIZ, all_sprites_matriz_list, time_to_start, time_last_time_new_enemy, matrizcoin
 MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
@@ -19,13 +19,14 @@ MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    [
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]]   ]
 
+matrizcoin = [[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None]]
 all_sprites_matriz_list =  pygame.sprite.Group ()
 
 time_to_start = pygame.time.get_ticks()/1000
 
 time_last_time_new_enemy = time_to_start
 
-
+time_last_time_new_coin = time_to_start
 
 # funcion texto
 def text(text, font, color, surface, x, y):
@@ -78,12 +79,13 @@ def juego():
     rook_list_in_game = pygame.sprite.Group()
 
     # Conjunto de monedas
-
-    coin_list = pygame.sprite.Group()
-    #ramdom_secs_coin = random.randint(5, 15)
+    global coin_list
+    #coin_list = pygame.sprite.Group()
+    coin_list = []
     for i in range(20):
-        coin = CoinsV0.New_Coin(1)
-        coin_list.add(coin)
+        coin = CoinsV0.New_Coin(random.randint(1,4))
+        #coin_list.add(coin)
+        coin_list.append(coin)
 
 
     level_1 = True
@@ -171,49 +173,50 @@ def juego():
 
             put_new_enemy(list_ramdom_secs)
 
-        draw_coins(coin_list)
+            put_new_coin()
+            draw_coins()
 
         clock.tick(60)
         pygame.display.flip()
 
 def put_new_enemy(list_ramdom_secs):
     global time_last_time_new_enemy
-    random.choice(list_ramdom_secs)
-    if 15 == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
-        print('Han pasado',int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy), 'Totalmente',pygame.time.get_ticks()//1000 )
+    time = random.randint(1,15)
+    if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
         time_last_time_new_enemy = pygame.time.get_ticks()//1000
         return put_new_enemy_aux()
 
-def put_new_enemy_aux():
 
+
+def put_new_enemy_aux():
     global avatar_list
     done = False
-    print()
-    print('Me llamaron')
     for enemy in avatar_list:
         for estado in MATRIZ[len(MATRIZ) - 5:]:
             if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
                 estado[0] = enemy
                 avatar_list = avatar_list[1:]
-                print('enemigo puesto','Quedan en total sin poner',len(avatar_list))
                 done = True
+                break
             else:
                 #print('Estoy lleno')
                 pass
 
         if done:
-            print('termine de poner enemigo')
-            print()
             break
 
 def put_new_rook_aux():
     global rook_list
-    for rook in rook_list:
-        for i in MATRIZ:
-            for estado in MATRIZ[i]:
-                if estado[0] == "Vacio":
-                    estado[0] = rook
-                    rook_list = rook_list[1:]
+    if rook_list != []:
+        for rook in rook_list:
+            for i in MATRIZ:
+                for estado in MATRIZ[i]:
+                    # colocar metodo de posicion y se verifica
+                    if estado[0] == "Vacio" and rook.posicion_get() == estado[1][0]: # crear metodo posicionget()
+                        estado[0] = rook
+                        rook_list = rook_list[1:]
+    else:
+        print("no compro rook, compre!!")
 
 
 def draw_objetcs_matriz():
@@ -223,9 +226,51 @@ def draw_objetcs_matriz():
         if object != 'Vacio':
             object.draw_me()
 
-def draw_coins (coin_list):
+
+def put_new_coin():
+    global time_last_time_new_coin
+    global coin_list
+    time = random.randint(1,10)
+    if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_coin) :
+        time_last_time_new_coin = pygame.time.get_ticks()//1000
+        return put_new_coin_aux()
+
+def put_new_coin_aux():
+    global  matrizcoin
+    global coin_list
+    done = False
+    #print('Me llamaron')
     for coin in coin_list:
-        coin.draw_me()
+        for coin2 in matrizcoin:
+            #print("1234")
+            if coin2[0] == None:
+                coin2[0] = coin
+                coin_list = coin_list[1:]
+                print('moneda puesto', 'Quedan en total sin poner', len(coin_list))
+                done = True
+                break
+            else:
+                #print('Estoy lleno')
+                pass
+
+        if done:
+            print('termine de poner moneda')
+            break
+
+def draw_coins ():
+    global matrizcoin
+    #print(matrizcoin)
+    for moneda in matrizcoin:
+        coins = moneda[0]
+        if coins != None:
+            print(coins.type_get(),coins.posicion_get())
+            coins.draw_me()
+
+#def draw_coins (coin_list):
+ #   for coin in coin_list:
+  #      coin.draw_me()
+
+
 
 
 
