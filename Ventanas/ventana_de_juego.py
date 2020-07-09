@@ -263,7 +263,7 @@ def draw_coins ():
     for moneda in matrizcoin:
         coins = moneda[0]
         if coins != None:
-            print(coins.type_get(),coins.posicion_get())
+            #print(coins.type_get(),coins.posicion_get())
             coins.draw_me()
 
 #def draw_coins (coin_list):

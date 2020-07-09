@@ -31,7 +31,7 @@ class New_Coin (pygame.sprite.Sprite):
         # Moneda de 50
         elif self.type_coin == 2:
             # Craracteristicas del pygame
-            Image = self.image = pygame.image.load('resource/coin_50.png').convert()
+            Image = pygame.image.load('resource/coin_50.png').convert()
             self.image = pygame.transform.scale(Image, (50, 50))
             self.image.set_colorkey(white)
             self.value = 50
