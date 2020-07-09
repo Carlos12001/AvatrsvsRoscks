@@ -32,9 +32,59 @@ time_last_time_new_enemy = time_to_start
 
 
 #Parte Funcional del Juego
+def put_new_enemy(list_ramdom_secs):
+    global time_last_time_new_enemy
+    if 15 == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
+        time_last_time_new_enemy = pygame.time.get_ticks()//1000
+        return put_new_enemy_aux()
 
+def put_new_enemy_aux():
 
+    global avatar_list
+    done = False
 
+    for enemy in avatar_list:
+        for estado in MATRIZ[len(MATRIZ) - 5:]:
+            if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
+                estado[0] = enemy
+                avatar_list = avatar_list[1:]
+                print('enemigo puesto','Quedan en total sin poner',len(avatar_list))
+                done = True
+            else:
+                #print('Estoy lleno')
+                pass
+
+        if done:
+
+            break
+
+def draw_objetcs_matriz():
+    global all_sprites_matriz_list,MATRIZ
+    for cuadrito in MATRIZ:
+        object = cuadrito[0]
+        if object != 'Vacio':
+            object.draw_me(pygame.time.get_ticks())
+
+def move_enemy():
+    global MATRIZ,game_over
+    i_now = -1
+
+    for cuadrito in MATRIZ:
+        i_now+=1
+
+        #Revisa si hay personaje
+        if cuadrito [0] != 'Vacio':
+
+            #Revisa si es un enemigo
+            if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
+            or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
+
+                #Revisa si es posible el cambio
+                if 0 <= i_now-5 and MATRIZ[i_now-5][0] == 'Vacio':
+
+                    if cuadrito[0].update(pygame.time.get_ticks(),'move'):
+                        MATRIZ[i_now-5][0] = cuadrito[0]
+                        cuadrito[0] = 'Vacio'
 
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 def juego():
@@ -106,62 +156,6 @@ def juego():
 
         clock.tick(60)
         pygame.display.flip()
-
-def put_new_enemy(list_ramdom_secs):
-    global time_last_time_new_enemy
-    if 15 == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
-        time_last_time_new_enemy = pygame.time.get_ticks()//1000
-        return put_new_enemy_aux()
-
-def put_new_enemy_aux():
-
-    global avatar_list
-    done = False
-
-    for enemy in avatar_list:
-        for estado in MATRIZ[len(MATRIZ) - 5:]:
-            if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
-                estado[0] = enemy
-                avatar_list = avatar_list[1:]
-                print('enemigo puesto','Quedan en total sin poner',len(avatar_list))
-                done = True
-            else:
-                #print('Estoy lleno')
-                pass
-
-        if done:
-
-            break
-
-def draw_objetcs_matriz():
-    global all_sprites_matriz_list,MATRIZ
-    for cuadrito in MATRIZ:
-        object = cuadrito[0]
-        if object != 'Vacio':
-            object.draw_me(pygame.time.get_ticks())
-
-
-def move_enemy():
-    global MATRIZ,game_over
-    i_now = -1
-
-    for cuadrito in MATRIZ:
-        i_now+=1
-
-        #Revisa si hay personaje
-        if cuadrito [0] != 'Vacio':
-
-            #Revisa si es un enemigo
-            if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
-            or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
-
-                #Revisa si es posible el cambio
-                if 0 <= i_now-5 and MATRIZ[i_now-5][0] == 'Vacio':
-
-                    if cuadrito[0].update(pygame.time.get_ticks(),'move'):
-                        MATRIZ[i_now-5][0] = cuadrito[0]
-                        cuadrito[0] = 'Vacio'
-
 
 
 
