@@ -7,9 +7,12 @@ from GameV0 import *
 
 
 class New_Avart ( pygame.sprite.Sprite ):
-    def __init__( self, type_avatar ):
+    def __init__( self, type_avatar, time=None):
         super().__init__()
-
+        #Tiempo de su creacion
+        self.time_create = time
+        self.last_time_atack  = time
+        self.last_time_move = time
         self.type_avatar = type_avatar
         #Que tipo de Avatar va crear
 
@@ -42,7 +45,7 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 5
             self.pa = 5
 
-            self.speed_walk = 2
+            self.speed_walk = 10
             self.speed_atack = 1.25
 
         #Lenador
@@ -58,7 +61,7 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 5
             self.pa = 5
 
-            self.speed_walk = 2
+            self.speed_walk = 40
             self.speed_atack = 1.25
 
         #Canival
@@ -74,7 +77,7 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 5
             self.pa = 5
 
-            self.speed_walk = 2
+            self.speed_walk = 30
             self.speed_atack = 1.25
 
     #Obtener posicion en X, y
@@ -96,6 +99,6 @@ class New_Avart ( pygame.sprite.Sprite ):
         return self.image
     #Movimiento
     def update(self):
-        self.rect.y -= 100
+        self.rect.y -= 90
     def draw_me(self):
         screen.blit(self.image, self.posicion_get())

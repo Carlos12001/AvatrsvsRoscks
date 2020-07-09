@@ -6,6 +6,7 @@ from Objetos import AvartsV0
 
 
 #Matriz de posiciones de juego
+#Variables a utilizar en
 global MATRIZ, all_sprites_matriz_list, time_to_start, time_last_time_new_enemy
 MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
               ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
@@ -85,6 +86,7 @@ def juego():
 
             put_new_enemy(list_ramdom_secs)
 
+            move_enemy()
 
 
 
@@ -96,9 +98,7 @@ def juego():
 
 def put_new_enemy(list_ramdom_secs):
     global time_last_time_new_enemy
-    random.choice(list_ramdom_secs)
     if 15 == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
-        print('Han pasado',int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy), 'Totalmente',pygame.time.get_ticks()//1000 )
         time_last_time_new_enemy = pygame.time.get_ticks()//1000
         return put_new_enemy_aux()
 
@@ -106,8 +106,7 @@ def put_new_enemy_aux():
 
     global avatar_list
     done = False
-    print()
-    print('Me llamaron')
+
     for enemy in avatar_list:
         for estado in MATRIZ[len(MATRIZ) - 5:]:
             if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
@@ -120,8 +119,7 @@ def put_new_enemy_aux():
                 pass
 
         if done:
-            print('termine de poner enemigo')
-            print()
+
             break
 
 def draw_objetcs_matriz():
@@ -131,6 +129,12 @@ def draw_objetcs_matriz():
         if object != 'Vacio':
             object.draw_me()
 
-
+def move_enemy():
+    global MATRIZ
+    for cuadrito in MATRIZ:
+        if cuadrito [0] != 'Vacio':
+            if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
+            or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
+                cuadrito[0].update()
 
 juego()
