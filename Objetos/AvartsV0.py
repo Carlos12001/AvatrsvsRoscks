@@ -7,12 +7,11 @@ from GameV0 import *
 
 
 class New_Avart ( pygame.sprite.Sprite ):
-    def __init__( self, type_avatar, time=None):
+    def __init__( self, type_avatar):
         super().__init__()
         #Tiempo de su creacion
-        self.time_create = time
-        self.last_time_atack  = time
-        self.last_time_move = time
+        self.last_time_atack  = 0
+        self.last_time_move = 0
         self.type_avatar = type_avatar
         #Que tipo de Avatar va crear
 
@@ -98,7 +97,20 @@ class New_Avart ( pygame.sprite.Sprite ):
     def image_get(self):
         return self.image
     #Movimiento
-    def update(self):
-        self.rect.y -= 90
-    def draw_me(self):
+    def update(self,time_now,choice):
+        if choice == 'move':
+            if (time_now - self.last_time_move) // 1000 == self.speed_walk:
+                self.last_time_move = time_now
+                self.rect.y -= 90
+                return True
+            else:
+                return False
+    #Dibuja el men en pantalla
+    def draw_me(self,time_now):
+        if self.last_time_move == 0 :
+            self.last_time_move = time_now
+            self.last_time_atack =  time_now
         screen.blit(self.image, self.posicion_get())
+
+    def getus(self):
+        return  self.last_time_move

@@ -8,14 +8,14 @@ from Objetos import AvartsV0
 #Matriz de posiciones de juego
 #Variables a utilizar en
 global MATRIZ, all_sprites_matriz_list, time_to_start, time_last_time_new_enemy
-MATRIZ = [    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
-              ['Vacio', [0, 0]],    ['Vacio', [0, 0]],   ['Vacio', [0, 0]],    ['Vacio', [0, 0]],    ['Vacio', [0, 0]],
+MATRIZ = [    ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
+              ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]],
               ['Vacio', [250, 0]],    ['Vacio', [350, 0]],   ['Vacio', [450, 0]],    ['Vacio', [550, 0]],    ['Vacio', [650, 0]]   ]
 
 all_sprites_matriz_list =  pygame.sprite.Group ()
@@ -71,6 +71,7 @@ def juego():
             avatar_list.append(avatar)
 
 
+    global game_over
 
     game_over=False
     while not game_over:
@@ -78,7 +79,17 @@ def juego():
             if event.type == pygame.QUIT:
                 game_over=True
                 exit()
+
+        #Pierde el juego
+        for enemy_false in MATRIZ[:5]:
+            if enemy_false[0] !='Vacio':
+                game_over = True
+                import GameV0
+                GameV0.start()
+                break
+
         screen.fill(white)
+        #Primer Nivel
         if level_1:
             screen.blit(matriz_0_dibujo, [250, 0])
 
@@ -127,15 +138,31 @@ def draw_objetcs_matriz():
     for cuadrito in MATRIZ:
         object = cuadrito[0]
         if object != 'Vacio':
-            object.draw_me()
+            object.draw_me(pygame.time.get_ticks())
+
 
 def move_enemy():
-    global MATRIZ
+    global MATRIZ,game_over
+    i_now = -1
+
     for cuadrito in MATRIZ:
+        i_now+=1
+
+        #Revisa si hay personaje
         if cuadrito [0] != 'Vacio':
+
+            #Revisa si es un enemigo
             if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
             or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
-                cuadrito[0].update()
-                cuadrito[0] = 'Vacio'
+
+                #Revisa si es posible el cambio
+                if 0 <= i_now-5 and MATRIZ[i_now-5][0] == 'Vacio':
+
+                    if cuadrito[0].update(pygame.time.get_ticks(),'move'):
+                        MATRIZ[i_now-5][0] = cuadrito[0]
+                        cuadrito[0] = 'Vacio'
+
+
+
 
 juego()

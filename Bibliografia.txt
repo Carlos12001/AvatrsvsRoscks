@@ -19,7 +19,3 @@ http://conocepython.blogspot.com/p/la-funcion-main.html#:~:text=la%20funci%C3%B3
 
 https://blog.depositphotos.com/15-cyberpunk-color-palettes-for-dystopian-designs.html
 
-# comando para instalar Pygame
-    # En la cmd
-    
-pip install Pygame
