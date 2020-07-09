@@ -212,9 +212,9 @@ def juego():
         #Pierde el juego
         for enemy_false in MATRIZ[:5]:
             if enemy_false[0] !='Vacio':
-                game_over = True
-                import GameV0
-                GameV0.start()
+                #game_over = True
+                #import GameV0
+                #GameV0.start()
                 break
 
         #Primer Nivel
@@ -313,7 +313,7 @@ def draw_objetcs_matriz():
     for cuadrito in MATRIZ:
         object = cuadrito[0]
         if object != 'Vacio':
-            object.draw_me()
+            object.draw_me(pygame.time.get_ticks())
 
 # Funciones para el funcionamiento de las monedas
 def put_new_coin():
