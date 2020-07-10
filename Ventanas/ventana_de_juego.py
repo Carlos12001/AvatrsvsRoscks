@@ -171,6 +171,7 @@ def new_rook(tipo):
     pos = RooksV0.position(True) 
     if tipo == 5:
         rook += [RooksV0.New_Rook(tipo), pos]
+        print(rook)
         #rook_list.append(rook)
 
     elif tipo == 6:
@@ -189,8 +190,10 @@ def put_new_rook_aux():
     global rook
     for fila in MATRIZ:
         for cuadrito in fila:
+            if rook == []:
+                pass
             # colocar metodo de posicion y se verifica
-            if cuadrito[0] == "Vacio" and rook[1] == cuadrito[1]: 
+            elif cuadrito[0] == "Vacio" and rook[1] == cuadrito[1]:
                 cuadrito[0] = rook[0]
                 rook = []
 
@@ -342,144 +345,18 @@ def juego():
             put_new_coin()
             draw_coins()
             kill_coins()
-            #put_new_rook_aux()
+            put_new_rook_aux()
 
         clock.tick(60)
         pygame.display.flip()
 
 juego()
 
-#def put_new_enemy(list_ramdom_secs):
- #   global time_last_time_new_enemy
-  #  time = random.randint(5,15)
-   # if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
-    #    time_last_time_new_enemy = pygame.time.get_ticks()//1000
-     #   return put_new_enemy_aux()
-
-
-
-#def put_new_enemy_aux():
- #   global avatar_list
-  #  done = False
-   # for enemy in avatar_list:
-    #    for estado in MATRIZ[len(MATRIZ) - 5:]:
-     #       if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
-      #          estado[0] = enemy
-       #         avatar_list = avatar_list[1:]
-        #        done = True
-         #       break
-          #  else:
-           #     #print('Estoy lleno')
-            #    pass
-
-       # if done:
-        #    break
-
-#def put_new_rook_aux():
-#    global rook_list
- #   if rook_list != []:
-  #      for rook in rook_list:
-   #         for i in MATRIZ:
-    #            for estado in i:
-     #               # colocar metodo de posicion y se verifica
-      #              if estado[0] == "Vacio" and rook.posicion_get() == estado[1][0]: # crear metodo posicionget()
-       #                 estado[0] = rook
-        #                rook_list = rook_list[1:]
-    #else:
-     #   print("no compro rook, compre!!")
-
-#def put_new_rook_aux2():
- #   global rook_list
-  #  i = 0
-   # j = 0
-    #if rook_list != []:
-     #   for rook in rook_list:
-      #      rook_pos = rook.position()
-       #     rook_type = rook.type_get()
-        #    for i in MATRIZ:
-         #       print("Fila revisada")
-          #      for j in i:
-           #         print("Columna revisada")
-            #        if j[0] == "Vacio":
-             #           j[0] = rook
-              #          rook_list = rook_list[1:]
-               #         done = True
-                #        break
-                #else:
-                 #   pass
-
-            #else:
-                #pass
-
-#def draw_objetcs_matriz():
- #   global all_sprites_matriz_list,MATRIZ
-  #  for cuadrito in MATRIZ:
-   #     object = cuadrito[0]
-    #    if object != 'Vacio':
-     #       object.draw_me(pygame.time.get_ticks())
-
-# Funciones para el funcionamiento de las monedas
-#def put_new_coin():
- #   global time_last_time_new_coin
-  #  global coin_list
-   # time = random.randint(5,10)
-    #if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_coin) :
-     #   time_last_time_new_coin = pygame.time.get_ticks()//1000
-      #  return put_new_coin_aux()
-
-#def put_new_coin_aux():
- #   global  matrizcoin
-  #  global coin_list
-   # done = False
-    #for coin in coin_list:
-     #   for coin2 in matrizcoin:
-      #      if coin2[0] == None:
-       #         coin2[0] = coin
-        #        coin_list = coin_list[1:]
-         #       done = True
-          #      break
-           # else:
-            #    pass
-        #if done:
-         #   break
-
-#def draw_coins ():
- #   global matrizcoin
-  #  for moneda in matrizcoin:
-   #     coins = moneda[0]
-    #    if coins != None:
-     #       coins.draw_me()
-
-#def kill_coins ():
- #   global matrizcoin
-  #  global coins
-   # mouse_pos = pygame.mouse.get_pos()
-    #mouse_click = pygame.mouse.get_pressed()
-    #for moneda in matrizcoin:
-     #   coin_obj = moneda[0]
-      #  if coin_obj == None:
-       #     pass
-        #elif coin_obj != None:
-         #   coin_pos = coin_obj.posicion_get()
-          #  coin_value = coin_obj.value_get()
-           # if coin_pos[0] <= mouse_pos[0] <= coin_pos[0] + 50 and mouse_click[0] == 1 and coin_pos[1] <= mouse_pos[1] <= coin_pos[1] + 50:
-            #    if coin_value == 25:
-             #       moneda[0] = None
-              #      coins += 25
-               #     break
-                #elif coin_value == 50:
-                 #   moneda[0] = None
-                  #  coins += 50
-                   # break
-                #elif coin_value == 100:
-                 #   moneda[0] = None
-                  #  coins += 100
-                   # break
 
 def new_rook_pos(set):
+    mouse_pos = pygame.mouse.get_pos()
+    mouse_click = pygame.mouse.get_pressed()
     while set:
-        mouse_pos = pygame.mouse.get_pos()
-        mouse_click = pygame.mouse.get_pressed()
         # primer fila
         if 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
             # posicionar cada self.type_rook en un a posicion estandar
