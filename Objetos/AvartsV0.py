@@ -107,7 +107,8 @@ class New_Avart ( pygame.sprite.Sprite ):
         if choice == 'move':
             if (time_now - self.last_time_move) // 1000 == self.speed_walk:
                 self.last_time_move = time_now
-                self.rect.y -= 90
+                self.rect.y -= 89
+                print(self.rect.y)
                 return True
             else:
                 return False

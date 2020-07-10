@@ -4,7 +4,7 @@ from GameV0 import *
 
 white = (255, 255, 255)
 #pos_rook = [type, x, y]
-class Rooks (pygame.sprite.Sprite):
+class New_Roo (pygame.sprite.Sprite):
     def __init__(self, tipo):
         super().__init__()
         self.type_rook = tipo
@@ -76,6 +76,7 @@ class Rooks (pygame.sprite.Sprite):
     def pa_get (self):
         return self.pa
 
+
     # Obtener imagen
     def image_get(self):
         return self.image
@@ -95,309 +96,300 @@ class Rooks (pygame.sprite.Sprite):
         elif self.type_rook == 8:
             return 'water'
 
-    def draw_me(self):
+    def draw_me(self,dontwork):
         screen.blit(self.image, self.posicion_get())
 
-    def position (self):
+def position (set):
+    while set:
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()
         # primer fila
-        if 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
+        if 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
+            # posicionar cada type_rook en un a posicion estandar
+            rectX = 250
+            rectY = 0
+            set = False
+            
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 45
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((self.rect.x, self.rect.y)) # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
+            rectX= 350
+            rectY = 0
+            set = False
+               
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 45
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
+            rectX= 450
+            rectY = 0
+            set = False
+               
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 45
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
+            rectX = 550
+            rectY = 0
+            set = False
+               
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 45
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 89:
-            # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 45
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-
+            rectX = 650
+            rectY = 0
+            set = False
+               
         # segunda fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 134
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
+            rectX = 250
+            rectY = 90
+            set = False
+               
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 134
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
+            rectX= 350
+            rectY = 90
+            set = False
+               
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 134
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
+            rectX= 450
+            rectY = 90
+            set = False
+               
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 134
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 89 < mouse_pos[1] < 178:
+            rectX = 550
+            rectY = 90
+            set = False
+               
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 134
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX = 650
+            rectY = 90
+            set = False
+               
 
         # tercera fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 223
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
+            rectX = 250
+            rectY = 180
+            set = False
+               
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 223
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
+            rectX= 350
+            rectY = 180
+            set = False
+               
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 223
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
+            rectX= 450
+            rectY = 180
+            set = False
+               
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 223
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 178 < mouse_pos[1] < 267:
+            rectX = 550
+            rectY = 180
+            set = False
+               
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 223
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX = 650
+            rectY = 180
+            set = False
+               
 
         # cuarta fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 312
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
+            rectX = 250
+            rectY = 270
+            set = False
+            
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 312
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
+            rectX  = 350
+            rectY = 270
+            set = False
+            
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 312
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
+            rectX  = 450
+            rectY = 270
+            set = False
+
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 312
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 267 < mouse_pos[1] < 356:
+            rectX  = 550
+            rectY = 270
+            set = False
+
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 312
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX  = 650
+            rectY = 270
+            set = False 
 
         # quinta fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 401
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
+            rectX = 250
+            rectY = 360
+            set = False
+     
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 401
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
+            rectX = 350
+            rectY = 360
+            set = False
+            
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 401
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
+            rectX = 450
+            rectY = 360
+            set = False 
+
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 401
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 356 < mouse_pos[1] < 445:
+            rectX = 550
+            rectY = 360
+            set = False 
+
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 401
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX = 650
+            rectY = 360
+            set = False 
 
         # sexta fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 490
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
+            rectX = 250
+            rectY = 455
+            set = False
+
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 490
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
+            rectX = 350
+            rectY = 455
+            set = False 
+
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 490
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
+            rectX = 450
+            rectY = 455
+            set = False
+
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 490
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
+            rectX = 550
+            rectY = 455
+            set = False
+
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 455 < mouse_pos[1] < 544:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 490
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX = 650
+            rectY = 455
+            set = False   
 
         # septima fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 589
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
+            rectX = 250
+            rectY = 544
+            set = False  
+
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 589
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
+            rectX = 350
+            rectY = 544
+            set = False
+
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 589
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
+            rectX = 450
+            rectY = 544
+            set = False
+              
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 589
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
+            rectX = 550
+            rectY = 544
+            set = False  
+
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 544 < mouse_pos[1] < 633:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 589
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX = 650
+            rectY = 544
+            set = False    
 
         # octava fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 678
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
+            rectX = 250
+            rectY = 633
+            set = False  
+              
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 678
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
+            rectX = 350
+            rectY = 633
+            set = False 
+               
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 678
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
-            # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 678
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
-            # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 678
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
+            rectX = 450
+            rectY = 633
+            set = False 
 
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
+            # posicionar cada self.type_rook en un a posicion estandar
+            rectX = 550
+            rectY = 633
+            set = False 
+               
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 633 < mouse_pos[1] < 722:
+            # posicionar cada self.type_rook en un a posicion estandar
+            rectX = 650
+            rectY = 633
+            set = False
+            
         # novena fila
 
-        elif 200 < mouse_pos[0] < 300 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
+        elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 250
-            self.rect.y = 767
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 300 < mouse_pos[0] < 400 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
+            rectX = 250
+            rectY = 722
+            set = False
+            
+        elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 350
-            self.rect.y = 767
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 400 < mouse_pos[0] < 500 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
+            rectX = 350
+            rectY = 722
+            set = False
+               
+        elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 450
-            self.rect.y = 767
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 500 < mouse_pos[0] < 600 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
+            rectX = 450
+            rectY = 722
+            set = False
+            
+        elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 550
-            self.rect.y = 767
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-        elif 600 < mouse_pos[0] < 700 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
+            rectX = 550
+            rectY = 722
+            set = False
+              
+        elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 722 < mouse_pos[1] < 811:
             # posicionar cada self.type_rook en un a posicion estandar
-            self.rect.x = 650
-            self.rect.y = 767
-            return (self.rect.x, self.rect.y)
-            #self.rect = self.image.center((rect.x, rect.y))  # verificar si esto esta bien
-
-
-
-
-
+            rectX = 650
+            rectY = 722
+            set = False
+    
+    return [rectX, rectY]
