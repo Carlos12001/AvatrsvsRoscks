@@ -4,69 +4,67 @@ from GameV0 import *
 
 white = (255, 255, 255)
 #pos_rook = [type, x, y]
-class New_Roo (pygame.sprite.Sprite):
-    def __init__(self, tipo):
+class New_Rook (pygame.sprite.Sprite):
+    def __init__(self, tipo,posicion):
         super().__init__()
         self.type_rook = tipo
-        #self.x = 0
-        #self.y = 0
 
-        #if self.type_rook == 5:
+
         # Rook de arena
         if self.type_rook == 5:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_sand.png").convert()
             self.image.set_colorkey(white)
+            self.image = pygame.transform.scale(self.image, (80, 80))
             self.rect = self.image.get_rect()
-            #self.rect.x = self.x
-            #self.rect.y = self.y
+            self.rect.x = posicion[0]
+            self.rect.y = posicion[1]
 
             # Caracteristicas del sand rook
             self.ps = 7
             self.pa = 2
-            cost_sand = 50
 
         # Rook de roca
         elif self.type_rook == 6:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_rock.png").convert()
             self.image.set_colorkey(white)
+            self.image = pygame.transform.scale(self.image, (80, 80))
             self.rect = self.image.get_rect()
-            #self.rect.x = self.x
-            #self.rect.y = self.y
+            self.rect.x = posicion[0]
+            self.rect.y = posicion[1]
 
             # Caracteristicas del sand rook
             self.ps = 14
             self.pa = 4
-            cost_rock = 100
 
         # Rook de fuego
         elif self.type_rook == 7:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_fire.png").convert()
             self.image.set_colorkey(white)
+            self.image = pygame.transform.scale(self.image, (80, 80))
             self.rect = self.image.get_rect()
-            #self.rect.x = self.x
-            #self.rect.y = self.y
+            self.rect.x = posicion[0]
+            self.rect.y = posicion[1]
 
             # Caracteristicas del sand rook
             self.ps = 16
             self.pa = 8
-            cost_fire = 150
 
         # Rook de agua
         elif self.type_rook == 8:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_water.png").convert()
             self.image.set_colorkey(white)
+            self.image = pygame.transform.scale(self.image, (80, 80))
             self.rect = self.image.get_rect()
-            #self.rect.x = self.x
-            #self.rect.y = self.y
+            self.rect.x = posicion[0]
+            self.rect.y = posicion[1]
 
             # Caracteristicas del sand rook
             self.ps = 16
             self.pa = 8
-            cost_water = 150
 
     # obtener vida
     def ps_get (self):
@@ -76,16 +74,18 @@ class New_Roo (pygame.sprite.Sprite):
     def pa_get (self):
         return self.pa
 
-
     # Obtener imagen
     def image_get(self):
         return self.image
 
         # Obtener posicion en X, y
+
+    #Obtienes posicion
     def posicion_get(self):
         return [self.rect.x, self.rect.y]
 
         # Obtener nombre del tipo de enemigo
+
     def type_get(self):
         if self.type_rook == 5:
             return 'Sand'
