@@ -1,0 +1,21 @@
+#Pygame 
+
+
+#codigo para entrada de texto
+https://www.youtube.com/watch?v=W3YH5TxzOTg
+
+# posibles links a utilizar
+
+https://ansimuz.itch.io/cyberpunk-street-environment
+
+
+#Entender Herencia simple
+https://pythones.net/funcion-super-en-python-bien-explicada-ejemplos-oop/
+
+#Para guardar el juego
+http://conocepython.blogspot.com/p/la-funcion-main.html#:~:text=la%20funci%C3%B3n%20main()%2C%20realmente,de%20su%20raz%C3%B3n%20de%20ser.
+
+# paletas de colores cyberpunk
+
+https://blog.depositphotos.com/15-cyberpunk-color-palettes-for-dystopian-designs.html
+
