@@ -249,8 +249,8 @@ def juego():
     if level_1:
         # Tiempo de apracion de avatar entre 5 15
         list_ramdom_secs = range(5, 15)
-        for i in range(1):
-            avatar = AvartsV0.New_Avart(1)
+        for i in range(50):
+            avatar = AvartsV0.New_Avart(range(1,4))
             avatar_list.append(avatar)
 
     # Creacion de Rooks segun donde es presionado
@@ -316,9 +316,9 @@ def juego():
         #Pierde el juego
         for enemy_false in MATRIZ[0]:
             if enemy_false[0] !='Vacio':
-                game_over = True
-                import GameV0
-                GameV0.start()
+                #game_over = True
+                #import GameV0
+                #GameV0.start()
                 break
 
         #Primer Nivel

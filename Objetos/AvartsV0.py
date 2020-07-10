@@ -150,7 +150,7 @@ class New_Avart ( pygame.sprite.Sprite ):
 
 #Atacks
 class Attack_Avatar( pygame.sprite.Sprite ):
-    def __init__( self ):( self, type, pos, rook=None):
+    def __init__( self, type, pos, rook = None):
         super.__init__()
         self.type = type
         #Flechador
