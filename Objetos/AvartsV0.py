@@ -48,7 +48,7 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 5
             self.pa = 5
 
-            self.speed_walk = 10
+            self.speed_walk = 8
             self.speed_atack = 2
 
         #Lenador
@@ -64,7 +64,7 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 5
             self.pa = 5
 
-            self.speed_walk = 40
+            self.speed_walk = 14
             self.speed_atack = 2
 
         #Canival
@@ -80,12 +80,12 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 5
             self.pa = 5
 
-            self.speed_walk = 30
+            self.speed_walk = 18
             self.speed_atack = 2
 
     #Obtener posicion en X, y
     def posicion_get(self):
-        return self.rect.x, self.rect.y
+        return ( self.rect.x, self.rect.y )
 
     #Obtener nombre del tipo de enemigo
     def type_get(self):
