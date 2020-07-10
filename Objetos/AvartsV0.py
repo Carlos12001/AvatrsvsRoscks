@@ -84,24 +84,26 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.speed_atack = 2
 
     #Obtener posicion en X, y
-    def posicion_get( self ):
-        return ( self.rect.x, self.rect.y)
+    def posicion_get(self):
+        return self.rect.x, self.rect.y
+
     #Obtener nombre del tipo de enemigo
     def type_get(self):
-        if self.type_avatar == 1 :
+        if self.type_avatar == 1:
             return 'Arquero'
-        elif self.type_avatar == 2 :
+        elif self.type_avatar == 2:
             return 'Escudero'
-        elif self.type_avatar == 3 :
+        elif self.type_avatar == 3:
             return 'Lenador'
-        elif self.type_avatar == 4 :
+        elif self.type_avatar == 4:
             return 'Canival'
 
     #Obtener imagen
-    def image_get( self ):
+    def image_get(self):
         return self.image
+
     #Movimiento
-    def update( self, time_now, choice, espacio=None):
+    def update(self, time_now, choice, espacio=None):
         if choice == 'move':
             if (time_now - self.last_time_move) // 1000 == self.speed_walk:
                 self.last_time_move = time_now
