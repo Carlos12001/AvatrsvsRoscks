@@ -114,7 +114,7 @@ class New_Avart ( pygame.sprite.Sprite ):
     #Ataque de los Avatrs
     def atack(self, time_now):
         #Revisa el tiempo de ataque
-        if (time_now - self.last_time_move) // 1000 == self.speed_atack:
+        if False: #(time_now - self.last_time_move) // 1000 == self.speed_atack:
             self.last_time_atack = time_now
 
             #Quien realiza el ataque
@@ -135,7 +135,7 @@ class New_Avart ( pygame.sprite.Sprite ):
                 atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
 
                 pass
-            return ('Bala')
+            return (atack)
         else:
             return ('')
 
@@ -147,10 +147,11 @@ class New_Avart ( pygame.sprite.Sprite ):
         screen.blit(self.image, self.posicion_get())
 
 #Atacks
-class Attack_Avatar( pygame.sprite.Sprite ):
-    def __init__( self, type, pos, rook = None):
-        super.__init__()
+class Attack_Avatar(pygame.sprite.Sprite):
+    def __init__(self, type, pos,rook = None):
+        super().__init__()
         self.type = type
+
         #Flechador
         if self.type == 1:
             self.image = pygame.image.load('resource/bala.png').convert()
