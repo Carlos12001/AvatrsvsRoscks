@@ -57,7 +57,7 @@ def put_new_enemy_aux():
             if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
                 estado[0] = enemy
                 avatar_list = avatar_list[1:]
-                #print('enemigo puesto','Quedan en total sin poner',len(avatar_list))
+                #print('Enemigo puesto','Quedan en total sin poner',len(avatar_list))
                 done = True
                 break
             else:
@@ -79,12 +79,11 @@ def move_enemy():
                 #Revisa si es un enemigo
                 if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
                 or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
-                    #print('Hay Avatar', i_now,j_now)
-                    #print('Siguiente fila',i_now-1,j_now)
-                    #print()
+
+
                     #Revisa si es posible el cambio
                     if i_now-1 >=0 and MATRIZ[i_now-1][j_now][0] == 'Vacio':
-                        if cuadrito[0].update(pygame.time.get_ticks(),'move'):
+                        if cuadrito[0].update(pygame.time.get_ticks()):
                             MATRIZ[i_now-1][j_now][0] = cuadrito[0]
                             cuadrito[0] = 'Vacio'
 

@@ -85,7 +85,7 @@ class New_Avart ( pygame.sprite.Sprite ):
 
     #Obtener posicion en X, y
     def posicion_get(self):
-        return ( self.rect.x, self.rect.y )
+        return [ self.rect.x, self.rect.y ]
 
     #Obtener nombre del tipo de enemigo
     def type_get(self):
@@ -103,43 +103,41 @@ class New_Avart ( pygame.sprite.Sprite ):
         return self.image
 
     #Movimiento
-    def update(self, time_now, choice, espacio=None):
-        if choice == 'move':
-            if (time_now - self.last_time_move) // 1000 == self.speed_walk:
-                self.last_time_move = time_now
-                self.rect.y -= 90
-                return True
-            else:
-                return False
+    def update(self, time_now):
+        if (time_now - self.last_time_move) // 1000 == self.speed_walk:
+            self.last_time_move = time_now
+            self.rect.y -= 90
+            return True
+        else:
+            return False
 
+    #Ataque de los Avatrs
+    def atack(self, time_now):
+        #Revisa el tiempo de ataque
+        if (time_now - self.last_time_move) // 1000 == self.speed_atack:
+            self.last_time_atack = time_now
 
-        if choice == 'atack':
+            #Quien realiza el ataque
+            if self.type_avatar == 1:
+                #Logica de cambio de sprite
+                atack = Attack_Avatar( self.type_avatar, self.posicion_get(), )
 
-            #Revisa el tiempo de ataque
-            if (time_now - self.last_time_move) // 1000 == self.speed_atack:
-                self.last_time_atack = time_now
+            if self.type_avatar == 2:
+                # Logica de cambio de sprite
+                atack = Attack_Avatar(self.type_avatar, self.posicion_get(), )
 
-                #Quien realiza el ataque
-                if self.type_avatar == 1:
-                    #Logica de cambio de sprite
-                    atack = Attack_Avatar( self.type_avatar, self.posicion_get(), )
+            if self.type_avatar == 3:
+                # Logica de cambio de sprite
+                atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
 
-                if self.type_avatar == 2:
-                    # Logica de cambio de sprite
-                    atack = Attack_Avatar(self.type_avatar, self.posicion_get(), )
+            if self.type_avatar == 4:
+                # Logica de cambio de sprite
+                atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
 
-                if self.type_avatar == 3:
-                    # Logica de cambio de sprite
-                    atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
-
-                if self.type_avatar == 4:
-                    # Logica de cambio de sprite
-                    atack = Attack_Avatar(self.type_avatar, self.posicion_get() )
-
-                    pass
-                return ('Bala')
-            else:
-                return ('')
+                pass
+            return ('Bala')
+        else:
+            return ('')
 
     #Dibuja el men en pantalla
     def draw_me( self, time_now ):
@@ -164,7 +162,7 @@ class Attack_Avatar( pygame.sprite.Sprite ):
             self.rect.top = pos(0)
             self.rect.left = pos(1)
 
-            #carrete imagenes
+        #Escuedero
         elif self.type == 2:
             self.image = pygame.image.load('resource/bala.png').convert()
             self.image = pygame.transform.scale(self.image, (20, 40))
@@ -175,9 +173,11 @@ class Attack_Avatar( pygame.sprite.Sprite ):
             self.rect.top = pos(0)
             self.rect.left = pos(1)
 
+        #Lenador
         elif self.type == 3:
             pass
 
+        #Canival
         elif self.type == 4:
             pass
     def trayect( self):
