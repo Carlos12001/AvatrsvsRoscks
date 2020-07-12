@@ -7,12 +7,13 @@ from GameV0 import *
 
 
 class New_Avart ( pygame.sprite.Sprite ):
-    def __init__( self, type_avatar):
+    def __init__( self, type_avatar,num):
         super().__init__()
         #Tiempo de su creacion
         self.last_time_atack  = 0
         self.last_time_move = 0
         self.type_avatar = type_avatar
+        self.num = num
         #Que tipo de Avatar va crear
 
         #Arquero
@@ -111,6 +112,18 @@ class New_Avart ( pygame.sprite.Sprite ):
         else:
             return False
 
+    #Vida
+    def life( self, damege ):
+        result = ''
+        self.ps -= damege
+        if self.ps <= 0:
+            result = 'i die'
+        else:
+            result = 'still a life'
+
+        return result
+
+
     #Ataque de los Avatrs
     def atack(self, time_now):
         #Revisa el tiempo de ataque
@@ -145,6 +158,10 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.last_time_move = time_now
             self.last_time_atack =  time_now
         screen.blit(self.image, self.posicion_get())
+
+    #Retorna quien es
+    def who( self ):
+        return self.num
 
 #Atacks
 class Attack_Avatar(pygame.sprite.Sprite):
