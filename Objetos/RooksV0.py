@@ -17,7 +17,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_sand.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -33,7 +33,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_rock.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -49,7 +49,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_fire.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -64,7 +64,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_water.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]

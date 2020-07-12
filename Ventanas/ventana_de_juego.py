@@ -7,7 +7,7 @@ from Objetos import CoinsV0
 #Variables Globales a Necesitar
 global MATRIZ, all_sprites_matriz_list, time_to_start, time_last_time_new_enemy,all_atacks_in_game
 global atacks_avart_0, atacks_avart_1, atacks_avart_2, atacks_avart_3, atacks_avart_4
-global atacks_rocks_0, atacks_rocks_1, atacks_rocks_2, atacks_rocks_3, atacks_rocks_4
+global atacks_rooks_0, atacks_rooks_1, atacks_rooks_2, atacks_rooks_3, atacks_rooks_4
 
 #Matriz de posiciones de juego
 MATRIZ = [    [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
@@ -28,11 +28,11 @@ atacks_avart_2 = pygame.sprite.Group()
 atacks_avart_3 = pygame.sprite.Group()
 atacks_avart_4 = pygame.sprite.Group()
 
-atacks_rocks_0 = pygame.sprite.Group()
-atacks_rocks_1 = pygame.sprite.Group()
-atacks_rocks_2 = pygame.sprite.Group()
-atacks_rocks_3 = pygame.sprite.Group()
-atacks_rocks_4 = pygame.sprite.Group()
+atacks_rooks_0 = pygame.sprite.Group()
+atacks_rooks_1 = pygame.sprite.Group()
+atacks_rooks_2 = pygame.sprite.Group()
+atacks_rooks_3 = pygame.sprite.Group()
+atacks_rooks_4 = pygame.sprite.Group()
 
 all_atacks_in_game = pygame.sprite.Group()
 all_sprites_matriz_list =  pygame.sprite.Group ()
@@ -495,7 +495,7 @@ def new_rook(tipo,pos):
 def atacks():
     global MATRIZ, all_atacks_in_game
     global atacks_avart_0,atacks_avart_1,atacks_avart_2,atacks_avart_3,atacks_avart_4
-    global atacks_rocks_0,atacks_rocks_1,atacks_rocks_2,atacks_rocks_3,atacks_rocks_4
+    global atacks_rooks_0,atacks_rooks_1,atacks_rooks_2,atacks_rooks_3,atacks_rooks_4
 
     for fila in MATRIZ:
         for cuadrito in fila:
@@ -510,13 +510,13 @@ def atacks():
                         if cuadrito[1][0] == 250:
                             atacks_rooks_0.add(atacking)
                         if cuadrito[1][0] == 350:
-                            atacks_rocks_1.add(atacking)
+                            atacks_rooks_1.add(atacking)
                         if cuadrito[1][0] == 450:
-                            atacks_rocks_2.add(atacking)
+                            atacks_rooks_2.add(atacking)
                         if cuadrito[1][0] == 550:
-                            atacks_rocks_3.add(atacking)
+                            atacks_rooks_3.add(atacking)
                         if cuadrito[1][0] == 650:
-                            atacks_rocks_4.add(atacking)
+                            atacks_rooks_4.add(atacking)
                         all_atacks_in_game.add(atacking)
                 else:
                     pass

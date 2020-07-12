@@ -176,11 +176,27 @@ class Attack_Avatar(pygame.sprite.Sprite):
 
         #Lenador
         elif self.type == 3:
-            pass
+            self.image = pygame.image.load('resource/bala.png').convert()
+            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            self.rect = self.image.get_rect()
+
+            self.speed = 2
+            self.rect.top = pos(0)
+            self.rect.left = pos(1)
+
 
         #Canival
         elif self.type == 4:
-            pass
+            self.image = pygame.image.load('resource/bala.png').convert()
+            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            self.rect = self.image.get_rect()
+
+            self.speed = 2
+            self.rect.top = pos(0)
+            self.rect.left = pos(1)
+            
     def trayect( self):
         self.rect.top = self.rect.top - self.speed
 
