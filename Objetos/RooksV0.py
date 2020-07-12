@@ -84,13 +84,14 @@ class New_Rook (pygame.sprite.Sprite):
     # Obtener ataque
     def damage(self):
         return self.pa
+
     # Obtener imagen
     def image_get(self):
         return self.image
 
     # Ataque de los Avatrs
     def atack(self, time_now):
-
+        atack = []
         # Revisa el tiempo de ataque
         if (time_now - self.last_time_atack) // 1000 == self.speed_atack:
             self.last_time_atack = time_now
@@ -141,7 +142,8 @@ class New_Rook (pygame.sprite.Sprite):
 
         screen.blit(self.image, self.posicion_get())
 
-
+    def who( self ):
+        return 'no'
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):
     def __init__( self, type, posicion ):
@@ -158,6 +160,9 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.rect.y = posicion[1]
 
 
+            self.pa = 2
+
+
             self.speed = 2
 
 
@@ -168,6 +173,8 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
+
+            self.pa = 4
 
 
             self.speed = 2
@@ -181,6 +188,8 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
 
+            self.pa = 4
+
 
             self.speed = 2
 
@@ -192,11 +201,13 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
 
+            self.pa = 4
+
 
             self.speed = 2
 
     #Trayectoria del ataque
-    def trayect( self ):
+    def update( self ):
         if self.rect.y<size[1]:
             self.rect.y += self.speed
         else:
@@ -205,4 +216,8 @@ class Attack_Rook (pygame.sprite.Sprite):
     #Dibujo del ataque
     def dibujar( self ):
         screen.blit( self.image, [self.rect.x,self.rect.y] )
+
+    #Obtiene el dano e la bala
+    def get_damage( self ):
+        return self.pa
 
