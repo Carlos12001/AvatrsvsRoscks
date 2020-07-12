@@ -165,8 +165,8 @@ def kill_coins ():
 
 # Funciones para el funcionamiento de los rooks
 
-def rook_posicion(tipo,mouse_pos, mouse_click):
 
+def rook_posicion(tipo,mouse_pos, mouse_click):
 
     # primer fila
 
@@ -459,9 +459,9 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
         set = False
 
     else:
-        set = True
         rectX = 0
         rectY = 0
+        set = True
 
     put_new_rook( [tipo, set, [rectX, rectY]] )
 
@@ -547,8 +547,7 @@ def draw_objetcs_matriz():
 def juego():
     global MATRIZ,all_atacks_in_game
 
-
-    #Matriz de imagen
+    # Matriz de imagen
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
 
     # botones tienda
@@ -588,7 +587,6 @@ def juego():
         for i in range(50):
             avatar = AvartsV0.New_Avart(random.randint(1,4))
             avatar_list.append(avatar)
-
 
 
     global game_over,shop_open
@@ -643,7 +641,6 @@ def juego():
         pygame.draw.rect(screen, brown, sand_button)
         pygame.draw.rect(screen, lightgreen, rock_button)
         pygame.draw.rect(screen, green, fire_button)
-
         pygame.draw.rect(screen, purple, water_button)
         text(str(coins), font2,brown, screen,100,50)
 
@@ -666,6 +663,9 @@ def juego():
             atacks()
             all_atacks_in_game.draw(screen)
             atacks_move()
+
+            #Parte funcional para que disparen los avatars
+
 
 
         clock.tick(60)

@@ -141,9 +141,9 @@ class New_Avart ( pygame.sprite.Sprite ):
 
     #Dibuja el men en pantalla
     def draw_me( self, time_now ):
-        if self.last_time_move == 0 :
+        if self.last_time_move == 0:
             self.last_time_move = time_now
-            self.last_time_atack =  time_now
+            self.last_time_atack = time_now
         screen.blit(self.image, self.posicion_get())
 
 #Atacks
@@ -196,9 +196,12 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.speed = 2
             self.rect.top = pos(0)
             self.rect.left = pos(1)
-            
-    def trayect( self):
-        self.rect.top = self.rect.top - self.speed
+
+    def trayect(self):
+        if -50 < self.rect.y < size[1]
+            self.rect.top = self.rect.top - self.speed
+        else:
+            self.kill()
 
     def dibujar( self):
         screen.blit( self.image, self.rect )
