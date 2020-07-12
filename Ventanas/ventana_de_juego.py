@@ -518,8 +518,24 @@ def atacks():
                         if cuadrito[1][0] == 650:
                             atacks_rooks_4.add(atacking)
                         all_atacks_in_game.add(atacking)
+
                 else:
-                    pass
+                    # Ataque
+                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
+
+                    if atacking != '':
+                        if cuadrito[1][0] == 250:
+                            atacks_avart_0.add(atacking)
+                        elif cuadrito[1][0] == 350:
+                            atacks_avart_1.add(atacking)
+                        elif cuadrito[1][0] == 450:
+                            atacks_avart_2.add(atacking)
+                        elif cuadrito[1][0] == 550:
+                            atacks_avart_3.add(atacking)
+                        elif cuadrito[1][0] == 650:
+                            atacks_avart_4.add(atacking)
+                        all_atacks_in_game.add(atacking)
+
 
 def atacks_move():
     global  all_atacks_in_game

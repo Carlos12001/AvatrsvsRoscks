@@ -114,7 +114,7 @@ class New_Avart ( pygame.sprite.Sprite ):
     #Ataque de los Avatrs
     def atack(self, time_now):
         #Revisa el tiempo de ataque
-        if False: #(time_now - self.last_time_move) // 1000 == self.speed_atack:
+        if (time_now - self.last_time_move) // 1000 == self.speed_atack:
             self.last_time_atack = time_now
 
             #Quien realiza el ataque
@@ -160,8 +160,8 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
 
             self.speed = 2
-            self.rect.top = pos(0)
-            self.rect.left = pos(1)
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
 
         #Escuedero
         elif self.type == 2:
@@ -171,8 +171,8 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
 
             self.speed = 2
-            self.rect.top = pos(0)
-            self.rect.left = pos(1)
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
 
         #Lenador
         elif self.type == 3:
@@ -182,8 +182,8 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
 
             self.speed = 2
-            self.rect.top = pos(0)
-            self.rect.left = pos(1)
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
 
 
         #Canival
@@ -194,16 +194,16 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
 
             self.speed = 2
-            self.rect.top = pos(0)
-            self.rect.left = pos(1)
+            self.rect.x = pos[0]
+            self.rect.y = pos[1]
 
     def trayect(self):
-        if -50 < self.rect.y < size[1]
-            self.rect.top = self.rect.top - self.speed
+        if -50 < self.rect.y:
+            self.rect.y -= self.speed
         else:
             self.kill()
 
     def dibujar( self):
-        screen.blit( self.image, self.rect )
+        screen.blit( self.image, [self.rect.x,self.rect.y])
 
 
