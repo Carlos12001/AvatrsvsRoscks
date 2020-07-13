@@ -128,7 +128,7 @@ class New_Avart ( pygame.sprite.Sprite ):
     #Ataque de los Avatrs
     def atack(self, time_now):
         #Revisa el tiempo de ataque
-        if False: #(time_now - self.last_time_move) // 1000 == self.speed_atack:
+        if (time_now - self.last_time_move) // 1000 == self.speed_atack:
             self.last_time_atack = time_now
 
             #Quien realiza el ataque
