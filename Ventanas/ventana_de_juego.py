@@ -51,7 +51,7 @@ def text(text, font, color, surface, x, y):
 
 def put_new_enemy(list_ramdom_secs):
     global time_last_time_new_enemy
-    if 1 == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
+    if random.choice(list_ramdom_secs) == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
         time_last_time_new_enemy = pygame.time.get_ticks()//1000
         return put_new_enemy_aux()
 
@@ -158,7 +158,6 @@ def kill_coins ():
                     break
 
 # Funciones para el funcionamiento de los rooks
-
 
 def rook_posicion( tipo, mouse_pos):
 
@@ -495,6 +494,7 @@ def atacks_rooks():
         for cuadrito in fila:
 
             if cuadrito[0] != 'Vacio':
+
                 if not(cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'
                     or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival'):
                     #Ataque
@@ -505,27 +505,31 @@ def atacks_rooks():
 def atacks_avarts():
     global MATRIZ
     done =False
+
     i_now = 0
     for fila in MATRIZ:
         j_now = 0
         for cuadrito in fila:
             if cuadrito[0] != 'Vacio':
+                
                 if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero':
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '':
                         list_atacks_avart.add(atacking)
                         break
-                else:
+                elif cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
                     if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
-
-                        if cuadrito[0].update(pygame.time.get_ticks()):
-                            atacking = cuadrito[0].atack(pygame.time.get_ticks(), MATRIZ[i_now - 1][j_now][0].type_get())
+                        if  MATRIZ[i_now - 1][j_now][0].type_get()== 'Sand' \
+                            or MATRIZ[i_now - 1][j_now][0].type_get()== 'Rock'\
+                            or MATRIZ[i_now - 1][j_now][0].type_get()== 'Fire' \
+                            or  MATRIZ[i_now - 1][j_now][0].type_get()== 'Water':
+                            atacking = cuadrito[0].atack(pygame.time.get_ticks())
                             if atacking != '':
                                 list_atacks_avart.add(atacking)
                                 break
-
-
+       
             j_now += 1
+            
         i_now += 1
 
 def atacks_move():
@@ -556,7 +560,7 @@ def atacks_colsion_check_avart():
                             avatar_victimin.kill()
                             cuadrito [0] = 'Vacio'
                     elif cuadrito[0] =='Vacio':
-                        cuadrito[0] = 'Vacio'                       
+                        cuadrito[0] = 'Vacio'
 
 def atacks_colsion_check_rook():
     global MATRIZ
@@ -848,10 +852,6 @@ def quit_rook (quit_pos):
                     print("no se puede eliminar avatar") # ver como indicar esto
             elif cuadrito[0] == "Vacio":
                 pass
-                
-
-    
-
 
 #Dibuja el los objetos de la matriz
 def draw_objetcs_matriz():
@@ -862,6 +862,13 @@ def draw_objetcs_matriz():
             if object != 'Vacio':
                 object.draw_me(pygame.time.get_ticks())
 
+def quit_name(name):
+    global player_name
+    ruta = "player_name.txt"
+    file = open(ruta,"w")
+    for line in file:
+        if line == player_name:
+            line = ""
 
 
 
@@ -908,7 +915,7 @@ def juego():
     #Creacion de Avatars segun el nivel que se encuentra
     if level_1:
         # Tiempo de apracion de avatar entre 5 15
-        list_ramdom_secs = range(5, 15)
+        list_ramdom_secs = range(10, 15)
         num = 0
         for i in range(50):
             avatar = AvartsV0.New_Avart(random.randint(1,4),num)
@@ -925,9 +932,6 @@ def juego():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over=True
-                for fila in MATRIZ:
-                    print(fila)
-                print("")
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if quit_button.collidepoint(event.pos):
@@ -962,19 +966,20 @@ def juego():
                     else:
                         coins = 0
                 else:
-                    rook_posicion(tipo,pygame.mouse.get_pos())   #Hay que quitar si existe un click
+                    rook_posicion(tipo,pygame.mouse.get_pos())
 
-                #Logica de quitar rook con otro if y otra funcion checkea donde ocurrio el click y si hay rook
 
         #Pierde el juego
         for enemy_false in MATRIZ[0]:
-            pass
-            #if enemy_false[0] !='Vacio': #Agregar logica para verificar si es un Avatar
-                #game_over = True
-                #import GameV0
-                #GameV0.start()
+            if enemy_false[0] !='Vacio':
+                if enemy_false[0].type_get() == 'Flechador' or  enemy_false[0].type_get() == 'Escudero' or enemy_false[0].type_get() == 'Canival' or enemy_false[0].type_get()=='Lenador':
+                    game_over = True
+                    import GameV0
+                    GameV0.start()
+                    #Eliminar el nombre de la lista
 
 
+        #Logiga para ganar
 
         screen.fill(white)
         pygame.draw.rect(screen, brown, sand_button)
@@ -989,7 +994,7 @@ def juego():
         if level_1:
             # Revisa las colisiones
             atacks_colsion_check_avart()
-
+            atacks_colsion_check_rook()
 
 
             screen.blit(matriz_0_dibujo, [250, 0])
@@ -998,11 +1003,12 @@ def juego():
             # Parte funcional para que disparen los rooks
             atacks_rooks()
             list_atacks_rooks.draw(screen)
-            atacks_move()
+            #atacks_move()
 
             # Parte funcional para que disparen los avatars
             atacks_avarts()
             list_atacks_avart.draw(screen)
+            atacks_move()
             #Parte funcional avatrs
             put_new_enemy(list_ramdom_secs)
             move_enemy()

@@ -1,6 +1,8 @@
 import pygame, sys
 from GameV0 import *
 
+global player_name
+player_name = ""
 # --------------------------------------------- Clases ---------------------------------------#
 
 # --------------------------------------------- Funciones ---------------------------------------------- #
@@ -14,6 +16,8 @@ def text(text, font, color, surface, x, y):
 
 # REVISAR EL FUNCIONAMIENTO DE ESTA FUNCION, NO ESCRIBE
 def save_name (name):
+    global player_name
+    player_name = name
     ruta = "player_name.txt"
     file = open(ruta,"w")
     file.write(name)
@@ -26,6 +30,7 @@ def save_name (name):
 # ---------------------- Ventana dodne el jugador digita su nombre por primera vez --------------------- #
 
 def name():
+    global user_name 
     entrybox = pygame.Rect(400,300,200,50)
     button = pygame.Rect(440, 400, 140, 50)
     user_name = ""

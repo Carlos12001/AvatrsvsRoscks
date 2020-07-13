@@ -24,7 +24,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 7
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 4
+            self.speed_atack = 2
 
         # Rook de roca
         elif self.type_rook == 6:
@@ -40,7 +40,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 14
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 6
+            self.speed_atack = 2
 
         # Rook de fuego
         elif self.type_rook == 7:
@@ -56,7 +56,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 16
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 8
+            self.speed_atack = 2
 
         # Rook de agua
         elif self.type_rook == 8:
@@ -72,7 +72,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 16
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 10
+            self.speed_atack = 2
 
     # obtener vida
     def ps_get (self):
@@ -82,7 +82,7 @@ class New_Rook (pygame.sprite.Sprite):
     def atack(self, time_now):
         atack = []
         # Revisa el tiempo de ataque
-        if (time_now - self.last_time_atack) // 1000 == self.speed_atack:
+        if (time_now - self.last_time_atack) // 1000 == self.speed_atack  and self.ps > 0:
             self.last_time_atack = time_now
 
             # Quien realiza el ataque
@@ -104,6 +104,9 @@ class New_Rook (pygame.sprite.Sprite):
 
             
             return atack
+        elif self.ps<=0:
+            self.kill()
+            return ''
         else:
             return ('')
      #Obtener imagen
@@ -136,6 +139,7 @@ class New_Rook (pygame.sprite.Sprite):
 
         if self.ps <= 0:
             result = 'i die'
+            self.kill()
 
         else:
             result = 'still a life'
@@ -144,11 +148,15 @@ class New_Rook (pygame.sprite.Sprite):
     
     # Dibuja el men en pantalla
     def draw_me(self, time_now):
-        if self.last_time_move == 0 :
-            self.last_time_move = time_now
-            self.last_time_atack =  time_now
+        if not self.ps <= 0:
+            
+            if self.last_time_move == 0 :
+                self.last_time_move = time_now
+                self.last_time_atack =  time_now
 
-        screen.blit(self.image, self.posicion_get())
+            screen.blit(self.image, self.posicion_get())
+        else:
+            self.kill()
 
     #Retorna el identificador del rook
     def who( self ):
@@ -173,7 +181,7 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.pa = 2
             self.speed = 2
 
-
+        #Roca
         elif self.type == 6 :
             self.image = pygame.image.load('resource/bala.png').convert()
             self.image = pygame.transform.scale(self.image, (20, 40))
@@ -187,7 +195,7 @@ class Attack_Rook (pygame.sprite.Sprite):
 
             self.speed = 2
 
-
+        #Fuego
         elif self.type == 7 :
             self.image = pygame.image.load('resource/bala.png').convert()
             self.image = pygame.transform.scale(self.image, (20, 40))
@@ -196,11 +204,12 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
 
-            self.pa = 4
+            self.pa = 8
 
 
             self.speed = 2
 
+        #Agua
         elif self.type == 8 :
             self.image = pygame.image.load('resource/bala.png').convert()
             self.image = pygame.transform.scale(self.image, (20, 40))
@@ -209,7 +218,7 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
 
-            self.pa = 4
+            self.pa = 8
 
 
             self.speed = 2
