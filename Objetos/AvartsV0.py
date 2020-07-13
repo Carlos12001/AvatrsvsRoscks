@@ -118,7 +118,6 @@ class New_Avart ( pygame.sprite.Sprite ):
         self.ps -= damege
         if self.ps <= 0:
             result = 'i die'
-
         else:
             result = 'still a life'
 
