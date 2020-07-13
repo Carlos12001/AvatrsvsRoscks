@@ -158,8 +158,8 @@ def kill_coins ():
 
 # Funciones para el funcionamiento de los rooks
 
-def rook_posicion(tipo,mouse_pos, mouse_click):
 
+def rook_posicion(tipo,mouse_pos, mouse_click):
 
     # primer fila
 
@@ -452,9 +452,9 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
         set = False
 
     else:
-        set = True
         rectX = 0
         rectY = 0
+        set = True
 
     put_new_rook( [tipo, set, [rectX, rectY]] )
 
@@ -501,7 +501,22 @@ def atacks():
                     if atacking != '' :
                         list_atacks_rooks.add(atacking)
                 else:
-                    pass
+                    # Ataque
+                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
+
+                    if atacking != '':
+                        if cuadrito[1][0] == 250:
+                            atacks_avart_0.add(atacking)
+                        elif cuadrito[1][0] == 350:
+                            atacks_avart_1.add(atacking)
+                        elif cuadrito[1][0] == 450:
+                            atacks_avart_2.add(atacking)
+                        elif cuadrito[1][0] == 550:
+                            atacks_avart_3.add(atacking)
+                        elif cuadrito[1][0] == 650:
+                            atacks_avart_4.add(atacking)
+                        all_atacks_in_game.add(atacking)
+
 
 def atacks_move():
     for atacking in list_atacks_rooks:
@@ -557,8 +572,7 @@ def draw_objetcs_matriz():
 def juego():
     global MATRIZ
 
-
-    #Matriz de imagen
+    # Matriz de imagen
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
 
     # botones tienda
@@ -600,7 +614,6 @@ def juego():
             avatar = AvartsV0.New_Avart(random.randint(1,4),num)
             avatar_list.append(avatar)
             num += 1
-
 
 
     global game_over,shop_open
@@ -654,7 +667,6 @@ def juego():
         pygame.draw.rect(screen, brown, sand_button)
         pygame.draw.rect(screen, lightgreen, rock_button)
         pygame.draw.rect(screen, green, fire_button)
-
         pygame.draw.rect(screen, purple, water_button)
         text(str(coins), font2,brown, screen,100,50)
 
@@ -680,6 +692,9 @@ def juego():
             atacks()
             list_atacks_rooks.draw(screen)
             atacks_move()
+
+            #Parte funcional para que disparen los avatars
+
 
 
 

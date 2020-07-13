@@ -1,5 +1,4 @@
 import pygame
-
 from GameV0 import *
 
 white = (255, 255, 255)
@@ -16,7 +15,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_sand.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -25,7 +24,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 7
             self.pa = 2
 
-
+            # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 4
 
         # Rook de roca
@@ -33,7 +32,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_rock.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -42,7 +41,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 14
             self.pa = 4
 
-
+            # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 6
 
         # Rook de fuego
@@ -50,7 +49,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_fire.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -59,6 +58,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 16
             self.pa = 4
 
+            # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 8
 
         # Rook de agua
@@ -66,7 +66,7 @@ class New_Rook (pygame.sprite.Sprite):
             # cargar imagen
             self.image = pygame.image.load("resource/rook_water.png").convert()
             self.image.set_colorkey(white)
-            self.image = pygame.transform.scale(self.image, (80, 80))
+            self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
@@ -75,6 +75,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 16
             self.pa = 4
 
+            # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 10
 
     # obtener vida
@@ -86,10 +87,10 @@ class New_Rook (pygame.sprite.Sprite):
         return self.pa
 
     # Obtener imagen
-    def image_get(self):
-        return self.image
+    #def image_get(self):
+     #   return self.image
 
-    # Ataque de los Avatrs
+    # Ataque de los Rooks
     def atack(self, time_now):
         atack = []
         # Revisa el tiempo de ataque
@@ -99,11 +100,11 @@ class New_Rook (pygame.sprite.Sprite):
             # Quien realiza el ataque
             if self.type_rook == 5:
                 # Logica de cambio de sprite
-                atack = Attack_Rook(self.type_rook, self.posicion_get() )
+                atack = Attack_Rook(self.type_rook, self.posicion_get())
 
             if self.type_rook == 6:
                 # Logica de cambio de sprite
-                atack = Attack_Rook(self.type_rook, self.posicion_get() )
+                atack = Attack_Rook(self.type_rook, self.posicion_get())
 
             if self.type_rook == 7:
                 # Logica de cambio de sprite
@@ -154,15 +155,12 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.image = pygame.image.load('resource/bala.png').convert()
             self.image = pygame.transform.scale(self.image, (20, 40))
 
-            self.rect = self.image.get_rect()
+            #self.rect = self.image.get_rect()
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
 
-
             self.pa = 2
-
-
             self.speed = 2
 
 
@@ -207,8 +205,8 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.speed = 2
 
     #Trayectoria del ataque
-    def update( self ):
-        if self.rect.y<size[1]:
+    def trayect( self):
+        if self.rect.y < size[1]:
             self.rect.y += self.speed
         else:
             self.kill()
