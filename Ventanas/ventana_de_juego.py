@@ -925,7 +925,9 @@ def juego():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over=True
-                print(list_atacks_avart)
+                for fila in MATRIZ:
+                    print(fila)
+                print("")
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if quit_button.collidepoint(event.pos):

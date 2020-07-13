@@ -106,7 +106,6 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.rect.y -= 90
             return True
         elif self.ps <= 0:
-            print('i die')
             self.kill()
         else:
             return False
@@ -159,7 +158,6 @@ class New_Avart ( pygame.sprite.Sprite ):
         if not self.ps<=0:
             screen.blit(self.image, self.posicion_get())
         else:
-            print('i die')
             self.kill()
 
     #Retorna quien es
