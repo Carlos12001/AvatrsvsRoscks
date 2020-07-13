@@ -848,7 +848,6 @@ def quit_rook (quit_pos):
                     print("no se puede eliminar avatar") # ver como indicar esto
             elif cuadrito[0] == "Vacio":
                 pass
-                #print("esta vacio")
                 
 
     
