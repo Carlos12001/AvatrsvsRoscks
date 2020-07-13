@@ -582,7 +582,7 @@ def atacks_colsion_check_rook():
                         cuadrito[0] = 'Vacio'
 
 def click_posicion(mouse_pos):
-    global click
+    #global click
     # primer fila
 
     if 250 < mouse_pos[0] < 350 and 0 < mouse_pos[1] < 90:
@@ -649,7 +649,7 @@ def click_posicion(mouse_pos):
         rectX = 350
         rectY = 180
 
-    elif 450 < mouse_pos[0] < 550 and 180 < mouse_pos[1] < 270:
+    elif 450 < mouse_pos[0] < 550   and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 180
@@ -806,7 +806,7 @@ def click_posicion(mouse_pos):
         rectX = 250
         rectY = 720
 
-    elif 350 < mouse_pos[0] < 450 and 720 < mouse_pos[1] < 810:
+    elif 350 < mouse_pos[0] < 450   and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 720
@@ -827,17 +827,28 @@ def click_posicion(mouse_pos):
         rectY = 720
 
     else:
+
         rectX = 0
         rectY = 0
 
-    click = [rectX, rectY]
+    quit_pos = [rectX, rectY]
+    quit_rook(quit_pos)
     
-#def quit_rook ():
-  #  global MATRIZ
-   # global click
-    #for fila in MATRIZ:
-       # for cuadrito in fila:
-           # if cuadrito[0] != "Vacio" and cuadrito[1] == click:
+def quit_rook (quit_pos):
+    global MATRIZ
+    global quit_rook_var
+    quit_rook_var = False
+    for fila in MATRIZ:
+        for cuadrito in fila:
+            if cuadrito[0] != "Vacio" and cuadrito[1] == quit_pos:
+                if cuadrito[0].type_get() == "Sand" or cuadrito[0].type_get() == "Rock" or cuadrito[0].type_get() == "Fire" or cuadrito[0].type_get() == "Water":
+                    cuadrito[0].kill()
+                    cuadrito[0] = "Vacio"
+                else:
+                    print("no se puede eliminar avatar") # ver como indicar esto
+            elif cuadrito[0] == "Vacio":
+                pass
+                #print("esta vacio")
                 
 
     
@@ -866,10 +877,11 @@ def juego():
 
     # botones tienda
 
-    sand_button = pygame.Rect(0,500,100,80)
-    rock_button = pygame.Rect(0,580,100,80)
-    fire_button = pygame.Rect(0,660,100,80)
-    water_button =pygame.Rect(0,740,100,80)
+    sand_button = pygame.Rect(0, 500, 100, 80)
+    rock_button = pygame.Rect(0, 580, 100, 80)
+    fire_button = pygame.Rect(0, 660, 100, 80)
+    water_button =pygame.Rect(0, 740, 100, 80)
+    quit_button = pygame.Rect(900, 500, 100, 80)
 
     #Conjunto de enemigos
     global avatar_list
@@ -905,7 +917,7 @@ def juego():
             num += 1
 
 
-    global game_over,shop_open, quit_rook
+    global game_over,shop_open, quit_rook_var
     shop_open = True
     game_over = False
     quit_rook_var = False
@@ -917,33 +929,39 @@ def juego():
                 print(list_atacks_avart)
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if shop_open:
+                if quit_button.collidepoint(event.pos):
+                    quit_rook_var = True
+                elif quit_rook_var:
+                    mouse_pos = pygame.mouse.get_pos()
+                    click_posicion(mouse_pos)
+                elif shop_open:
                     if coins > 0:           #Hacer global las coins y shop_open, para meter toda la logica de las monedas en funcion
                         if coins >= 50 and sand_button.collidepoint(event.pos):
                             coins -= 50
                             tipo = 5
                             shop_open = False
+                            quit_rook_var = False
                         elif coins >= 100 and rock_button.collidepoint(event.pos):
                             coins -= 100
                             tipo = 6
                             shop_open = False
+                            quit_rook_var = False
                         elif coins >= 150 and fire_button.collidepoint(event.pos):
                             coins -= 150
                             tipo = 7
                             shop_open = False
+                            quit_rook_var = False
                         elif coins >= 150 and water_button.collidepoint(event.pos):
                             coins -= 150
                             tipo = 8
                             shop_open = False
+                            quit_rook_var = False
                         else:
                             coins = coins
                     else:
                         coins = 0
-                #elif quit_button.collidepoint(event.pos):
-                    #quit_rook_var = True
-                    #quit_rook()
                 else:
-                     rook_posicion(tipo,pygame.mouse.get_pos(),)   #Hay que quitar si existe un click
+                    rook_posicion(tipo,pygame.mouse.get_pos())   #Hay que quitar si existe un click
 
                 #Logica de quitar rook con otro if y otra funcion checkea donde ocurrio el click y si hay rook
 
@@ -962,6 +980,7 @@ def juego():
         pygame.draw.rect(screen, lightgreen, rock_button)
         pygame.draw.rect(screen, green, fire_button)
         pygame.draw.rect(screen, purple, water_button)
+        pygame.draw.rect(screen, darkpurple, quit_button)
         text(str(coins), font2,brown, screen,100,50)
 
 
