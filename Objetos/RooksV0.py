@@ -3,7 +3,7 @@ from GameV0 import *
 
 white = (255, 255, 255)
 class New_Rook (pygame.sprite.Sprite):
-    def __init__(self, tipo,posicion):
+    def __init__( self, tipo, posicion, num ):
         super().__init__()
         self.type_rook = tipo
 
@@ -22,7 +22,6 @@ class New_Rook (pygame.sprite.Sprite):
 
             # Caracteristicas del sand rook
             self.ps = 7
-            self.pa = 2
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 4
@@ -39,7 +38,6 @@ class New_Rook (pygame.sprite.Sprite):
 
             # Caracteristicas del sand rook
             self.ps = 14
-            self.pa = 4
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 6
@@ -56,7 +54,6 @@ class New_Rook (pygame.sprite.Sprite):
 
             # Caracteristicas del sand rook
             self.ps = 16
-            self.pa = 4
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 8
@@ -73,7 +70,6 @@ class New_Rook (pygame.sprite.Sprite):
 
             # Caracteristicas del sand rook
             self.ps = 16
-            self.pa = 4
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 10
@@ -81,14 +77,6 @@ class New_Rook (pygame.sprite.Sprite):
     # obtener vida
     def ps_get (self):
         return self.ps
-
-    # Obtener ataque
-    def damage(self):
-        return self.pa
-
-    # Obtener imagen
-    #def image_get(self):
-     #   return self.image
 
     # Ataque de los Rooks
     def atack(self, time_now):
@@ -114,18 +102,24 @@ class New_Rook (pygame.sprite.Sprite):
                 # Logica de cambio de sprite
                 atack = Attack_Rook(self.type_rook, self.posicion_get())
 
-                pass
+            
             return atack
         else:
             return ('')
+     #Obtener imagen
 
+    #Obtienes la imagen
+    def image_get(self):
+        return self.image
+    
     #Obtienes posicion
     def posicion_get(self):
         return [self.rect.x, self.rect.y]
 
         # Obtener nombre del tipo de enemigo
 
-    def type_get(self):
+    #El tipo de rook que es
+    def type_get (self) :
         if self.type_rook == 5:
             return 'Sand'
         elif self.type_rook == 6:
@@ -135,6 +129,19 @@ class New_Rook (pygame.sprite.Sprite):
         elif self.type_rook == 8:
             return 'Water'
 
+    #Funciona como hace la vida
+    def life (self, damege) :
+        result = ''
+        self.ps -= damege
+
+        if self.ps <= 0:
+            result = 'i die'
+
+        else:
+            result = 'still a life'
+
+        return result
+    
     # Dibuja el men en pantalla
     def draw_me(self, time_now):
         if self.last_time_move == 0 :
@@ -143,13 +150,16 @@ class New_Rook (pygame.sprite.Sprite):
 
         screen.blit(self.image, self.posicion_get())
 
+    #Retorna el identificador del rook
     def who( self ):
         return 'no'
+
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):
-    def __init__( self, type, posicion ):
+    def __init__( self, tipo, posicion ):
         super().__init__()
-        self.type = type
+
+        self.type = tipo
         #Arena
         if self.type == 5 :
             self.image = pygame.image.load('resource/bala.png').convert()

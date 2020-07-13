@@ -5,7 +5,7 @@ from Objetos import RooksV0
 from Objetos import CoinsV0
 
 #Variables Globales a Necesitar
-global MATRIZ, time_to_start, time_last_time_new_enemy
+global MATRIZ, time_to_start, time_last_time_new_enemy, num_rook
 
 #Matriz de posiciones de juego
 MATRIZ = [    [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
@@ -29,6 +29,7 @@ list_avarts_in_game = pygame.sprite.Group()
 
 list_rooks_in_game = pygame.sprite.Group()
 
+num_rook = 1000 
 
 time_to_start = pygame.time.get_ticks()/1000
 
@@ -159,35 +160,35 @@ def kill_coins ():
 # Funciones para el funcionamiento de los rooks
 
 
-def rook_posicion(tipo,mouse_pos, mouse_click):
+def rook_posicion( tipo, mouse_pos):
 
     # primer fila
 
-    if 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
+    if 250 < mouse_pos[0] < 350 and 0 < mouse_pos[1] < 90:
         # posicionar cada type_rook en un a posicion estandar
         rectX = 250
         rectY = 0
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
+    elif 350 < mouse_pos[0] < 450 and 0 < mouse_pos[1] < 90:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 0
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
+    elif 450 < mouse_pos[0] < 550 and 0 < mouse_pos[1] < 90:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 0
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
+    elif 550 < mouse_pos[0] < 650 and 0 < mouse_pos[1] < 90:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 0
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 0 < mouse_pos[1] < 90:
+    elif 650 < mouse_pos[0] < 750 and 0 < mouse_pos[1] < 90:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 0
@@ -195,31 +196,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
     # segunda fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
+    elif 250 < mouse_pos[0] < 350 and 90 < mouse_pos[1] < 180:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 90
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
+    elif 350 < mouse_pos[0] < 450 and 90 < mouse_pos[1] < 180:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 90
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
+    elif 450 < mouse_pos[0] < 550 and 90 < mouse_pos[1] < 180:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 90
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
+    elif 550 < mouse_pos[0] < 650 and 90 < mouse_pos[1] < 180:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 90
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 90 < mouse_pos[1] < 180:
+    elif 650 < mouse_pos[0] < 750 and 90 < mouse_pos[1] < 180:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 90
@@ -228,31 +229,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
     # tercera fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
+    elif 250 < mouse_pos[0] < 350 and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 180
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
+    elif 350 < mouse_pos[0] < 450 and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 180
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
+    elif 450 < mouse_pos[0] < 550 and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 180
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
+    elif 550 < mouse_pos[0] < 650 and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 180
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 180 < mouse_pos[1] < 270:
+    elif 650 < mouse_pos[0] < 750 and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 180
@@ -261,31 +262,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
     # cuarta fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
+    elif 250 < mouse_pos[0] < 350 and 270 < mouse_pos[1] < 360:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 270
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
+    elif 350 < mouse_pos[0] < 450 and 270 < mouse_pos[1] < 360:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 270
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
+    elif 450 < mouse_pos[0] < 550 and 270 < mouse_pos[1] < 360:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 270
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
+    elif 550 < mouse_pos[0] < 650 and 270 < mouse_pos[1] < 360:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 270
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 270 < mouse_pos[1] < 360:
+    elif 650 < mouse_pos[0] < 750 and 270 < mouse_pos[1] < 360:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 270
@@ -293,31 +294,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
         # quinta fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
+    elif 250 < mouse_pos[0] < 350 and 360 < mouse_pos[1] < 450:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 360
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
+    elif 350 < mouse_pos[0] < 450 and 360 < mouse_pos[1] < 450:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 360
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
+    elif 450 < mouse_pos[0] < 550 and 360 < mouse_pos[1] < 450:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 360
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
+    elif 550 < mouse_pos[0] < 650 and 360 < mouse_pos[1] < 450:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 360
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 360 < mouse_pos[1] < 450:
+    elif 650 < mouse_pos[0] < 750 and 360 < mouse_pos[1] < 450:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 360
@@ -325,31 +326,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
         # sexta fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 450 < mouse_pos[1] < 540:
+    elif 250 < mouse_pos[0] < 350 and 450 < mouse_pos[1] < 540:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 450
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 450 < mouse_pos[1] < 540:
+    elif 350 < mouse_pos[0] < 450 and 450 < mouse_pos[1] < 540:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 450
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 450 < mouse_pos[1] < 540:
+    elif 450 < mouse_pos[0] < 550 and 450 < mouse_pos[1] < 540:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 450
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 450 < mouse_pos[1] < 540:
+    elif 550 < mouse_pos[0] < 650 and 450 < mouse_pos[1] < 540:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 450
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 450 < mouse_pos[1] < 540:
+    elif 650 < mouse_pos[0] < 750 and 450 < mouse_pos[1] < 540:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 450
@@ -357,31 +358,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
         # septima fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 540 < mouse_pos[1] < 630:
+    elif 250 < mouse_pos[0] < 350 and 540 < mouse_pos[1] < 630:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 540
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 540 < mouse_pos[1] < 630:
+    elif 350 < mouse_pos[0] < 450 and 540 < mouse_pos[1] < 630:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 540
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 540 < mouse_pos[1] < 630:
+    elif 450 < mouse_pos[0] < 550 and 540 < mouse_pos[1] < 630:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 540
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 540 < mouse_pos[1] < 630:
+    elif 550 < mouse_pos[0] < 650 and 540 < mouse_pos[1] < 630:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 540
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 540 < mouse_pos[1] < 630:
+    elif 650 < mouse_pos[0] < 750 and 540 < mouse_pos[1] < 630:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 540
@@ -389,31 +390,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
         # octava fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 630 < mouse_pos[1] < 720:
+    elif 250 < mouse_pos[0] < 350 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 630
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 630 < mouse_pos[1] < 720:
+    elif 350 < mouse_pos[0] < 450 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 630
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 630 < mouse_pos[1] < 720:
+    elif 450 < mouse_pos[0] < 550 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 630
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 630 < mouse_pos[1] < 720:
+    elif 550 < mouse_pos[0] < 650 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 630
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 630 < mouse_pos[1] < 720:
+    elif 650 < mouse_pos[0] < 750 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 630
@@ -421,31 +422,31 @@ def rook_posicion(tipo,mouse_pos, mouse_click):
 
     # novena fila
 
-    elif 250 < mouse_pos[0] < 350 and mouse_click[0] == 1 and 720 < mouse_pos[1] < 810:
+    elif 250 < mouse_pos[0] < 350 and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 720
         set = False
 
-    elif 350 < mouse_pos[0] < 450 and mouse_click[0] == 1 and 720 < mouse_pos[1] < 810:
+    elif 350 < mouse_pos[0] < 450 and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 720
         set = False
 
-    elif 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 720 < mouse_pos[1] < 810:
+    elif 450 < mouse_pos[0] < 550 and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 720
         set = False
 
-    elif 550 < mouse_pos[0] < 650 and mouse_click[0] == 1 and 720 < mouse_pos[1] < 810:
+    elif 550 < mouse_pos[0] < 650 and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 550
         rectY = 720
         set = False
 
-    elif 650 < mouse_pos[0] < 750 and mouse_click[0] == 1 and 720 < mouse_pos[1] < 810:
+    elif 650 < mouse_pos[0] < 750 and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 720
@@ -464,35 +465,35 @@ def put_new_rook(lists):
         for fila in MATRIZ:
             for cuadrito in fila:
                 if cuadrito[0] == 'Vacio' and cuadrito[1] == lists[2] :
-                    #Agregar identificador
+                    
                     cuadrito[0] = new_rook(lists[0], lists[2])
                     list_rooks_in_game.add(cuadrito[0])
                     shop_open = True
 
 def new_rook(tipo,pos):
-
-    rook=[]
+    global num_rook
+    rook = []
     if tipo == 5:
-        rook = RooksV0.New_Rook(tipo,pos)
+        rook = RooksV0.New_Rook( tipo, pos, num_rook )
 
     if tipo == 6:
-        rook = RooksV0.New_Rook(tipo,pos)
+        rook = RooksV0.New_Rook( tipo, pos, num_rook )
 
     if tipo == 7:
-        rook = RooksV0.New_Rook(tipo,pos)
+        rook = RooksV0.New_Rook( tipo, pos, num_rook )
 
     if tipo == 8:
-        rook = RooksV0.New_Rook(tipo,pos)
-
+        rook = RooksV0.New_Rook( tipo, pos, num_rook )
+    num_rook += 1
     return rook
 
-
 #Funciones para los ataques
-def atacks():
-    global MATRIZ
 
+def atacks_rooks():
+    global MATRIZ
     for fila in MATRIZ:
         for cuadrito in fila:
+
             if cuadrito[0] != 'Vacio':
                 if not(cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'
                     or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival'):
@@ -500,27 +501,53 @@ def atacks():
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '' :
                         list_atacks_rooks.add(atacking)
+
+def atacks_avarts():
+    global MATRIZ
+    done =False
+    i_now = 0
+    for fila in MATRIZ:
+        j_now = 0
+        for cuadrito in fila:
+            if cuadrito[0] != 'Vacio':
+                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero':
+                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
+                    if atacking != '':
+                        list_atacks_avart.add(atacking)
+                        break
                 else:
-                    pass
+                    if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
+
+                        if cuadrito[0].update(pygame.time.get_ticks()):
+                            atacking = cuadrito[0].atack(pygame.time.get_ticks(), MATRIZ[i_now - 1][j_now][0].type_get())
+                            if atacking != '':
+                                list_atacks_avart.add(atacking)
+                                break
+
+
+            j_now += 1
+        i_now += 1
 
 def atacks_move():
-    for atacking in list_atacks_rooks:
-        atacking.update()
+    for atacking_rook in list_atacks_rooks:
+        atacking_rook.update()
+
+    for atacking_avart in list_atacks_avart:
+        atacking_avart.update()
 
 def atacks_colsion_check_avart():
-    global MATRIZ
+    global MATRIZ,coins
 
     #Logica para avatar impacto
     colisicion_avarts = pygame.sprite.groupcollide(list_avarts_in_game,list_atacks_rooks,False,True)
     if colisicion_avarts != {}:
-        done = False
         atacking = list(colisicion_avarts.values())[0][0].get_damage()
         list(colisicion_avarts.values())[0][0].kill()
         avatar_victimin = list(colisicion_avarts.keys())[0]
 
         if avatar_victimin.life(atacking) == 'i die':
             num = avatar_victimin.who()
-
+            coins += 100
             for fila in MATRIZ:
                 for cuadrito in fila:
                     if cuadrito[0] != 'Vacio':
@@ -529,7 +556,291 @@ def atacks_colsion_check_avart():
                             avatar_victimin.kill()
                             cuadrito [0] = 'Vacio'
                     elif cuadrito[0] =='Vacio':
+                        cuadrito[0] = 'Vacio'                       
+
+def atacks_colsion_check_rook():
+    global MATRIZ
+
+    #Logica para avatar impacto
+    colisicion_avarts = pygame.sprite.groupcollide(list_rooks_in_game, list_atacks_avart, False, True)
+    if colisicion_avarts != {}:
+        atacking = list(colisicion_avarts.values())[0][0].get_damage()
+        list(colisicion_avarts.values())[0][0].kill()
+        rook_victimin = list(colisicion_avarts.keys())[0]
+
+        if rook_victimin.life(atacking) == 'i die':
+            num = rook_victimin.who()
+
+            for fila in MATRIZ:
+                for cuadrito in fila:
+                    if cuadrito[0] != 'Vacio':
+                        if cuadrito[0].who() == num:
+                            cuadrito[0].kill()
+                            rook_victimin.kill()
+                            cuadrito[0] = 'Vacio'
+                    elif cuadrito[0] == 'Vacio':
                         cuadrito[0] = 'Vacio'
+
+def click_posicion(mouse_pos):
+    global click
+    # primer fila
+
+    if 250 < mouse_pos[0] < 350 and 0 < mouse_pos[1] < 90:
+        # posicionar cada type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 0
+
+    elif 350 < mouse_pos[0] < 450 and 0 < mouse_pos[1] < 90:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 0
+
+    elif 450 < mouse_pos[0] < 550 and 0 < mouse_pos[1] < 90:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 0
+
+    elif 550 < mouse_pos[0] < 650 and 0 < mouse_pos[1] < 90:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 0
+
+    elif 650 < mouse_pos[0] < 750 and 0 < mouse_pos[1] < 90:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 0
+
+    # segunda fila
+
+    elif 250 < mouse_pos[0] < 350 and 90 < mouse_pos[1] < 180:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 90
+
+    elif 350 < mouse_pos[0] < 450 and 90 < mouse_pos[1] < 180:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 90
+
+    elif 450 < mouse_pos[0] < 550 and 90 < mouse_pos[1] < 180:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 90
+
+    elif 550 < mouse_pos[0] < 650 and 90 < mouse_pos[1] < 180:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 90
+
+    elif 650 < mouse_pos[0] < 750 and 90 < mouse_pos[1] < 180:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 90
+
+    # tercera fila
+
+    elif 250 < mouse_pos[0] < 350 and 180 < mouse_pos[1] < 270:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 180
+
+    elif 350 < mouse_pos[0] < 450 and 180 < mouse_pos[1] < 270:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 180
+
+    elif 450 < mouse_pos[0] < 550 and 180 < mouse_pos[1] < 270:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 180
+
+    elif 550 < mouse_pos[0] < 650 and 180 < mouse_pos[1] < 270:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 180
+
+    elif 650 < mouse_pos[0] < 750 and 180 < mouse_pos[1] < 270:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 180
+
+    # cuarta fila
+
+    elif 250 < mouse_pos[0] < 350 and 270 < mouse_pos[1] < 360:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 270
+
+    elif 350 < mouse_pos[0] < 450 and 270 < mouse_pos[1] < 360:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 270
+
+    elif 450 < mouse_pos[0] < 550 and 270 < mouse_pos[1] < 360:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 270
+
+    elif 550 < mouse_pos[0] < 650 and 270 < mouse_pos[1] < 360:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 270
+
+    elif 650 < mouse_pos[0] < 750 and 270 < mouse_pos[1] < 360:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 270
+
+        # quinta fila
+
+    elif 250 < mouse_pos[0] < 350 and 360 < mouse_pos[1] < 450:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 360
+
+    elif 350 < mouse_pos[0] < 450 and 360 < mouse_pos[1] < 450:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 360
+
+    elif 450 < mouse_pos[0] < 550 and 360 < mouse_pos[1] < 450:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 360
+
+    elif 550 < mouse_pos[0] < 650 and 360 < mouse_pos[1] < 450:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 360
+
+    elif 650 < mouse_pos[0] < 750 and 360 < mouse_pos[1] < 450:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 360
+
+        # sexta fila
+
+    elif 250 < mouse_pos[0] < 350 and 450 < mouse_pos[1] < 540:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 450
+
+    elif 350 < mouse_pos[0] < 450 and 450 < mouse_pos[1] < 540:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 450
+
+    elif 450 < mouse_pos[0] < 550 and 450 < mouse_pos[1] < 540:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 450
+
+    elif 550 < mouse_pos[0] < 650 and 450 < mouse_pos[1] < 540:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 450
+
+    elif 650 < mouse_pos[0] < 750 and 450 < mouse_pos[1] < 540:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 450
+
+        # septima fila
+
+    elif 250 < mouse_pos[0] < 350 and 540 < mouse_pos[1] < 630:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 540
+
+    elif 350 < mouse_pos[0] < 450 and 540 < mouse_pos[1] < 630:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 540
+
+    elif 450 < mouse_pos[0] < 550 and 540 < mouse_pos[1] < 630:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 540
+
+    elif 550 < mouse_pos[0] < 650 and 540 < mouse_pos[1] < 630:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 540
+
+    elif 650 < mouse_pos[0] < 750 and 540 < mouse_pos[1] < 630:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 540
+        
+        # octava fila
+
+    elif 250 < mouse_pos[0] < 350 and 630 < mouse_pos[1] < 720:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 630
+        
+    elif 350 < mouse_pos[0] < 450 and 630 < mouse_pos[1] < 720:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 630
+
+    elif 450 < mouse_pos[0] < 550 and 630 < mouse_pos[1] < 720:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 630
+
+    elif 550 < mouse_pos[0] < 650 and 630 < mouse_pos[1] < 720:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 630
+
+    elif 650 < mouse_pos[0] < 750 and 630 < mouse_pos[1] < 720:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 630
+
+    # novena fila
+
+    elif 250 < mouse_pos[0] < 350 and 720 < mouse_pos[1] < 810:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 250
+        rectY = 720
+
+    elif 350 < mouse_pos[0] < 450 and 720 < mouse_pos[1] < 810:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 350
+        rectY = 720
+
+    elif 450 < mouse_pos[0] < 550 and 720 < mouse_pos[1] < 810:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 450
+        rectY = 720
+
+    elif 550 < mouse_pos[0] < 650 and 720 < mouse_pos[1] < 810:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 550
+        rectY = 720
+
+    elif 650 < mouse_pos[0] < 750 and 720 < mouse_pos[1] < 810:
+        # posicionar cada self.type_rook en un a posicion estandar
+        rectX = 650
+        rectY = 720
+
+    else:
+        rectX = 0
+        rectY = 0
+
+    click = [rectX, rectY]
+    
+#def quit_rook ():
+  #  global MATRIZ
+   # global click
+    #for fila in MATRIZ:
+       # for cuadrito in fila:
+           # if cuadrito[0] != "Vacio" and cuadrito[1] == click:
+                
+
+    
 
 
 #Dibuja el los objetos de la matriz
@@ -567,7 +878,7 @@ def juego():
     list_ramdom_secs = []
 
     # Cosas que necesita rooks
-    type = 0
+    tipo = 0
 
     # Conjunto de monedas
     global coins
@@ -594,40 +905,45 @@ def juego():
             num += 1
 
 
-    global game_over,shop_open
+    global game_over,shop_open, quit_rook
     shop_open = True
     game_over = False
+    quit_rook_var = False
 
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over=True
+                print(list_atacks_avart)
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if shop_open:
                     if coins > 0:           #Hacer global las coins y shop_open, para meter toda la logica de las monedas en funcion
                         if coins >= 50 and sand_button.collidepoint(event.pos):
                             coins -= 50
-                            type = 5
+                            tipo = 5
                             shop_open = False
                         elif coins >= 100 and rock_button.collidepoint(event.pos):
                             coins -= 100
-                            type = 6
+                            tipo = 6
                             shop_open = False
                         elif coins >= 150 and fire_button.collidepoint(event.pos):
                             coins -= 150
-                            type = 7
+                            tipo = 7
                             shop_open = False
                         elif coins >= 150 and water_button.collidepoint(event.pos):
                             coins -= 150
-                            type = 8
+                            tipo = 8
                             shop_open = False
                         else:
                             coins = coins
                     else:
                         coins = 0
+                #elif quit_button.collidepoint(event.pos):
+                    #quit_rook_var = True
+                    #quit_rook()
                 else:
-                     rook_posicion(type,pygame.mouse.get_pos(),[1])   #Hay que quitar si existe un click
+                     rook_posicion(tipo,pygame.mouse.get_pos(),)   #Hay que quitar si existe un click
 
                 #Logica de quitar rook con otro if y otra funcion checkea donde ocurrio el click y si hay rook
 
@@ -654,9 +970,19 @@ def juego():
             # Revisa las colisiones
             atacks_colsion_check_avart()
 
+
+
             screen.blit(matriz_0_dibujo, [250, 0])
             draw_objetcs_matriz()
 
+            # Parte funcional para que disparen los rooks
+            atacks_rooks()
+            list_atacks_rooks.draw(screen)
+            atacks_move()
+
+            # Parte funcional para que disparen los avatars
+            atacks_avarts()
+            list_atacks_avart.draw(screen)
             #Parte funcional avatrs
             put_new_enemy(list_ramdom_secs)
             move_enemy()
@@ -666,12 +992,7 @@ def juego():
             draw_coins()
             kill_coins()
 
-            #Parte funcional para que disparen los rooks
-            atacks()
-            list_atacks_rooks.draw(screen)
-            atacks_move()
 
-            #Parte funcional para que disparen los avatars
 
 
 
