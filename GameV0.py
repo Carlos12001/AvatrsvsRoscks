@@ -11,6 +11,7 @@ lightgreen = (160,255,227)
 green = (101,220,152)
 brown = (141,137,128)
 white = (255, 255, 255)
+black = (0, 0, 0)
 
 pygame.init()
 pygame.font.init()
@@ -20,6 +21,7 @@ screen = pygame.display.set_mode(size)
 
 font = pygame.font.SysFont("Times New Roman", 50)
 font2 = pygame.font.SysFont("Times New Roman", 30)
+font3 = pygame.font.SysFont("Times New Roman", 20)
 
 clock = pygame.time.Clock()
 # --------------------------------------------- Funciones ---------------------------------------------- #
@@ -50,9 +52,12 @@ def start ():
                 if event.key == pygame.K_5:
                     run = False
                     from Ventanas import ventana_de_juego
-                else:
+                if event.key == pygame.K_9:
                     run = False
-                    from Ventanas import ventana_nuevo_nombre
+                    from Ventanas import ventana_config
+                #else:
+                 #   run = False
+                  #  from Ventanas import ventana_nuevo_nombre
 
 
 
