@@ -83,7 +83,7 @@ def move_enemy():
             #Revisa si hay personaje
             if cuadrito [0] != 'Vacio':
 
-                #Revisa si es un enemigo
+                #Revisa si
                 if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'\
                 or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
 
@@ -501,22 +501,7 @@ def atacks():
                     if atacking != '' :
                         list_atacks_rooks.add(atacking)
                 else:
-                    # Ataque
-                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
-
-                    if atacking != '':
-                        if cuadrito[1][0] == 250:
-                            atacks_avart_0.add(atacking)
-                        elif cuadrito[1][0] == 350:
-                            atacks_avart_1.add(atacking)
-                        elif cuadrito[1][0] == 450:
-                            atacks_avart_2.add(atacking)
-                        elif cuadrito[1][0] == 550:
-                            atacks_avart_3.add(atacking)
-                        elif cuadrito[1][0] == 650:
-                            atacks_avart_4.add(atacking)
-                        all_atacks_in_game.add(atacking)
-
+                    pass
 
 def atacks_move():
     for atacking in list_atacks_rooks:
@@ -546,13 +531,6 @@ def atacks_colsion_check_avart():
                     elif cuadrito[0] =='Vacio':
                         cuadrito[0] = 'Vacio'
 
-
-
-
-
-
-
-    pass
 
 #Dibuja el los objetos de la matriz
 def draw_objetcs_matriz():

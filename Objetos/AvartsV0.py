@@ -105,10 +105,12 @@ class New_Avart ( pygame.sprite.Sprite ):
 
     #Movimiento
     def update(self, time_now):
-        if (time_now - self.last_time_move) // 1000 == self.speed_walk:
+        if (time_now - self.last_time_move) // 1000 == self.speed_walk and self.pa > 0:
             self.last_time_move = time_now
             self.rect.y -= 90
             return True
+        elif self.pa <= 0:
+            self.kill()
         else:
             return False
 
@@ -155,10 +157,16 @@ class New_Avart ( pygame.sprite.Sprite ):
 
     #Dibuja el men en pantalla
     def draw_me( self, time_now ):
-        if self.last_time_move == 0:
+        if self.last_time_move == 0 :
             self.last_time_move = time_now
             self.last_time_atack = time_now
-        screen.blit(self.image, self.posicion_get())
+
+        if not self.pa<=0:
+            screen.blit(self.image, self.posicion_get())
+        else:
+            self.kill()
+
+
 
     #Retorna quien es
     def who( self ):

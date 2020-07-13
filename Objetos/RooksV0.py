@@ -205,7 +205,7 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.speed = 2
 
     #Trayectoria del ataque
-    def trayect( self):
+    def update( self ):
         if self.rect.y < size[1]:
             self.rect.y += self.speed
         else:
