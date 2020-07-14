@@ -1,18 +1,14 @@
 import pygame, sys
 from GameV0 import *
 
-
-
-
-
 def save_config (final_config):
     ruta = "configuracion.txt"
     file = open(ruta,"w")
     for value in final_config:
         value_int = int(value)
         if isinstance(value_int, int) and 1 <= value_int <= 6:
-            file.write(value)
-            file.write('\n')
+            file.write(value + '\n')
+            #file.write('\n')
         else:
             print("error")
     file.close()
@@ -461,10 +457,10 @@ def config():
                         atack_w += event.unicode # ver solo numero
 
 
-        final_config = [speed_f, speed_e, speed_l, speed_c,
-                        speed_s, speed_r, speed_fi, speed_w,
-                        atack_f, atack_e, atack_l, atack_c,
-                        atack_s, atack_r, atack_fi, atack_w]
+        final_config = [speed_f, atack_f, speed_e, atack_e,
+                        speed_l, atack_l, speed_c, atack_c,
+                        speed_s, atack_s, speed_r, atack_r,
+                        speed_fi, atack_fi, speed_w, atack_w]
 
         screen.blit(music_on, (850, 730))
         screen.blit(music_off, (930, 730))
