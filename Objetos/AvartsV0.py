@@ -63,7 +63,7 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 20
 
             self.speed_walk = 14
-            self.speed_atack = 1
+            self.speed_atack = 5
 
         #Canival
         elif self.type_avatar == 4:
@@ -78,14 +78,14 @@ class New_Avart ( pygame.sprite.Sprite ):
             self.ps = 25
 
             self.speed_walk = 18
-            self.speed_atack = 1
+            self.speed_atack = 5
 
     #Obtener posicion en X, y
-    def posicion_get(self):
+    def posicion_get( self ):
         return [ self.rect.x, self.rect.y ]
 
     #Obtener nombre del tipo de enemigo
-    def type_get(self):
+    def type_get( self ):
         if self.type_avatar == 1:
             return 'Arquero'
         elif self.type_avatar == 2:
@@ -96,11 +96,17 @@ class New_Avart ( pygame.sprite.Sprite ):
             return 'Canival'
 
     #Obtener imagen
-    def image_get(self):
+    def image_get( self ):
         return self.image
 
+    #Obtener vida
+    def ps_get( self ):
+        if self.ps <=0:
+            self.kill()
+        return  self.ps
+
     #Movimiento
-    def update(self, time_now):
+    def update( self, time_now ):
         if (time_now - self.last_time_move) // 1000 == self.speed_walk and self.ps > 0:
             self.last_time_move = time_now
             self.rect.y -= 90
@@ -123,9 +129,9 @@ class New_Avart ( pygame.sprite.Sprite ):
         return result
 
     #Ataque de los Avatrs
-    def atack(self, time_now):
+    def atack( self, time_now ):
         #Revisa el tiempo de ataque
-        if (time_now - self.last_time_atack) // 1000 == self.speed_atack and self.ps>0:
+        if (time_now - self.last_time_atack) // 1000 >= self.speed_atack and self.ps>0:
             self.last_time_atack = time_now
             #Quien realiza el ataque
             if self.type_avatar == 1:
@@ -181,7 +187,7 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
 
             self.speed = 2
-            self.rect.x = pos[0]+50
+            self.rect.x = pos[0]+40
             self.rect.y = pos[1]
             self.pa = 2
 
@@ -193,20 +199,21 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
 
             self.speed = 2
-            self.rect.x = pos[0]+50
+            self.rect.x = pos[0]+40
             self.rect.y = pos[1]
             self.pa = 3
 
         #Lenador
         elif self.type == 3 :
             self.image = pygame.image.load('resource/bala.png').convert()
+            self.image = pygame.transform.scale(self.image, (1, 1))
 
-            self.image = pygame.transform.scale(self.image, (20, 40))
+
 
             self.rect = self.image.get_rect()
 
-            self.speed = 2
-            self.rect.x = pos[0]+50
+            self.speed = 1
+            self.rect.x = pos[0]+40
             self.rect.y = pos[1]
             self.pa = 9
 
@@ -214,13 +221,12 @@ class Attack_Avatar(pygame.sprite.Sprite):
         #Canival
         elif self.type == 4 :
             self.image = pygame.image.load('resource/bala.png').convert()
-            
-            self.image = pygame.transform.scale(self.image, (20, 40))
+            self.image = pygame.transform.scale(self.image, (1, 1))
 
             self.rect = self.image.get_rect()
 
-            self.speed = 2
-            self.rect.x = pos[0]+50
+            self.speed = 1
+            self.rect.x = pos[0]+40
             self.rect.y = pos[1]
             self.pa = 12
 

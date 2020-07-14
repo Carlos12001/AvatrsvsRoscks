@@ -6,7 +6,7 @@ class New_Rook (pygame.sprite.Sprite):
     def __init__( self, tipo, posicion, num ):
         super().__init__()
         self.type_rook = tipo
-
+        self.num = num
         self.last_time_atack = 0
         self.last_time_move = 0
 
@@ -74,15 +74,17 @@ class New_Rook (pygame.sprite.Sprite):
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
             self.speed_atack = 2
 
-    # obtener vida
-    def ps_get (self):
+    # Obtener vida
+    def ps_get(self):
+        if self.ps <= 0:
+            self.kill()
         return self.ps
 
     # Ataque de los Rooks
     def atack(self, time_now):
         atack = []
         # Revisa el tiempo de ataque
-        if (time_now - self.last_time_atack) // 1000 == self.speed_atack  and self.ps > 0:
+        if (time_now - self.last_time_atack) // 1000 >= self.speed_atack  and self.ps > 0:
             self.last_time_atack = time_now
 
             # Quien realiza el ataque
@@ -160,7 +162,7 @@ class New_Rook (pygame.sprite.Sprite):
 
     #Retorna el identificador del rook
     def who( self ):
-        return 'no'
+        return self.num
 
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):
