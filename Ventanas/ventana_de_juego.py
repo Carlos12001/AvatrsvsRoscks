@@ -5,7 +5,14 @@ from Objetos import RooksV0
 from Objetos import CoinsV0
 
 #Variables Globales a Necesitar
-global MATRIZ, time_to_start, time_last_time_new_enemy, num_rook
+global level_1, level_2, level_3, MATRIZ, time_to_start, time_last_time_new_enemy, num_rook
+
+
+
+level_1 = True
+level_2 = False
+level_3 = False
+
 
 #Matriz de posiciones de juego
 MATRIZ = [    [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
@@ -29,6 +36,7 @@ list_avarts_in_game = pygame.sprite.Group()
 
 list_rooks_in_game = pygame.sprite.Group()
 
+all_sprites = pygame.sprite.Group()
 num_rook = 1000 
 
 time_to_start = pygame.time.get_ticks()/1000
@@ -95,9 +103,42 @@ def move_enemy():
                             MATRIZ[i_now-1][j_now][0] = cuadrito[0]
                             cuadrito[0] = 'Vacio'
 
+
+
+
             j_now += 1
         i_now += 1
 
+def atacks_avarts():
+    global MATRIZ
+    done = False
+
+    i_now = 0
+    for fila in MATRIZ:
+        j_now = 0
+        for cuadrito in fila:
+            if cuadrito[0] != 'Vacio':
+
+                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero':
+                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
+                    if atacking != '':
+                        list_atacks_avart.add(atacking)
+                        break
+                elif cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
+                    if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
+                        if MATRIZ[i_now - 1][j_now][0].type_get() == 'Sand' \
+                                or MATRIZ[i_now - 1][j_now][0].type_get() == 'Rock' \
+                                or MATRIZ[i_now - 1][j_now][0].type_get() == 'Fire' \
+                                or MATRIZ[i_now - 1][j_now][0].type_get() == 'Water':
+                            atacking = cuadrito[0].atack(pygame.time.get_ticks())
+                            if atacking != '':
+                                list_atacks_avart.add(atacking)
+                                all_sprites.add(atacking)
+                                break
+
+            j_now += 1
+
+        i_now += 1
 
 # Funciones para el funcionamiento de las monedas
 
@@ -467,6 +508,7 @@ def put_new_rook(lists):
                     
                     cuadrito[0] = new_rook(lists[0], lists[2])
                     list_rooks_in_game.add(cuadrito[0])
+                    all_sprites.add(cuadrito[0])
                     shop_open = True
 
 def new_rook(tipo,pos):
@@ -486,8 +528,6 @@ def new_rook(tipo,pos):
     num_rook += 1
     return rook
 
-#Funciones para los ataques
-
 def atacks_rooks():
     global MATRIZ
     for fila in MATRIZ:
@@ -501,92 +541,10 @@ def atacks_rooks():
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '' :
                         list_atacks_rooks.add(atacking)
-
-def atacks_avarts():
-    global MATRIZ
-    done =False
-
-    i_now = 0
-    for fila in MATRIZ:
-        j_now = 0
-        for cuadrito in fila:
-            if cuadrito[0] != 'Vacio':
-                
-                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero':
-                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
-                    if atacking != '':
-                        list_atacks_avart.add(atacking)
-                        break
-                elif cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
-                    if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
-                        if  MATRIZ[i_now - 1][j_now][0].type_get()== 'Sand' \
-                            or MATRIZ[i_now - 1][j_now][0].type_get()== 'Rock'\
-                            or MATRIZ[i_now - 1][j_now][0].type_get()== 'Fire' \
-                            or  MATRIZ[i_now - 1][j_now][0].type_get()== 'Water':
-                            atacking = cuadrito[0].atack(pygame.time.get_ticks())
-                            if atacking != '':
-                                list_atacks_avart.add(atacking)
-                                break
-       
-            j_now += 1
-            
-        i_now += 1
-
-def atacks_move():
-    for atacking_rook in list_atacks_rooks:
-        atacking_rook.update()
-
-    for atacking_avart in list_atacks_avart:
-        atacking_avart.update()
-
-def atacks_colsion_check_avart():
-    global MATRIZ,coins
-
-    #Logica para avatar impacto
-    colisicion_avarts = pygame.sprite.groupcollide(list_avarts_in_game,list_atacks_rooks,False,True)
-    if colisicion_avarts != {}:
-        atacking = list(colisicion_avarts.values())[0][0].get_damage()
-        list(colisicion_avarts.values())[0][0].kill()
-        avatar_victimin = list(colisicion_avarts.keys())[0]
-
-        if avatar_victimin.life(atacking) == 'i die':
-            num = avatar_victimin.who()
-            coins += 100
-            for fila in MATRIZ:
-                for cuadrito in fila:
-                    if cuadrito[0] != 'Vacio':
-                        if  cuadrito[0].who() == num:
-                            cuadrito[0].kill()
-                            avatar_victimin.kill()
-                            cuadrito [0] = 'Vacio'
-                    elif cuadrito[0] =='Vacio':
-                        cuadrito[0] = 'Vacio'
-
-def atacks_colsion_check_rook():
-    global MATRIZ
-
-    #Logica para avatar impacto
-    colisicion_avarts = pygame.sprite.groupcollide(list_rooks_in_game, list_atacks_avart, False, True)
-    if colisicion_avarts != {}:
-        atacking = list(colisicion_avarts.values())[0][0].get_damage()
-        list(colisicion_avarts.values())[0][0].kill()
-        rook_victimin = list(colisicion_avarts.keys())[0]
-
-        if rook_victimin.life(atacking) == 'i die':
-            num = rook_victimin.who()
-
-            for fila in MATRIZ:
-                for cuadrito in fila:
-                    if cuadrito[0] != 'Vacio':
-                        if cuadrito[0].who() == num:
-                            cuadrito[0].kill()
-                            rook_victimin.kill()
-                            cuadrito[0] = 'Vacio'
-                    elif cuadrito[0] == 'Vacio':
-                        cuadrito[0] = 'Vacio'
+                        all_sprites(atacking)
 
 def click_posicion(mouse_pos):
-    #global click
+    # global click
     # primer fila
 
     if 250 < mouse_pos[0] < 350 and 0 < mouse_pos[1] < 90:
@@ -653,7 +611,7 @@ def click_posicion(mouse_pos):
         rectX = 350
         rectY = 180
 
-    elif 450 < mouse_pos[0] < 550   and 180 < mouse_pos[1] < 270:
+    elif 450 < mouse_pos[0] < 550 and 180 < mouse_pos[1] < 270:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 450
         rectY = 180
@@ -775,14 +733,14 @@ def click_posicion(mouse_pos):
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 650
         rectY = 540
-        
+
         # octava fila
 
     elif 250 < mouse_pos[0] < 350 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 250
         rectY = 630
-        
+
     elif 350 < mouse_pos[0] < 450 and 630 < mouse_pos[1] < 720:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
@@ -810,7 +768,7 @@ def click_posicion(mouse_pos):
         rectX = 250
         rectY = 720
 
-    elif 350 < mouse_pos[0] < 450   and 720 < mouse_pos[1] < 810:
+    elif 350 < mouse_pos[0] < 450 and 720 < mouse_pos[1] < 810:
         # posicionar cada self.type_rook en un a posicion estandar
         rectX = 350
         rectY = 720
@@ -837,21 +795,78 @@ def click_posicion(mouse_pos):
 
     quit_pos = [rectX, rectY]
     quit_rook(quit_pos)
-    
-def quit_rook (quit_pos):
+
+def quit_rook(quit_pos):
     global MATRIZ
     global quit_rook_var
     quit_rook_var = False
     for fila in MATRIZ:
         for cuadrito in fila:
             if cuadrito[0] != "Vacio" and cuadrito[1] == quit_pos:
-                if cuadrito[0].type_get() == "Sand" or cuadrito[0].type_get() == "Rock" or cuadrito[0].type_get() == "Fire" or cuadrito[0].type_get() == "Water":
+                if cuadrito[0].type_get() == "Sand" or cuadrito[0].type_get() == "Rock" or cuadrito[
+                    0].type_get() == "Fire" or cuadrito[0].type_get() == "Water":
                     cuadrito[0].kill()
                     cuadrito[0] = "Vacio"
                 else:
-                    print("no se puede eliminar avatar") # ver como indicar esto
+                    print("no se puede eliminar avatar")  # ver como indicar esto
             elif cuadrito[0] == "Vacio":
                 pass
+
+
+#Funciones para los ataques
+
+def atacks_move():
+    for atacking_rook in list_atacks_rooks:
+        atacking_rook.update()
+
+    for atacking_avart in list_atacks_avart:
+        atacking_avart.update()
+
+def atacks_colsion_check_avart():
+    global MATRIZ,coins
+
+    #Logica para avatar impacto
+    colisicion_avarts = pygame.sprite.groupcollide(list_avarts_in_game,list_atacks_rooks,False,True)
+    if colisicion_avarts != {}:
+        atacking = list(colisicion_avarts.values())[0][0].get_damage()
+        list(colisicion_avarts.values())[0][0].kill()
+        avatar_victimin = list(colisicion_avarts.keys())[0]
+
+        if avatar_victimin.life(atacking) == 'i die':
+            num = avatar_victimin.who()
+            coins += 100
+            for fila in MATRIZ:
+                for cuadrito in fila:
+                    if cuadrito[0] != 'Vacio':
+                        if  cuadrito[0].who() == num:
+                            cuadrito[0].kill()
+                            avatar_victimin.kill()
+                            cuadrito [0] = 'Vacio'
+                    elif cuadrito[0] =='Vacio':
+                        cuadrito[0] = 'Vacio'
+
+def atacks_colsion_check_rook():
+    global MATRIZ
+
+    #Logica para avatar impacto
+    colisicion_avarts = pygame.sprite.groupcollide(list_rooks_in_game, list_atacks_avart, False, True)
+    if colisicion_avarts != {}:
+        atacking = list(colisicion_avarts.values())[0][0].get_damage()
+        list(colisicion_avarts.values())[0][0].kill()
+        rook_victimin = list(colisicion_avarts.keys())[0]
+
+        if rook_victimin.life(atacking) == 'i die':
+            num = rook_victimin.who()
+
+            for fila in MATRIZ:
+                for cuadrito in fila:
+                    if cuadrito[0] != 'Vacio':
+                        if cuadrito[0].who() == num:
+                            cuadrito[0].kill()
+                            rook_victimin.kill()
+                            cuadrito[0] = 'Vacio'
+                    elif cuadrito[0] == 'Vacio':
+                        cuadrito[0] = 'Vacio'
 
 #Dibuja el los objetos de la matriz
 def draw_objetcs_matriz():
@@ -862,6 +877,7 @@ def draw_objetcs_matriz():
             if object != 'Vacio':
                 object.draw_me(pygame.time.get_ticks())
 
+#Funcion para quitar el nombre de la lista
 def quit_name(name):
     global player_name
     ruta = "player_name.txt"
@@ -870,19 +886,27 @@ def quit_name(name):
         if line == player_name:
             line = ""
 
+#Limpia la matriz y la lista de objetos
+
+def limpiar_matriz():
+    global MATRIZ
+    for fila in MATRIZ:
+        for cuadrtito in fila:
+            cuadrtito[0] = 'Vacio'
+    for sprite in all_sprites:
+        sprite.kill()
 
 
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 
 
 def juego():
-    global MATRIZ
+    global MATRIZ, level_1, level_2, level_3
 
     # Matriz de imagen
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
 
     # botones tienda
-
     sand_button = pygame.Rect(0, 500, 100, 80)
     rock_button = pygame.Rect(0, 580, 100, 80)
     fire_button = pygame.Rect(0, 660, 100, 80)
@@ -906,21 +930,21 @@ def juego():
     for i in range(20):
         coin = CoinsV0.New_Coin(random.randint(1, 3))
         coin_list.append(coin)
+        all_sprites.add(coin)
 
 
-    level_1 = True
-    level_2 = False
-    level_3 = False
+
 
     #Creacion de Avatars segun el nivel que se encuentra
     if level_1:
         # Tiempo de apracion de avatar entre 5 15
-        list_ramdom_secs = range(10, 15)
+        list_ramdom_secs = range(1, 2)
         num = 0
-        for i in range(50):
-            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
+        for i in range(1):
+            avatar = AvartsV0.New_Avart(1,num)#random.randint(1,4),num)
             avatar_list.append(avatar)
             num += 1
+            all_sprites.add(avatar)
 
 
     global game_over,shop_open, quit_rook_var
@@ -930,15 +954,21 @@ def juego():
 
     while not game_over:
         for event in pygame.event.get():
+
+            #Salida abruta del juego
             if event.type == pygame.QUIT:
                 game_over=True
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+
+                #Valida si presiono el boton de quitar el rook
                 if quit_button.collidepoint(event.pos):
                     quit_rook_var = True
                 elif quit_rook_var:
                     mouse_pos = pygame.mouse.get_pos()
                     click_posicion(mouse_pos)
+
+               #Valida si presiono el boton de presionar un rook
                 elif shop_open:
                     if coins > 0:           #Hacer global las coins y shop_open, para meter toda la logica de las monedas en funcion
                         if coins >= 50 and sand_button.collidepoint(event.pos):
@@ -965,18 +995,22 @@ def juego():
                             coins = coins
                     else:
                         coins = 0
+
                 else:
                     rook_posicion(tipo,pygame.mouse.get_pos())
 
 
         #Pierde el juego
         for enemy_false in MATRIZ[0]:
-            if enemy_false[0] !='Vacio':
-                if enemy_false[0].type_get() == 'Flechador' or  enemy_false[0].type_get() == 'Escudero' or enemy_false[0].type_get() == 'Canival' or enemy_false[0].type_get()=='Lenador':
+
+            if enemy_false[0] != 'Vacio':
+
+                if enemy_false[0].type_get() == 'Arquero' or  enemy_false[0].type_get() == 'Escudero' or enemy_false[0].type_get() == 'Canival' or enemy_false[0].type_get()=='Lenador':
+
                     game_over = True
                     import GameV0
+                    limpiar_matriz()
                     GameV0.start()
-                    #Eliminar el nombre de la lista
 
 
         #Logiga para ganar
