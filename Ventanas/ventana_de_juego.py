@@ -145,7 +145,7 @@ def atacks_avarts():
 def put_new_coin():
     global time_last_time_new_coin
     global coin_list
-    time = random.randint(5,10)
+    time = random.randint(7,10)
     if time == int(pygame.time.get_ticks()//1000 - time_last_time_new_coin) :
         time_last_time_new_coin = pygame.time.get_ticks()//1000
         return put_new_coin_aux()
