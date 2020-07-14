@@ -48,16 +48,17 @@ def start ():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                 if event.key == pygame.K_5:
                     run = False
                     from Ventanas import ventana_de_juego
-                if event.key == pygame.K_9:
+                elif event.key == pygame.K_9:
                     run = False
                     from Ventanas import ventana_config
-                #else:
-                 #   run = False
-                  #  from Ventanas import ventana_nuevo_nombre
+                else:
+                    run = False
+                    from Ventanas import ventana_nuevo_nombre
+
 
 
 
