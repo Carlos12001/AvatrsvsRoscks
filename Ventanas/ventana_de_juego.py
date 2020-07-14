@@ -541,7 +541,7 @@ def atacks_rooks():
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '' :
                         list_atacks_rooks.add(atacking)
-                        all_sprites(atacking)
+                        all_sprites.add(atacking)
 
 def click_posicion(mouse_pos):
     # global click
