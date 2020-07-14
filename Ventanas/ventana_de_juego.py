@@ -102,10 +102,6 @@ def move_enemy():
                         if cuadrito[0].update(pygame.time.get_ticks()):
                             MATRIZ[i_now-1][j_now][0] = cuadrito[0]
                             cuadrito[0] = 'Vacio'
-
-
-
-
             j_now += 1
         i_now += 1
 

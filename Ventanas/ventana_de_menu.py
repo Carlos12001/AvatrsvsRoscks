@@ -1,7 +1,6 @@
 import pygame, sys
 from GameV0 import *
-<<<<<<< Updated upstream
-=======
+
 
 global list_config
 
@@ -38,13 +37,13 @@ def read_config():
 
 
 
->>>>>>> Stashed changes
+
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 
 def menu():
     screen.fill(green) # color de la ventana
-    text('Jugar', font, purple, screen, 500, 150,dark)
-    text('Configuración', font, purple, screen, 500, 250,dark)
+    text('Jugar', font, purple, screen, 500, 150)
+    text('Configuración', font, purple, screen, 500, 250)
     text('Salon de la fama', font, purple, screen, 500, 350,dark)
     text('Ayuda', font, purple,screen, 500, 450,dark)
 
@@ -56,18 +55,6 @@ def menu():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-<<<<<<< Updated upstream
-
-        mouse_pos = pygame.mouse.get_pos()
-        mouse_click = pygame.mouse.get_pressed()
-
-
-        #Verificar si presiona algun cartel
-        if 450 < mouse_pos[0] < 550 and mouse_click[0] == 1 and 125< mouse_pos[1] < 175:
-            from Ventanas import ventana_de_juego
-
-
-=======
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if game_button.collidepoint(event.pos):
                     read_config()
@@ -90,7 +77,6 @@ def menu():
         text('Configuración', font2, green, screen, config_button.x + 100, config_button.y + 25)
         text('Salon de la fama', font2, green, screen, salon_button.x + 100, salon_button.y + 25)
         text('Ayuda', font2, green, screen, help_button.x + 100, help_button.y + 25)
->>>>>>> Stashed changes
 
         pygame.display.flip()
 
