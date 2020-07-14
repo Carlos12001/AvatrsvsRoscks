@@ -5,14 +5,7 @@ from Objetos import RooksV0
 from Objetos import CoinsV0
 
 #Variables Globales a Necesitar
-global level_1, level_2, level_3, MATRIZ, time_to_start, time_last_time_new_enemy, num_rook
-
-
-
-level_1 = True
-level_2 = False
-level_3 = False
-
+global  MATRIZ, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, anti_bugs
 
 #Matriz de posiciones de juego
 MATRIZ = [    [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
@@ -25,7 +18,17 @@ MATRIZ = [    [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450
               [['Vacio', [250, 630]],    ['Vacio', [350, 630]],   ['Vacio', [450,  630]],    ['Vacio', [550, 630]],    ['Vacio', [650, 630]]],
               [['Vacio', [250, 720]],    ['Vacio', [350, 720]],   ['Vacio', [450,  720]],    ['Vacio', [550, 720]],    ['Vacio', [650, 720]]]   ]
 
+
+#Matriz de monedas
 matrizcoin = [[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None]]
+
+#Variables con la funcionalidad de los niveles
+
+levels = [True, True, True]
+
+one_time_upload_levels = [False,True, True, True]
+
+list_ramdom_secs = 0
 
 #Lista de objetos en el juego
 list_atacks_avart = pygame.sprite.Group()
@@ -37,8 +40,19 @@ list_avarts_in_game = pygame.sprite.Group()
 list_rooks_in_game = pygame.sprite.Group()
 
 all_sprites = pygame.sprite.Group()
+
+#Numero de Moendas en el juego
+coins = 100
+
+#Lista de avarts que faltan de poner
+avatar_list = []
+
+#Numero de identificador del Rook
 num_rook = 1000 
 
+#Solucionar bugs
+anti_bugs = 0
+#Variables relacionadas con el tiempo
 time_to_start = pygame.time.get_ticks()/1000
 
 time_last_time_new_enemy = time_to_start
@@ -48,36 +62,93 @@ time_last_time_new_coin = time_to_start
 
 # -------------------------------------- Parte Funcional del Juego -------------------------------------- #
 
-# funcion texto
-def text(text, font, color, surface, x, y):
-    txtobj = font.render(text, 1, color)
+#---Textos---
+def text(text, font, color, surface, x, y, backgrounf=None):
+    txtobj = font.render(text, 1, color, backgrounf)
     txtrect = txtobj.get_rect()
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
 
-# Funciones para el funcionamiento de los avatars
+
+#---Funciones para niveles---
+
+def guardado():
+    pass
+
+def create_avarts_level_1():
+    global one_time_upload_levels, list_ramdom_secs, avart_list
+    #Creacion de Avatars segun el nivel que se encuentra
+    if  not one_time_upload_levels[0] and one_time_upload_levels[1]:
+        # Tiempo de apracion de avatar entre 10 12
+        list_ramdom_secs = range(7, 9)
+        num = 0
+        for i in range(50):
+            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
+            avatar_list.append(avatar)
+            num += 1
+            all_sprites.add(avatar)
+        one_time_upload_levels[1] = False
+
+def create_avarts_level_2():
+    global one_time_upload_levels,list_ramdom_secs, avart_list, num_rook
+    #Creacion de Avatars segun el nivel que se encuentra
+    if not one_time_upload_levels[0] and one_time_upload_levels[2]:
+        # Tiempo de apracion de avatar entre 5 15
+        list_ramdom_secs = range(4, 7)
+        num = 0
+        for i in range(75):
+            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
+            avatar_list.append(avatar)
+            num += 1
+            all_sprites.add(avatar)
+        one_time_upload_levels[2] = False
+        num_rook = 1000
+
+def create_avarts_level_3():
+    global one_time_upload_levels,list_ramdom_secs, avart_list, num_rook
+    #Creacion de Avatars segun el nivel que se encuentra
+    if not one_time_upload_levels[0] and one_time_upload_levels[3]:
+        # Tiempo de apracion de avatar entre 5 15
+        list_ramdom_secs = range(1, 2)
+        num = 0
+        for i in range(100):
+            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
+            avatar_list.append(avatar)
+            num += 1
+            all_sprites.add(avatar)
+        one_time_upload_levels[3] = False
+        num_rook = 1000
+
+
+#---Funciones relacionadas con los avarts---
 
 def put_new_enemy(list_ramdom_secs):
     global time_last_time_new_enemy
-    if random.choice(list_ramdom_secs) == int(pygame.time.get_ticks()//1000 - time_last_time_new_enemy) :
+    num_ramdom = random.choice(list_ramdom_secs)
+    if  num_ramdom <= (pygame.time.get_ticks()//1000 - time_last_time_new_enemy)//1:
         time_last_time_new_enemy = pygame.time.get_ticks()//1000
         return put_new_enemy_aux()
 
 def put_new_enemy_aux():
 
-    global avatar_list
+    global avatar_list, anti_bugs
     done = False
 
     for enemy in avatar_list:
         for estado in MATRIZ [8]:
-            if estado[0] == 'Vacio' and enemy.posicion_get()[0] == estado[1][0]:
-                estado[0] = enemy
-                avatar_list = avatar_list[1:]
-                list_avarts_in_game.add(enemy)
-                done = True
-                break
+            if estado[0] == 'Vacio' :
+                if enemy.posicion_get()[0] == estado[1][0]:
+                    anti_bugs = 0
+                    estado[0] = enemy
+                    avatar_list = avatar_list[1:]
+                    list_avarts_in_game.add(enemy)
+                    done = True
+                    break
             else:
-                pass
+                if estado[0].ps_get() <= 0 :
+                    estado[0] =  'Vacio'
+                    print('\n Error corregido')
+
 
         if done:
 
@@ -102,6 +173,10 @@ def move_enemy():
                         if cuadrito[0].update(pygame.time.get_ticks()):
                             MATRIZ[i_now-1][j_now][0] = cuadrito[0]
                             cuadrito[0] = 'Vacio'
+                else:
+                    if cuadrito[0].ps_get() <= 0:
+                        cuadrito[0] = 'Vacio'
+                        print('\n Error corregido')
 
 
 
@@ -126,21 +201,25 @@ def atacks_avarts():
                         break
                 elif cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
                     if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
+                        #print('voy atacar',MATRIZ[i_now - 1][j_now][0].type_get() )
                         if MATRIZ[i_now - 1][j_now][0].type_get() == 'Sand' \
                                 or MATRIZ[i_now - 1][j_now][0].type_get() == 'Rock' \
                                 or MATRIZ[i_now - 1][j_now][0].type_get() == 'Fire' \
-                                or MATRIZ[i_now - 1][j_now][0].type_get() == 'Water':
+                                or MATRIZ[i_now - 1][j_now][0].type_get() == 'Water' and cuadrito[1][1] ==MATRIZ[i_now - 1][j_now][1][1]:
+
                             atacking = cuadrito[0].atack(pygame.time.get_ticks())
                             if atacking != '':
                                 list_atacks_avart.add(atacking)
                                 all_sprites.add(atacking)
                                 break
-
+                else:
+                    pass
             j_now += 1
 
         i_now += 1
 
-# Funciones para el funcionamiento de las monedas
+
+#---Funciones para el funcionamiento de las monedas---
 
 def put_new_coin():
     global time_last_time_new_coin
@@ -198,7 +277,8 @@ def kill_coins ():
                     coins += 100
                     break
 
-# Funciones para el funcionamiento de los rooks
+
+#---Funciones para el funcionamiento de los rooks---
 
 def rook_posicion( tipo, mouse_pos):
 
@@ -510,6 +590,10 @@ def put_new_rook(lists):
                     list_rooks_in_game.add(cuadrito[0])
                     all_sprites.add(cuadrito[0])
                     shop_open = True
+                else:
+                    if  cuadrito[0] != 'Vacio' and cuadrito[0].ps_get() <= 0:
+                        cuadrito[0] = 'Vacio'
+                        print('\n Error corregido')
 
 def new_rook(tipo,pos):
     global num_rook
@@ -541,7 +625,11 @@ def atacks_rooks():
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '' :
                         list_atacks_rooks.add(atacking)
-                        all_sprites(atacking)
+                        all_sprites.add(atacking)
+                else:
+                    if cuadrito[0].ps_get() <= 0:
+                        cuadrito[0] = 'Vacio'
+                        print('\n Error corregido')
 
 def click_posicion(mouse_pos):
     # global click
@@ -811,9 +899,13 @@ def quit_rook(quit_pos):
                     print("no se puede eliminar avatar")  # ver como indicar esto
             elif cuadrito[0] == "Vacio":
                 pass
+            else:
+                if  cuadrito[0] != "Vacio" and cuadrito[0].ps_get() <= 0:
+                    cuadrito[0] = 'Vacio'
+                    print('\n Error corregido')
 
 
-#Funciones para los ataques
+#---Funciones para los ataques---
 
 def atacks_move():
     for atacking_rook in list_atacks_rooks:
@@ -849,26 +941,28 @@ def atacks_colsion_check_rook():
     global MATRIZ
 
     #Logica para avatar impacto
-    colisicion_avarts = pygame.sprite.groupcollide(list_rooks_in_game, list_atacks_avart, False, True)
-    if colisicion_avarts != {}:
-        atacking = list(colisicion_avarts.values())[0][0].get_damage()
-        list(colisicion_avarts.values())[0][0].kill()
-        rook_victimin = list(colisicion_avarts.keys())[0]
+    collision_rooks = pygame.sprite.groupcollide(list_rooks_in_game, list_atacks_avart, False, True)
+    if collision_rooks != {}:
 
-        if rook_victimin.life(atacking) == 'i die':
-            num = rook_victimin.who()
+        attacking = list(collision_rooks.values())[0][0].get_damage()
+        list(collision_rooks.values())[0][0].kill()
+        rook_victim = list(collision_rooks.keys())[0]
+
+        if rook_victim.life(attacking) == 'i die':
+            num = rook_victim.who()
 
             for fila in MATRIZ:
                 for cuadrito in fila:
                     if cuadrito[0] != 'Vacio':
                         if cuadrito[0].who() == num:
                             cuadrito[0].kill()
-                            rook_victimin.kill()
+                            rook_victim.kill()
                             cuadrito[0] = 'Vacio'
                     elif cuadrito[0] == 'Vacio':
                         cuadrito[0] = 'Vacio'
 
-#Dibuja el los objetos de la matriz
+
+#---Dibuja el los objetos de la matriz---
 def draw_objetcs_matriz():
     global MATRIZ
     for fila in MATRIZ:
@@ -877,7 +971,8 @@ def draw_objetcs_matriz():
             if object != 'Vacio':
                 object.draw_me(pygame.time.get_ticks())
 
-#Funcion para quitar el nombre de la lista
+
+#---Funcion para quitar el nombre de la lista---
 def quit_name(name):
     global player_name
     ruta = "player_name.txt"
@@ -886,8 +981,8 @@ def quit_name(name):
         if line == player_name:
             line = ""
 
-#Limpia la matriz y la lista de objetos
 
+#---Limpia la matriz y la lista de objetos--
 def limpiar_matriz():
     global MATRIZ
     for fila in MATRIZ:
@@ -897,13 +992,27 @@ def limpiar_matriz():
         sprite.kill()
 
 
+
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 
 
 def juego():
-    global MATRIZ, level_1, level_2, level_3
+    global MATRIZ, levels, quit_rook_var
 
-    # Matriz de imagen
+    global game_over, shop_open
+
+    global avatar_list, coins
+
+
+
+    shop_open = True
+    game_over = False
+    quit_rook_var = False
+
+
+
+
+    # Importa imagenes del escenario
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
 
     # botones tienda
@@ -913,18 +1022,12 @@ def juego():
     water_button =pygame.Rect(0, 740, 100, 80)
     quit_button = pygame.Rect(900, 500, 100, 80)
 
-    #Conjunto de enemigos
-    global avatar_list
-    avatar_list = []
-    avatar_list_in_game = pygame.sprite.Group ()
-    list_ramdom_secs = []
 
     # Cosas que necesita rooks
     tipo = 0
 
     # Conjunto de monedas
-    global coins
-    coins = 100
+
     global coin_list
     coin_list = []
     for i in range(20):
@@ -935,23 +1038,6 @@ def juego():
 
 
 
-    #Creacion de Avatars segun el nivel que se encuentra
-    if level_1:
-        # Tiempo de apracion de avatar entre 5 15
-        list_ramdom_secs = range(1, 2)
-        num = 0
-        for i in range(1):
-            avatar = AvartsV0.New_Avart(1,num)#random.randint(1,4),num)
-            avatar_list.append(avatar)
-            num += 1
-            all_sprites.add(avatar)
-
-
-    global game_over,shop_open, quit_rook_var
-    shop_open = True
-    game_over = False
-    quit_rook_var = False
-
     while not game_over:
         for event in pygame.event.get():
 
@@ -959,6 +1045,8 @@ def juego():
             if event.type == pygame.QUIT:
                 game_over=True
                 exit()
+
+            #Presionar 'Botones' o 'Quitar Rooks'
             if event.type == pygame.MOUSEBUTTONDOWN:
 
                 #Valida si presiono el boton de quitar el rook
@@ -1013,19 +1101,23 @@ def juego():
                     GameV0.start()
 
 
-        #Logiga para ganar
 
-        screen.fill(white)
-        pygame.draw.rect(screen, brown, sand_button)
-        pygame.draw.rect(screen, lightgreen, rock_button)
-        pygame.draw.rect(screen, green, fire_button)
-        pygame.draw.rect(screen, purple, water_button)
-        pygame.draw.rect(screen, darkpurple, quit_button)
-        text(str(coins), font2,brown, screen,100,50)
 
 
         # Primer Nivel
-        if level_1:
+        if levels[0]:
+            screen.fill(white)
+
+            pygame.draw.rect(screen, brown, sand_button)
+            pygame.draw.rect(screen, lightgreen, rock_button)
+            pygame.draw.rect(screen, green, fire_button)
+            pygame.draw.rect(screen, purple, water_button)
+            pygame.draw.rect(screen, darkpurple, quit_button)
+            text(str(coins), font2, brown, screen, 100, 50)
+            text('Nivel 1', font2, brown, screen, 100, 200)
+            #Pone la cantidad de enemigo en este nivel
+            create_avarts_level_1()
+
             # Revisa las colisiones
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
@@ -1052,12 +1144,110 @@ def juego():
             draw_coins()
             kill_coins()
 
+            # Logiga para ganar
+            if len(avatar_list) == 0 and len(list_avarts_in_game) == 0 :
+                levels[0] = False
+                limpiar_matriz()
 
 
+        #Segundo Nivel
+
+        elif levels[1]:
+            screen.fill(purple)
+
+            pygame.draw.rect(screen, brown, sand_button)
+            pygame.draw.rect(screen, lightgreen, rock_button)
+            pygame.draw.rect(screen, green, fire_button)
+            pygame.draw.rect(screen, purple, water_button)
+            pygame.draw.rect(screen, darkpurple, quit_button)
+            text(str(coins), font2, brown, screen, 100, 50)
+            text('Nivel 2', font2, brown, screen, 100, 200)
+
+            #Pone la cantidad de enemigo en este nivel
+            create_avarts_level_2()
+
+            # Revisa las colisiones
+            atacks_colsion_check_avart()
+            atacks_colsion_check_rook()
 
 
+            screen.blit(matriz_0_dibujo, [250, 0])
+            draw_objetcs_matriz()
+
+            # Parte funcional para que disparen los rooks
+            atacks_rooks()
+            list_atacks_rooks.draw(screen)
+            #atacks_move()
+
+            # Parte funcional para que disparen los avatars
+            atacks_avarts()
+            list_atacks_avart.draw(screen)
+            atacks_move()
+            #Parte funcional avatrs
+            put_new_enemy(list_ramdom_secs)
+            move_enemy()
+
+            #Parte funcional coins
+            put_new_coin()
+            draw_coins()
+            kill_coins()
+
+            # Logiga para ganar
+            if len(avatar_list) == 0 and len(list_avarts_in_game) == 0 :
+                levels[1] = False
+                limpiar_matriz()
 
 
+        # Tercer Nivel
+        elif levels[2]:
+            screen.fill(darkpurple)
+
+            pygame.draw.rect(screen, brown, sand_button)
+            pygame.draw.rect(screen, lightgreen, rock_button)
+            pygame.draw.rect(screen, green, fire_button)
+            pygame.draw.rect(screen, purple, water_button)
+            pygame.draw.rect(screen, darkpurple, quit_button)
+            text(str(coins), font2, brown, screen, 100, 50)
+            text('Nivel 3', font2, brown, screen, 100, 200)
+
+            # Pone la cantidad de enemigo en este nivel
+            create_avarts_level_3()
+
+            # Revisa las colisiones
+            atacks_colsion_check_avart()
+            atacks_colsion_check_rook()
+
+            screen.blit(matriz_0_dibujo, [250, 0])
+            draw_objetcs_matriz()
+
+            # Parte funcional para que disparen los rooks
+            atacks_rooks()
+            list_atacks_rooks.draw(screen)
+            # atacks_move()
+
+            # Parte funcional para que disparen los avatars
+            atacks_avarts()
+            list_atacks_avart.draw(screen)
+            atacks_move()
+            # Parte funcional avatrs
+            put_new_enemy(list_ramdom_secs)
+            move_enemy()
+
+            # Parte funcional coins
+            put_new_coin()
+            draw_coins()
+            kill_coins()
+
+            # Logiga para ganar
+            if len(avatar_list) == 0 and len(list_avarts_in_game) == 0:
+                levels[2] = False
+                limpiar_matriz()
+
+        else:
+            game_over = True
+            import GameV0
+            limpiar_matriz()
+            GameV0.start()
         clock.tick(60)
         pygame.display.flip()
 
