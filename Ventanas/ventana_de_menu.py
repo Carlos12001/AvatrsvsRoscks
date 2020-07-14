@@ -1,11 +1,35 @@
 import pygame, sys
 from GameV0 import *
 
+global list_config
+
 def text(text, font, color, surface, x, y):
     txtobj = font.render(text, 1, color)
     txtrect = txtobj.get_rect()
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
+
+def read_config():
+    global list_config
+    list_config = []
+    ruta = ("configuracion.txt")
+    file = open(ruta, "r")
+    sprite = []
+    cont = 0
+    for line in file:
+        if cont == 2:
+            list_config.append(sprite)
+            sprite = []
+            line = int(line)
+            sprite.append(line)
+            cont = 1
+        else:
+            cont += 1
+            line = int(line)
+            sprite.append(line)
+    list_config.append(sprite)
+    print(list_config)
+
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 
 def menu():
@@ -28,6 +52,7 @@ def menu():
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if game_button.collidepoint(event.pos):
+                    read_config()
                     from Ventanas import ventana_de_juego
                 elif config_button.collidepoint(event.pos):
                     from  Ventanas import ventana_config

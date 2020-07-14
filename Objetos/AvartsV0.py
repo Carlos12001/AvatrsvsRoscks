@@ -1,6 +1,9 @@
 import pygame,sys,random
 from GameV0 import *
+from Ventanas import ventana_de_menu
 
+global list_config
+list_config = ventana_de_menu.list_config
 #PRimero funcion crear dibuja en cada matriz y revisa que no halla ningun avatar dicha matriz
 #Avatars lista mpara saber que tiempo fue puesto cada avatar y para saber cuanto tiempo a pasado el avatar hasta
 #Cuando fue puesto y se hace (tiempo actual - tiempo avatar)
@@ -8,6 +11,7 @@ from GameV0 import *
 
 class New_Avart ( pygame.sprite.Sprite ):
     def __init__( self, type_avatar,num):
+        global list_config
         super().__init__()
         #Tiempo de su creacion
         self.last_time_atack  = 0
@@ -32,8 +36,8 @@ class New_Avart ( pygame.sprite.Sprite ):
             #Caracteristicas del arquero
             self.ps = 5
 
-            self.speed_walk = 2
-            self.speed_atack = 5
+            self.speed_walk = list_config[0][0]
+            self.speed_atack = list_config[0][1]
 
         #Escudero
         elif self.type_avatar == 2 :
@@ -47,8 +51,8 @@ class New_Avart ( pygame.sprite.Sprite ):
             # Caracteristicas del escudero
             self.ps = 10
 
-            self.speed_walk = 8
-            self.speed_atack = 5
+            self.speed_walk = list_config[1][0]
+            self.speed_atack = list_config[1][1]
 
         #Lenador
         elif self.type_avatar == 3 :
@@ -62,8 +66,8 @@ class New_Avart ( pygame.sprite.Sprite ):
             # Caracteristicas del lenador
             self.ps = 20
 
-            self.speed_walk = 14
-            self.speed_atack = 5
+            self.speed_walk = list_config[2][0]
+            self.speed_atack = list_config[2][0]
 
         #Canival
         elif self.type_avatar == 4:
@@ -77,8 +81,8 @@ class New_Avart ( pygame.sprite.Sprite ):
             # Caracteristicas del canival
             self.ps = 25
 
-            self.speed_walk = 18
-            self.speed_atack = 5
+            self.speed_walk = list_config[3][0]
+            self.speed_atack = list_config[3][0]
 
     #Obtener posicion en X, y
     def posicion_get( self ):
