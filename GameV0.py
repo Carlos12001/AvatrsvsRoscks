@@ -58,6 +58,9 @@ def start ():
                 elif event.key == pygame.K_6:
                     run = False
                     from Ventanas import  ventana_de_menu
+                elif event.key == pygame.K_7:
+                    run = False
+                    from Ventanas import ventana_game_over
                 else:
                     run = False
                     from Ventanas import ventana_nuevo_nombre

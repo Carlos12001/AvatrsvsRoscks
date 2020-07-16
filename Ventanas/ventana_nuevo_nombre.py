@@ -1,7 +1,7 @@
 import pygame, sys
 from GameV0 import *
 
-global MATRIZ, coins2, MATRIZ_NEW, coins_new, player_name
+global MATRIZ, coins2, MATRIZ_NEW, coins_new, player_name, user_name
 
 # matriz a cargar limpia
 MATRIZ_NEW = [  [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
