@@ -22,6 +22,7 @@ screen = pygame.display.set_mode(size)
 font = pygame.font.SysFont("Times New Roman", 50)
 font2 = pygame.font.SysFont("Times New Roman", 30)
 font3 = pygame.font.SysFont("Times New Roman", 20)
+font4 = pygame.font.SysFont("Castellar", 70)
 
 clock = pygame.time.Clock()
 # --------------------------------------------- Funciones ---------------------------------------------- #
