@@ -17,6 +17,8 @@ def save_config (final_config):
                 save = False
                 #print("error")
         else:
+            file.write("2")
+            file.write('\n')
             save = False
             print("error")
     file.close()
