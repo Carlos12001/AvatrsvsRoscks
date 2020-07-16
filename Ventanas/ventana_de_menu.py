@@ -28,7 +28,7 @@ def read_config():
             line = int(line)
             sprite.append(line)
     list_config.append(sprite)
-    print(list_config)
+    file.close()
 
 # ------------------------------- Pantalla de inicio del menu del juego ------------------------------- #
 

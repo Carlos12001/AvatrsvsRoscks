@@ -5,7 +5,7 @@ def save_config (final_config):
     global save
     save = None
     ruta = "configuracion.txt"
-    file = open(ruta,"w")
+    file = open(ruta, "w")
     for value in final_config:
         value_int = int(value)
         if isinstance(value_int, int) and 1 <= value_int <= 6:
