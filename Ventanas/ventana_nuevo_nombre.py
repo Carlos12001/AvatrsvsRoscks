@@ -3,6 +3,7 @@ from GameV0 import *
 
 global MATRIZ, coins2, MATRIZ_NEW, coins_new, player_name
 
+# matriz a cargar limpia
 MATRIZ_NEW = [  [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
                 [['Vacio', [250,  90]],    ['Vacio', [350,  90]],   ['Vacio', [450,   90]],    ['Vacio', [550,  90]],    ['Vacio', [650,  90]]],
                 [['Vacio', [250, 180]],    ['Vacio', [350, 180]],   ['Vacio', [450,  180]],    ['Vacio', [550, 180]],    ['Vacio', [650, 180]]],
@@ -13,6 +14,7 @@ MATRIZ_NEW = [  [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [4
                 [['Vacio', [250, 630]],    ['Vacio', [350, 630]],   ['Vacio', [450,  630]],    ['Vacio', [550, 630]],    ['Vacio', [650, 630]]],
                 [['Vacio', [250, 720]],    ['Vacio', [350, 720]],   ['Vacio', [450,  720]],    ['Vacio', [550, 720]],    ['Vacio', [650, 720]]]  ]
 
+# monedas limpias
 coins_new = 0
 
 player_name = ""
@@ -28,15 +30,15 @@ def text(text, font, color, surface, x, y):
     surface.blit(txtobj, txtrect)
 
 # Funciones para el cargado de partidas guardadas o nuevas
-
+# validacion si el usuario guardo
 def validation (name):
     global MATRIZ, MATRIZ_NEW, coins_new
-    name = name
+    name = str(name)
     ruta = "game_save.txt"
     file = open(ruta, "r")
     for line in file:
-        print(name)
-        if line == name:
+        print(name==line,line,name) 
+        if str(line) == name:
             print("juego cargado")
             load_game()
         else:
