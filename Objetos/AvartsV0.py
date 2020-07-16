@@ -183,14 +183,13 @@ class New_Avart ( pygame.sprite.Sprite ):
 
 
     #Metodo que sirve para Cargar todos los estado de guardado en la Matriz
-    def set_guardado( self, posicion, ps ):
+    def set_guardado( self, posicion, ps):
         if ps <= 0:
             self.kill()
         else:
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
             self.ps = ps
-            self.num = num
 
 
         

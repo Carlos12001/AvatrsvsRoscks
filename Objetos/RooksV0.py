@@ -166,14 +166,11 @@ class New_Rook (pygame.sprite.Sprite):
         return self.num
 
     #Metodo que sirve para Cargar todos los estado de guardado
-    def set_guardado( self, posicion, ps, num ):
+    def set_guardado( self, ps ):
         if ps <= 0:
             self.kill()
         else:
-            self.rect.x = posicion[0]
-            self.rect.y = posicion[1]
             self.ps = ps
-            self.num = num
 
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):
