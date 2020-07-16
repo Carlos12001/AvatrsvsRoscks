@@ -7,14 +7,18 @@ def save_config (final_config):
     ruta = "configuracion.txt"
     file = open(ruta, "w")
     for value in final_config:
-        value_int = int(value)
-        if isinstance(value_int, int) and 1 <= value_int <= 6:
-            file.write(value)
-            file.write('\n')
-            save = True
+        if value != "":
+            value_int = int(value)
+            if isinstance(value_int, int) and 1 <= value_int <= 6:
+                file.write(value)
+                file.write('\n')
+                save = True
+            else:
+                save = False
+                #print("error")
         else:
             save = False
-            #print("error")
+            print("error")
     file.close()
 
 def config():
