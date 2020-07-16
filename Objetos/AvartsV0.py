@@ -1,13 +1,12 @@
 import pygame,sys,random
 from GameV0 import *
 
-#PRimero funcion crear dibuja en cada matriz y revisa que no halla ningun avatar dicha matriz
-#Avatars lista mpara saber que tiempo fue puesto cada avatar y para saber cuanto tiempo a pasado el avatar hasta
-#Cuando fue puesto y se hace (tiempo actual - tiempo avatar)
+#Primero funcion crear dibuja en cada cuadrito de la matriz y revisa que no halla ningun personaje en dicho espacio
+
 
 
 class New_Avart ( pygame.sprite.Sprite ):
-    def __init__( self, type_avatar,num):
+    def __init__( self, type_avatar, num ):
         super().__init__()
         #Tiempo de su creacion
         self.last_time_atack  = 0
@@ -172,6 +171,17 @@ class New_Avart ( pygame.sprite.Sprite ):
     #Retorna quien es
     def who( self ):
         return self.num
+
+    #Metodo que sirve para Cargar todos los estado de guardado
+    def set_guardado( self, posicion, ps ):
+        if ps <= 0:
+            self.kill()
+        else:
+            self.posicion.x = posicion[0]
+            self.posicion.y = posicion[1]
+            self.ps = ps
+
+        
 
 #Atacks
 class Attack_Avatar(pygame.sprite.Sprite):

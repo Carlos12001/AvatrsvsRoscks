@@ -1,8 +1,8 @@
-import pygame,sys,random
+import random
 from GameV0 import *
 from Objetos import AvartsV0
-from Objetos import RooksV0
 from Objetos import CoinsV0
+from Objetos import RooksV0
 
 #Variables Globales a Necesitar
 global  MATRIZ, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, anti_bugs
@@ -73,6 +73,13 @@ def text(text, font, color, surface, x, y, backgrounf=None):
 #---Funciones para niveles---
 
 def guardado():
+    #Se guarda el tipo
+    #El identificador dicho
+    #Y la vida
+
+    #La matriz se guarda completa
+
+    #Las monedas
     pass
 
 def create_avarts_level_1():

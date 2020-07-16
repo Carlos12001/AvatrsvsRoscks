@@ -1,6 +1,9 @@
 import pygame
 from GameV0 import *
 
+#Primero funcion crear dibuja en cada cuadrito de la matriz y revisa que no halla ningun personaje en dicho espacio
+
+
 white = (255, 255, 255)
 class New_Rook (pygame.sprite.Sprite):
     def __init__( self, tipo, posicion, num ):
@@ -163,6 +166,15 @@ class New_Rook (pygame.sprite.Sprite):
     #Retorna el identificador del rook
     def who( self ):
         return self.num
+
+    #Metodo que sirve para Cargar todos los estado de guardado
+    def set_guardado( self, posicion, ps ):
+        if ps <= 0:
+            self.kill()
+        else:
+            self.posicion.x = posicion[0]
+            self.posicion.y = posicion[1]
+            self.ps = ps
 
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):
