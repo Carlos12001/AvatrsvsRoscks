@@ -37,15 +37,14 @@ def validation (name):
     ruta = "game_save.txt"
     file = open(ruta, "r")
     for line in file:
-        line = line.rstrip('\n')
-        if line == name:
+        print(name==line,line,name) 
+        if str(line) == name:
             print("juego cargado")
             load_game()
-            break
         else:
             MATRIZ = MATRIZ_NEW
             coins2 = coins_new
-            #save_name(name)
+            save_name(name)
             print("no se cargo")
             #print(MATRIZ)
             #print(coins2)
@@ -83,10 +82,6 @@ def load_game():
             coins2 += int(line)
         else:
             cont += 1
-    print(player_name)
-    print(MATRIZ)
-    print(coins2)
-    print("listo")
     file.close()
 
 
