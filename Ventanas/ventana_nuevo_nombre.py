@@ -73,6 +73,8 @@ def load_game():
     file = open(ruta, "r")
     cont = 0
     for line in file:
+        line.splitlines()
+        line = line.rstrip('\n')
         if cont == 0:
             player_name = line
             cont += 1
@@ -84,7 +86,8 @@ def load_game():
         else:
             cont += 1
     print(player_name)
-    print(MATRIZ)
+    print(list(MATRIZ))
+    print(type(MATRIZ))
     print(coins2)
     print("listo")
     file.close()
