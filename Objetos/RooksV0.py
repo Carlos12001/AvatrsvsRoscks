@@ -11,7 +11,6 @@ class New_Rook (pygame.sprite.Sprite):
         self.type_rook = tipo
         self.num = num
         self.last_time_atack = 0
-        self.last_time_move = 0
 
         # Rook de arena
         if self.type_rook == 5:
@@ -155,8 +154,7 @@ class New_Rook (pygame.sprite.Sprite):
     def draw_me(self, time_now):
         if not self.ps <= 0:
             
-            if self.last_time_move == 0 :
-                self.last_time_move = time_now
+            if self.last_time_atack == 0 :
                 self.last_time_atack =  time_now
 
             screen.blit(self.image, self.posicion_get())
@@ -168,13 +166,14 @@ class New_Rook (pygame.sprite.Sprite):
         return self.num
 
     #Metodo que sirve para Cargar todos los estado de guardado
-    def set_guardado( self, posicion, ps ):
+    def set_guardado( self, posicion, ps, num ):
         if ps <= 0:
             self.kill()
         else:
-            self.posicion.x = posicion[0]
-            self.posicion.y = posicion[1]
+            self.rect.x = posicion[0]
+            self.rect.y = posicion[1]
             self.ps = ps
+            self.num = num
 
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):

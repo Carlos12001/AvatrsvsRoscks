@@ -5,18 +5,18 @@ from Objetos import CoinsV0
 from Objetos import RooksV0
 
 #Variables Globales a Necesitar
-global  MATRIZ, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, anti_bugs
+global  MATRIZ,  matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list
 
 #Matriz de posiciones de juego
-MATRIZ = [    [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
-              [['Vacio', [250,  90]],    ['Vacio', [350,  90]],   ['Vacio', [450,   90]],    ['Vacio', [550,  90]],    ['Vacio', [650,  90]]],
-              [['Vacio', [250, 180]],    ['Vacio', [350, 180]],   ['Vacio', [450,  180]],    ['Vacio', [550, 180]],    ['Vacio', [650, 180]]],
-              [['Vacio', [250, 270]],    ['Vacio', [350, 270]],   ['Vacio', [450,  270]],    ['Vacio', [550, 270]],    ['Vacio', [650, 270]]],
-              [['Vacio', [250, 360]],    ['Vacio', [350, 360]],   ['Vacio', [450,  360]],    ['Vacio', [550, 360]],    ['Vacio', [650, 360]]],
-              [['Vacio', [250, 450]],    ['Vacio', [350, 450]],   ['Vacio', [450,  450]],    ['Vacio', [550, 450]],    ['Vacio', [650, 450]]],
-              [['Vacio', [250, 540]],    ['Vacio', [350, 540]],   ['Vacio', [450,  540]],    ['Vacio', [550, 540]],    ['Vacio', [650, 540]]],
-              [['Vacio', [250, 630]],    ['Vacio', [350, 630]],   ['Vacio', [450,  630]],    ['Vacio', [550, 630]],    ['Vacio', [650, 630]]],
-              [['Vacio', [250, 720]],    ['Vacio', [350, 720]],   ['Vacio', [450,  720]],    ['Vacio', [550, 720]],    ['Vacio', [650, 720]]]   ]
+MATRIZ = [      [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
+                [['Vacio', [250,  90]],    ['Vacio', [350,  90]],   ['Vacio', [450,   90]],    ['Vacio', [550,  90]],    ['Vacio', [650,  90]]],
+                [['Vacio', [250, 180]],    ['Vacio', [350, 180]],   ['Vacio', [450,  180]],    ['Vacio', [550, 180]],    ['Vacio', [650, 180]]],
+                [['Vacio', [250, 270]],    ['Vacio', [350, 270]],   ['Vacio', [450,  270]],    ['Vacio', [550, 270]],    ['Vacio', [650, 270]]],
+                [['Vacio', [250, 360]],    ['Vacio', [350, 360]],   ['Vacio', [450,  360]],    ['Vacio', [550, 360]],    ['Vacio', [650, 360]]],
+                [['Vacio', [250, 450]],    ['Vacio', [350, 450]],   ['Vacio', [450,  450]],    ['Vacio', [550, 450]],    ['Vacio', [650, 450]]],
+                [['Vacio', [250, 540]],    ['Vacio', [350, 540]],   ['Vacio', [450,  540]],    ['Vacio', [550, 540]],    ['Vacio', [650, 540]]],
+                [['Vacio', [250, 630]],    ['Vacio', [350, 630]],   ['Vacio', [450,  630]],    ['Vacio', [550, 630]],    ['Vacio', [650, 630]]],
+                [['Vacio', [250, 720]],    ['Vacio', [350, 720]],   ['Vacio', [450,  720]],    ['Vacio', [550, 720]],    ['Vacio', [650, 720]]]       ]
 
 
 #Matriz de monedas
@@ -24,10 +24,13 @@ matrizcoin = [[None],[None],[None],[None],[None],[None],[None],[None],[None],[No
 
 #Variables con la funcionalidad de los niveles
 
-levels = [True, True, True]
+save = False
 
-one_time_upload_levels = [False,True, True, True]
+levels = [ True, True, True ]
 
+one_time_upload_levels = [ True, True, True ]
+
+#Rango de secs aleatorio
 list_ramdom_secs = 0
 
 #Lista de objetos en el juego
@@ -50,9 +53,9 @@ avatar_list = []
 #Numero de identificador del Rook
 num_rook = 1000 
 
-#Solucionar bugs
-anti_bugs = 0
 #Variables relacionadas con el tiempo
+total_time_in_game = 0
+
 time_to_start = pygame.time.get_ticks()/1000
 
 time_last_time_new_enemy = time_to_start
@@ -72,62 +75,100 @@ def text(text, font, color, surface, x, y, backgrounf=None):
 
 #---Funciones para niveles---
 
-def guardado():
+def login():
+    global MATRIZ, matrizcoin
+    pass
+
+def save():
+    #nombre
     #Se guarda el tipo
     #El identificador dicho
     #Y la vida
+    #posicion
 
     #La matriz se guarda completa
 
     #Las monedas
+
+    #num rook
+
+    #niveles
+
+    #one time
+
+    #numero tiempo jugado
     pass
 
-def create_avarts_level_1():
-    global one_time_upload_levels, list_ramdom_secs, avart_list
+def start_config_level_1():
+    global one_time_upload_levels, num_rook,list_ramdom_secs
     #Creacion de Avatars segun el nivel que se encuentra
-    if  not one_time_upload_levels[0] and one_time_upload_levels[1]:
-        # Tiempo de apracion de avatar entre 10 12
-        list_ramdom_secs = range(7, 9)
-        num = 0
-        for i in range(50):
-            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
-            avatar_list.append(avatar)
-            num += 1
-            all_sprites.add(avatar)
+    if  one_time_upload_levels[0]:
+        list_ramdom_secs = range(10, 14)
+
+        # Creacion de enemigos
+        create_enemy( 50, 0 )
+
+        #Creacion de monedas
+        create_new_coins(12)
+
+        #Numero de rook
+        num_rook = 1000
+
+        #No ejecuta esto mas de una vez
+        one_time_upload_levels[0] = False
+
+def start_config_level_2():
+    global one_time_upload_levels,list_ramdom_secs, avart_list, num_rook
+    #Creacion de Avatars segun el nivel que se encuentra
+    if one_time_upload_levels[1]:
+        # Tiempo de apracion de avatar entre 4 8
+        list_ramdom_secs = range(4, 8)
+
+       # Creacion de enemigos
+        create_enemy( 70, 0 )
+
+        #Creacion de monedas
+        create_new_coins( 14 )
+
+        #Numero de rook
+        num_rook = 1000
+
+        #No ejecuta esto mas de una vez
         one_time_upload_levels[1] = False
 
-def create_avarts_level_2():
+
+def start_config_level_3():
     global one_time_upload_levels,list_ramdom_secs, avart_list, num_rook
     #Creacion de Avatars segun el nivel que se encuentra
-    if not one_time_upload_levels[0] and one_time_upload_levels[2]:
-        # Tiempo de apracion de avatar entre 5 15
-        list_ramdom_secs = range(4, 7)
-        num = 0
-        for i in range(75):
-            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
-            avatar_list.append(avatar)
-            num += 1
-            all_sprites.add(avatar)
+    if one_time_upload_levels[2]:
+        # Tiempo de apracion de avatar entre 1 3
+        list_ramdom_secs = range(1, 3)
+
+        # Creacion de enemigos
+        create_enemy( 100, 0 )
+
+        # Creacion de monedas
+        create_new_coins(16)
+
+        # Numero de rook
+        num_rook = 1000
+
+        # No ejecuta esto mas de una vez
         one_time_upload_levels[2] = False
-        num_rook = 1000
-
-def create_avarts_level_3():
-    global one_time_upload_levels,list_ramdom_secs, avart_list, num_rook
-    #Creacion de Avatars segun el nivel que se encuentra
-    if not one_time_upload_levels[0] and one_time_upload_levels[3]:
-        # Tiempo de apracion de avatar entre 5 15
-        list_ramdom_secs = range(1, 2)
-        num = 0
-        for i in range(100):
-            avatar = AvartsV0.New_Avart(random.randint(1,4),num)
-            avatar_list.append(avatar)
-            num += 1
-            all_sprites.add(avatar)
-        one_time_upload_levels[3] = False
-        num_rook = 1000
 
 
-#---Funciones relacionadas con los avarts---
+
+
+
+#---Funciones relacionadas con los avarts y monedas---
+
+def create_enemy (how_much,num):
+    global avart_list
+    for i in range(how_much):
+        avatar = AvartsV0.New_Avart(random.randint(1, 4), num)
+        avatar_list.append(avatar)
+        num += 1
+        all_sprites.add(avatar)
 
 def put_new_enemy(list_ramdom_secs):
     global time_last_time_new_enemy
@@ -138,14 +179,13 @@ def put_new_enemy(list_ramdom_secs):
 
 def put_new_enemy_aux():
 
-    global avatar_list, anti_bugs
+    global avatar_list
     done = False
 
     for enemy in avatar_list:
         for estado in MATRIZ [8]:
             if estado[0] == 'Vacio' :
                 if enemy.posicion_get()[0] == estado[1][0]:
-                    anti_bugs = 0
                     estado[0] = enemy
                     avatar_list = avatar_list[1:]
                     list_avarts_in_game.add(enemy)
@@ -205,6 +245,7 @@ def atacks_avarts():
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '':
                         list_atacks_avart.add(atacking)
+                        all_sprites.add(atacking)
                         break
                 elif cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
                     if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
@@ -227,6 +268,16 @@ def atacks_avarts():
 
 
 #---Funciones para el funcionamiento de las monedas---
+
+def create_new_coins(how_much):
+    # Conjunto de monedas
+
+    global coin_list
+    coin_list = []
+    for i in range(how_much):
+        coin = CoinsV0.New_Coin(random.randint(1, 3))
+        coin_list.append(coin)
+        all_sprites.add(coin)
 
 def put_new_coin():
     global time_last_time_new_coin
@@ -909,7 +960,6 @@ def quit_rook(quit_pos):
             else:
                 if  cuadrito[0] != "Vacio" and cuadrito[0].ps_get() <= 0:
                     cuadrito[0] = 'Vacio'
-                    print('\n Error corregido')
 
 
 #---Funciones para los ataques---
@@ -991,7 +1041,12 @@ def quit_name(name):
 
 #---Limpia la matriz y la lista de objetos--
 def limpiar_matriz():
-    global MATRIZ
+    global MATRIZ,matrizcoin
+    matrizcoin = [[None],[None],[None],[None],
+                  [None],[None],[None],[None],
+                  [None],[None],[None],[None],
+                  [None],[None],[None]]
+
     for fila in MATRIZ:
         for cuadrtito in fila:
             cuadrtito[0] = 'Vacio'
@@ -1008,7 +1063,7 @@ def juego():
 
     global game_over, shop_open
 
-    global avatar_list, coins
+    global avatar_list, coins, coin_list
 
 
 
@@ -1021,6 +1076,11 @@ def juego():
 
     # Importa imagenes del escenario
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
+    #matriz  1
+    #matriz 2
+    #matriz 3
+    image_save = pygame.image.load('resource/save_quit.gif').convert()
+    image_save.set_colorkey(white)
 
     # botones tienda
     sand_button = pygame.Rect(0, 500, 100, 80)
@@ -1033,14 +1093,7 @@ def juego():
     # Cosas que necesita rooks
     tipo = 0
 
-    # Conjunto de monedas
 
-    global coin_list
-    coin_list = []
-    for i in range(20):
-        coin = CoinsV0.New_Coin(random.randint(1, 3))
-        coin_list.append(coin)
-        all_sprites.add(coin)
 
 
 
@@ -1091,7 +1144,7 @@ def juego():
                     else:
                         coins = 0
 
-                else:
+                elif not shop_open:
                     rook_posicion(tipo,pygame.mouse.get_pos())
 
 
@@ -1120,10 +1173,12 @@ def juego():
             pygame.draw.rect(screen, green, fire_button)
             pygame.draw.rect(screen, purple, water_button)
             pygame.draw.rect(screen, darkpurple, quit_button)
+
             text(str(coins), font2, brown, screen, 100, 50)
             text('Nivel 1', font2, brown, screen, 100, 200)
-            #Pone la cantidad de enemigo en este nivel
-            create_avarts_level_1()
+
+            #Pone la cantidad de enemigo y monedas en este nivel
+            start_config_level_1()
 
             # Revisa las colisiones
             atacks_colsion_check_avart()
@@ -1171,7 +1226,7 @@ def juego():
             text('Nivel 2', font2, brown, screen, 100, 200)
 
             #Pone la cantidad de enemigo en este nivel
-            create_avarts_level_2()
+            start_config_level_2()
 
             # Revisa las colisiones
             atacks_colsion_check_avart()
@@ -1218,7 +1273,7 @@ def juego():
             text('Nivel 3', font2, brown, screen, 100, 200)
 
             # Pone la cantidad de enemigo en este nivel
-            create_avarts_level_3()
+            start_config__level_3()
 
             # Revisa las colisiones
             atacks_colsion_check_avart()

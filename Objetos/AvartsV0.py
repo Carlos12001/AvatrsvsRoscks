@@ -88,6 +88,10 @@ class New_Avart ( pygame.sprite.Sprite ):
     def posicion_get( self ):
         return [ self.rect.x, self.rect.y ]
 
+    def posicion_set( self , posicion):
+        self.rect.x = posicion[0]
+        self.rect.y = posicion[1]
+
     #Obtener nombre del tipo de enemigo
     def type_get( self ):
         if self.type_avatar == 1:
@@ -177,14 +181,17 @@ class New_Avart ( pygame.sprite.Sprite ):
     def who( self ):
         return self.num
 
-    #Metodo que sirve para Cargar todos los estado de guardado
+
+    #Metodo que sirve para Cargar todos los estado de guardado en la Matriz
     def set_guardado( self, posicion, ps ):
         if ps <= 0:
             self.kill()
         else:
-            self.posicion.x = posicion[0]
-            self.posicion.y = posicion[1]
+            self.rect.x = posicion[0]
+            self.rect.y = posicion[1]
             self.ps = ps
+            self.num = num
+
 
         
 

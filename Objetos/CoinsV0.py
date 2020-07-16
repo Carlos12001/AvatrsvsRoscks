@@ -2,7 +2,7 @@ import pygame,sys,random
 from GameV0 import *
 
 class New_Coin (pygame.sprite.Sprite):
-    def __init__(self, type_coin):
+    def __init__( self, type_coin ):
         super().__init__()
 
         self.type_coin = type_coin
@@ -45,14 +45,14 @@ class New_Coin (pygame.sprite.Sprite):
     def posicion_get(self):
         return [self.rect.x,self.rect.y]
 
-    #Obtener nombre del tipo de enemigo
-    #def type_get(self):
-     #   if self.type_coin == 1:
-      #      return 'Moneda25'
-       # elif self.type_coin == 2:
-        #    return 'Moneda50'
-        #elif self.type_coin == 3:
-         #   return 'Moneda100'
+#    Obtener nombre del tipo de moneda
+    def type_get(self):
+        if self.type_coin == 1:
+            return 'Moneda25'
+        elif self.type_coin == 2:
+            return 'Moneda50'
+        elif self.type_coin == 3:
+            return 'Moneda100'
 
     #Obtener imagen
     #def image_get(self):
