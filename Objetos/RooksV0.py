@@ -1,14 +1,16 @@
 import pygame
-from GameV0 import *
+#from GameV0 import *
+
+#Primero funcion crear dibuja en cada cuadrito de la matriz y revisa que no halla ningun personaje en dicho espacio
+
 
 white = (255, 255, 255)
 class New_Rook (pygame.sprite.Sprite):
-    def __init__( self, tipo, posicion, num ):
+    def __init__( self, tipo, posicion, num, white, list_config):
         super().__init__()
         self.type_rook = tipo
         self.num = num
         self.last_time_atack = 0
-        self.last_time_move = 0
 
         # Rook de arena
         if self.type_rook == 5:
@@ -24,7 +26,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 7
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 2
+            self.speed_atack = list_config[4][0]
 
         # Rook de roca
         elif self.type_rook == 6:
@@ -40,7 +42,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 14
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 2
+            self.speed_atack = list_config[4][0]
 
         # Rook de fuego
         elif self.type_rook == 7:
@@ -56,7 +58,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 16
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 2
+            self.speed_atack = list_config[4][0]
 
         # Rook de agua
         elif self.type_rook == 8:
@@ -72,7 +74,7 @@ class New_Rook (pygame.sprite.Sprite):
             self.ps = 16
 
             # Velocidad de ataque   OBTENER DEL MENUN DE CONFIG
-            self.speed_atack = 2
+            self.speed_atack = list_config[4][0]
 
     # Obtener vida
     def ps_get(self):
@@ -81,7 +83,7 @@ class New_Rook (pygame.sprite.Sprite):
         return self.ps
 
     # Ataque de los Rooks
-    def atack(self, time_now):
+    def atack(self, time_now, list_config):
         atack = []
         # Revisa el tiempo de ataque
         if (time_now - self.last_time_atack) // 1000 >= self.speed_atack  and self.ps > 0:
@@ -90,19 +92,19 @@ class New_Rook (pygame.sprite.Sprite):
             # Quien realiza el ataque
             if self.type_rook == 5:
                 # Logica de cambio de sprite
-                atack = Attack_Rook(self.type_rook, self.posicion_get())
+                atack = Attack_Rook(self.type_rook, self.posicion_get(), list_config)
 
             if self.type_rook == 6:
                 # Logica de cambio de sprite
-                atack = Attack_Rook(self.type_rook, self.posicion_get())
+                atack = Attack_Rook(self.type_rook, self.posicion_get(), list_config)
 
             if self.type_rook == 7:
                 # Logica de cambio de sprite
-                atack = Attack_Rook(self.type_rook, self.posicion_get())
+                atack = Attack_Rook(self.type_rook, self.posicion_get(), list_config)
 
             if self.type_rook == 8:
                 # Logica de cambio de sprite
-                atack = Attack_Rook(self.type_rook, self.posicion_get())
+                atack = Attack_Rook(self.type_rook, self.posicion_get(), list_config)
 
             
             return atack
@@ -149,11 +151,10 @@ class New_Rook (pygame.sprite.Sprite):
         return result
     
     # Dibuja el men en pantalla
-    def draw_me(self, time_now):
+    def draw_me(self, time_now, screen):
         if not self.ps <= 0:
             
-            if self.last_time_move == 0 :
-                self.last_time_move = time_now
+            if self.last_time_atack == 0 :
                 self.last_time_atack =  time_now
 
             screen.blit(self.image, self.posicion_get())
@@ -164,9 +165,16 @@ class New_Rook (pygame.sprite.Sprite):
     def who( self ):
         return self.num
 
+    #Metodo que sirve para Cargar todos los estado de guardado
+    def set_guardado( self, ps ):
+        if ps <= 0:
+            self.kill()
+        else:
+            self.ps = ps
+
 #Atacks
 class Attack_Rook (pygame.sprite.Sprite):
-    def __init__( self, tipo, posicion ):
+    def __init__( self, tipo, posicion, list_config):
         super().__init__()
 
         self.type = tipo
@@ -226,14 +234,14 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.speed = 2
 
     #Trayectoria del ataque
-    def update( self ):
+    def update( self, size ):
         if self.rect.y < size[1]:
             self.rect.y += self.speed
         else:
             self.kill()
 
     #Dibujo del ataque
-    def dibujar( self ):
+    def dibujar( self, screen):
         screen.blit( self.image, [self.rect.x,self.rect.y] )
 
     #Obtiene el dano e la bala
