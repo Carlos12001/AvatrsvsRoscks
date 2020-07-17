@@ -27,7 +27,7 @@ screen = pygame.display.set_mode(size)
 font = pygame.font.SysFont("Times New Roman", 50)
 font2 = pygame.font.SysFont("Times New Roman", 30)
 font3 = pygame.font.SysFont("Times New Roman", 20)
-font4 = pygame.font.SysFont("Castellar", 40)
+font4 = pygame.font.SysFont("Castellar", 70)
 clock = pygame.time.Clock()
 
 # ----------------------------------------- Variables globales ----------------------------------------- #
@@ -1755,8 +1755,21 @@ def start ():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                run = False
-                name()
+                if event.key == pygame.K_5:
+                    run = False
+                    juego()
+                elif event.key == pygame.K_9:
+                    run = False
+                    config()
+                elif event.key == pygame.K_6:
+                    run = False
+                    menu()
+                elif event.key == pygame.K_7:
+                    run = False
+                    game_over_ani()
+                else:
+                    run = False
+                    name()
 
 
 # ***************************************  Ventana juego  ************************************************
