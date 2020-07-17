@@ -1,11 +1,11 @@
 #Pygame 
+https://www.youtube.com/watch?v=kWNehaPNZ9o
 
 
 #codigo para entrada de texto
 https://www.youtube.com/watch?v=W3YH5TxzOTg
 
 # posibles links a utilizar
-
 https://ansimuz.itch.io/cyberpunk-street-environment
 
 
@@ -15,7 +15,14 @@ https://pythones.net/funcion-super-en-python-bien-explicada-ejemplos-oop/
 #Para guardar el juego
 http://conocepython.blogspot.com/p/la-funcion-main.html#:~:text=la%20funci%C3%B3n%20main()%2C%20realmente,de%20su%20raz%C3%B3n%20de%20ser.
 
-# paletas de colores cyberpunk
+#Reload
+https://likegeeks.com/es/modulos-de-python/#:~:text=archivo%20de%20importaci%C3%B3n.-,Recargando%20M%C3%B3dulos,funci%C3%B3n%20reload%20que%20puede%20lograrlo.
 
+# paletas de colores cyberpunk
 https://blog.depositphotos.com/15-cyberpunk-color-palettes-for-dystopian-designs.html
 
+#Serializacion
+https://www.youtube.com/watch?v=CkfDnMC79b4&list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS&index=40
+
+#Archivos externos
+https://www.youtube.com/watch?v=0dEYVSRYl_s&list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS&index=38
