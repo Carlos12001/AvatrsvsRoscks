@@ -2013,6 +2013,7 @@ def juego():
             if len(avatar_list) == 0 and len(list_avarts_in_game) == 0:
                 levels[1] = False
                 limpiar_matriz()
+                win_ani()
 
         # Tercer Nivel
         elif levels[2]:
