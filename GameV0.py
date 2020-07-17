@@ -28,6 +28,7 @@ font = pygame.font.SysFont("Times New Roman", 50)
 font2 = pygame.font.SysFont("Times New Roman", 30)
 font3 = pygame.font.SysFont("Times New Roman", 20)
 font4 = pygame.font.SysFont("Castellar", 70)
+font5 = pygame.font.SysFont("Castellar", 45)
 clock = pygame.time.Clock()
 
 # ----------------------------------------- Variables globales ----------------------------------------- #
@@ -1245,12 +1246,22 @@ def you_lost_game():
 
 # --------------------------------------------- Ventanas --------------------------------------------- #
 
-# Ventana game over
-def game_over_ani():
+# Ventana win
 
-    sprite = animacion('resource/gameover.png', (480,450), 99, 96, 14)
+def win_ani():
+    pos1 = random.randint(48, 952)
+    pos2 = random.randint(48, 952)
+    pos3 = random.randint(48, 952)
+    pos4 = random.randint(48, 952)
+    pos5 = random.randint(48, 952)
+    pos6 = random.randint(48, 952)
+    sprite_win = animacion('resource/win.png', (pos1, pos2), 96, 96, 4)
+    sprite_win2 = animacion('resource/win.png', (pos3, pos4), 96, 96, 4)
+    sprite_win3 = animacion('resource/win.png', (pos5, pos6), 96, 96, 4)
+    sprite_win4 = animacion('resource/win.png', (pos3, pos2), 96, 96, 4)
+    sprite_win5 = animacion('resource/win.png', (pos6, pos1), 96, 96, 4)
+    sprite_win6 = animacion('resource/win.png', (pos5, pos5), 96, 96, 4)
 
-    again = pygame.Rect(390, 650, 220, 50)
     clock = pygame.time.Clock()
     run = True
     while run:
@@ -1258,8 +1269,50 @@ def game_over_ani():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if again.collidepoint(event.pos):
+            elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                if event.key == pygame.K_2:
+                    run = False
+                    sprite_win.kill()
+                    sprite_win2.kill()
+                    sprite_win3.kill()
+                    start()
+
+        screen.fill(dark)  # color la ventana
+        sprite_win.update()
+        sprite_win2.update()
+        sprite_win3.update()
+        sprite_win4.update()
+        sprite_win5.update()
+        sprite_win6.update()
+
+        screen.blit(sprite_win.image, sprite_win.rect)
+        screen.blit(sprite_win2.image, sprite_win2.rect)
+        screen.blit(sprite_win3.image, sprite_win3.rect)
+        screen.blit(sprite_win4.image, sprite_win4.rect)
+        screen.blit(sprite_win5.image, sprite_win5.rect)
+        screen.blit(sprite_win6.image, sprite_win6.rect)
+        text("Felicidades", font4, darkpurple, screen, 500, 100)
+        text("has ganado", font5, darkpurple, screen, 500, 200)
+        text("Presiona una tecla 2 para iniciar", font3, brown, screen, 505, 605)
+
+        pygame.display.flip()
+        clock.tick(6)
+
+# Ventana game over
+def game_over_ani():
+
+    sprite = animacion('resource/gameover.png', (480,450), 99, 96, 14)
+
+    clock = pygame.time.Clock()
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                if event.key == pygame.K_1:
+                    run = False
                     sprite.kill()
                     start()
 
@@ -1267,9 +1320,8 @@ def game_over_ani():
         screen.fill(dark)  # color la ventana
         screen.blit(sprite.image, sprite.rect)
 
-        pygame.draw.rect(screen, brown, again)
         text("Game Over", font4, darkpurple, screen, 505, 305)
-
+        text("Presiona una tecla 1 para iniciar", font3, brown, screen, 505, 605)
 
         pygame.display.flip()
         clock.tick(10)
@@ -1749,7 +1801,6 @@ def start ():
     pygame.display.flip()
     run = True
     while run:
-        print("vive start")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -1767,6 +1818,9 @@ def start ():
                 elif event.key == pygame.K_7:
                     run = False
                     game_over_ani()
+                elif event.key == pygame.K_8:
+                    run = False
+                    win_ani()
                 else:
                     run = False
                     name()
