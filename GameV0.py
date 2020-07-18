@@ -1,5 +1,4 @@
 import pygame, sys, random, pickle
-#from GameV0 import *
 from Objetos import AvartsV0
 from Objetos import CoinsV0
 from Objetos import RooksV0
@@ -36,33 +35,6 @@ global player_name, list_config
 
 player_name = ""
 
-
-# Variables globales para el juego
-global  MATRIZ,  matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list
-
-# Matriz de posiciones de juego
-MATRIZ = [      [['Vacio', [250,   0]],    ['Vacio', [350,   0]],   ['Vacio', [450,    0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
-                [['Vacio', [250,  90]],    ['Vacio', [350,  90]],   ['Vacio', [450,   90]],    ['Vacio', [550,  90]],    ['Vacio', [650,  90]]],
-                [['Vacio', [250, 180]],    ['Vacio', [350, 180]],   ['Vacio', [450,  180]],    ['Vacio', [550, 180]],    ['Vacio', [650, 180]]],
-                [['Vacio', [250, 270]],    ['Vacio', [350, 270]],   ['Vacio', [450,  270]],    ['Vacio', [550, 270]],    ['Vacio', [650, 270]]],
-                [['Vacio', [250, 360]],    ['Vacio', [350, 360]],   ['Vacio', [450,  360]],    ['Vacio', [550, 360]],    ['Vacio', [650, 360]]],
-                [['Vacio', [250, 450]],    ['Vacio', [350, 450]],   ['Vacio', [450,  450]],    ['Vacio', [550, 450]],    ['Vacio', [650, 450]]],
-                [['Vacio', [250, 540]],    ['Vacio', [350, 540]],   ['Vacio', [450,  540]],    ['Vacio', [550, 540]],    ['Vacio', [650, 540]]],
-                [['Vacio', [250, 630]],    ['Vacio', [350, 630]],   ['Vacio', [450,  630]],    ['Vacio', [550, 630]],    ['Vacio', [650, 630]]],
-                [['Vacio', [250, 720]],    ['Vacio', [350, 720]],   ['Vacio', [450,  720]],    ['Vacio', [550, 720]],    ['Vacio', [650, 720]]]       ]
-
-# Matriz de monedas
-matrizcoin = [[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None],[None]]
-
-# Variables con la funcionalidad de los niveles
-
-levels = [ True, True, True ]
-
-one_time_upload_levels = [ True, True, True ]
-
-# Rango de secs aleatorio
-list_ramdom_secs = 0
-
 # Lista de objetos en el juego
 list_atacks_avart = pygame.sprite.Group()
 
@@ -74,24 +46,7 @@ list_rooks_in_game = pygame.sprite.Group()
 
 all_sprites = pygame.sprite.Group()
 
-# Numero de Moendas en el juego
-coins = 100
-
-# Lista de avarts que faltan de poner
-avatar_list = []
-
-# Numero de identificador del Rook
-num_rook = 1001
-
-# Variables relacionadas con el tiempo
-total_time_in_game = 0
-
-time_to_start = pygame.time.get_ticks()/1000
-
-time_last_time_new_enemy = time_to_start
-
-time_last_time_new_coin = time_to_start
-# --------------------------------------------- Clases ---------------------------------------------- #
+# --------------------------------------------- Clases General ---------------------------------------------- #
 class animacion (pygame.sprite.Sprite):
     def __init__(self, image, position, width, height,frames_t):
         super().__init__()
@@ -119,17 +74,15 @@ class animacion (pygame.sprite.Sprite):
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
 # --------------------------------------------- Funciones ---------------------------------------------- #
-# General
-# ---Funcion para crear texto
-        
+# General-
 def text (text, font, color, surface, x , y):
     txtobj = font.render(text, 1, color)
     txtrect = txtobj.get_rect()
     txtrect.center = (x, y)
     surface.blit(txtobj, txtrect)
 
-# funciones de ventana nuevo nombre
-# ---Funciones para el cargado de partidas guardadas o nuevas
+# --------------------------------------funciones de ventana nuevo nombre --------------------------------------
+
 # ------validacion si el usuario guardo
 def validation (name):
     ruta = "Data/player_name.txt"
@@ -146,7 +99,9 @@ def save_name(name):
     file.write(player_name)
     file.close()
 
-# funciones de Ventana menu
+
+
+#--------------------------------------funciones de Ventana menu--------------------------------------
 # ---Funcion que lee la configuracion del usuario
 
 def read_config():
@@ -170,8 +125,11 @@ def read_config():
     list_config.append(sprite)
     file.close()
 
-# funciones de Ventana configuracion
+
+
+#--------------------------------------funciones de Ventana configuracion--------------------------------------
 # ---Funcion para guardar configuracion en un .txt
+
 def save_config (final_config):
     global save
     save = None
@@ -187,7 +145,7 @@ def save_config (final_config):
             save = False
     file.close()
 
-# funciones de ventana juego
+#--------------------------------------funciones de ventana juego--------------------------------------
 
 # ---Logica para el guardado
 
@@ -405,7 +363,7 @@ def start_config_level_1():
     global one_time_upload_levels, num_rook, list_ramdom_secs
     # Creacion de Avatars segun el nivel que se encuentra
     if one_time_upload_levels[0]:
-        list_ramdom_secs = range(10, 14)
+        list_ramdom_secs = range(1, 14)
 
         # Creacion de enemigos
         create_enemy(50, 1)
@@ -424,7 +382,7 @@ def start_config_level_2():
     # Creacion de Avatars segun el nivel que se encuentra
     if one_time_upload_levels[1]:
         # Tiempo de apracion de avatar entre 4 8
-        list_ramdom_secs = range(4, 8)
+        list_ramdom_secs = range(1, 8)
 
         # Creacion de enemigos
         create_enemy(70, 1)
@@ -1233,16 +1191,67 @@ def limpiar_matriz():
         sprite.kill()
 
 # ---Fin del juego
-
 def you_lost_game():
-    global MATRIZ, game_over
+    global MATRIZ, game_over , levels, one_time_upload_levels , coins
     for enemy_false in MATRIZ[0]:
         if enemy_false[0] != 'Vacio':
-            if enemy_false[0].type_get() == 'Arquero' or enemy_false[0].type_get() == 'Escudero' or enemy_false[
-                0].type_get() == 'Canival' or enemy_false[0].type_get() == 'Lenador':
+            if enemy_false[0].type_get() == 'Arquero' or enemy_false[0].type_get() == 'Escudero' or \
+               enemy_false[0].type_get() == 'Canival' or enemy_false[0].type_get() == 'Lenador':
                 game_over = True
                 limpiar_matriz()
+                levels = [True, True, True]
+                one_time_upload_levels = [True, True, True]
+                coins = 100
+
                 game_over_ani()
+
+def high_score_save():
+    time = round((total_time_in_game-time_to_start+pygame.time.get_ticks()/1000), 2)
+    #Archivos
+    file_name = open ('Data/player_name.txt', 'r')
+    file_hg_r = open('Data/high_score','rb')
+
+    #Variables de los archivos
+    names_player =   file_name.readlines()[0]
+    list_hg = pickle.load(file_hg_r)
+
+    #Cierres de Archivos
+    file_name.close()
+    file_hg_r.close()
+
+    #Variables axuliares
+    mismo = False
+
+    #Logica para comprobar si hay otro nombre igual
+    c = 0
+    for item in list_hg:
+        if item [1] == names_player:
+            list_hg[c] = ( time, names_player )
+            mismo = True
+            break
+        c+=1
+
+
+
+    #Revisa si tiene agregar un elmento o no
+    if not mismo:
+        print('No cambio\n\n')
+        #Agrega la nueva tupla
+        list_hg.append( ( time, names_player ) )
+
+    #Ordena la lista
+    new_list_hg = sorted(list_hg, key=lambda times: times[0] )
+
+
+    # Modo escritura de el archivo
+    file_hg_w = open('Data/high_score', 'wb')
+
+    #Agrega la nueva lista
+    pickle.dump( new_list_hg, file_hg_w )
+
+    file_hg_r.close()
+
+
 
 # --------------------------------------------- Ventanas --------------------------------------------- #
 
@@ -1716,7 +1725,6 @@ def menu():
     pygame.display.flip()
     run = True
     while run:
-        print("vive menu")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -1730,8 +1738,8 @@ def menu():
                     run = False
                     config()
                 elif salon_button.collidepoint(event.pos):
-                    # hacer salon de la fama
-                    pass
+                    run = False
+                    high_score()
                 elif help_button.collidepoint(event.pos):
                     # hacer ayuda
                     pass
@@ -1761,11 +1769,9 @@ def name():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                global MATRIZ
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if entrybox.collidepoint(event.pos):
-                    print("encendido")
                     active = True
                 elif button.collidepoint(event.pos) and user_name != "":
                     validation(user_name)
@@ -1825,13 +1831,97 @@ def start ():
                     run = False
                     name()
 
+#Ventana de high score
+def high_score():
 
+    return_menu = pygame.Rect(380, 650, 220, 50)
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if read_config().collidepoint(event.pos):
+                    run = False
+                    menu()
+        
+            elif event.type == pygame.KEYDOWN:
+                if active == True:
+                    if event.key == pygame.K_BACKSPACE:
+                        user_name = user_name [0:-1]
+                    elif event.key == pygame.K_TAB:
+                        user_name = user_name
+                    else:
+                        user_name += event.unicode
+        screen.fill(dark)  # color la ventana
+
+        text("Salon de la Fama", font, green, screen, 500, 100)
+
+        pygame.display.flip()
 # ***************************************  Ventana juego  ************************************************
 
 def juego():
-    global MATRIZ, levels, quit_rook_var, game_over, shop_open, avatar_list, coins, coin_list
-    # global game_over, shop_open
-    # global avatar_list, coins, coin_list
+    # Variables globales para el juego
+    global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin
+
+    # Matriz de posiciones de juego
+    MATRIZ = [[['Vacio', [250, 0]], ['Vacio', [350, 0]], ['Vacio', [450, 0]], ['Vacio', [550, 0]], ['Vacio', [650, 0]]],
+              [['Vacio', [250, 90]], ['Vacio', [350, 90]], ['Vacio', [450, 90]], ['Vacio', [550, 90]],
+               ['Vacio', [650, 90]]],
+              [['Vacio', [250, 180]], ['Vacio', [350, 180]], ['Vacio', [450, 180]], ['Vacio', [550, 180]],
+               ['Vacio', [650, 180]]],
+              [['Vacio', [250, 270]], ['Vacio', [350, 270]], ['Vacio', [450, 270]], ['Vacio', [550, 270]],
+               ['Vacio', [650, 270]]],
+              [['Vacio', [250, 360]], ['Vacio', [350, 360]], ['Vacio', [450, 360]], ['Vacio', [550, 360]],
+               ['Vacio', [650, 360]]],
+              [['Vacio', [250, 450]], ['Vacio', [350, 450]], ['Vacio', [450, 450]], ['Vacio', [550, 450]],
+               ['Vacio', [650, 450]]],
+              [['Vacio', [250, 540]], ['Vacio', [350, 540]], ['Vacio', [450, 540]], ['Vacio', [550, 540]],
+               ['Vacio', [650, 540]]],
+              [['Vacio', [250, 630]], ['Vacio', [350, 630]], ['Vacio', [450, 630]], ['Vacio', [550, 630]],
+               ['Vacio', [650, 630]]],
+              [['Vacio', [250, 720]], ['Vacio', [350, 720]], ['Vacio', [450, 720]], ['Vacio', [550, 720]],
+               ['Vacio', [650, 720]]]]
+
+    # Matriz de monedas
+    matrizcoin = [[None], [None], [None], [None], [None], [None], [None], [None], [None], [None], [None], [None],
+                  [None], [None], [None]]
+
+    # Variables con la funcionalidad de los niveles
+
+    levels = [True, True, True]
+
+    one_time_upload_levels = [True, True, True]
+
+    # Rango de secs aleatorio
+    list_ramdom_secs = 0
+
+    # Numero de Moendas en el juego
+    coins = 100
+
+    # Lista de avarts que faltan de poner
+    avatar_list = []
+
+    # Numero de identificador del Rook
+    num_rook = 1001
+
+    # Variables relacionadas con el tiempo
+    total_time_in_game = 0
+
+    time_to_start = pygame.time.get_ticks() / 1000
+
+    time_last_time_new_enemy = time_to_start
+
+    time_last_time_new_coin = time_to_start
+
+
+
+
+    global quit_rook_var, game_over, shop_open
+
+
+
 
     shop_open = True
     game_over = False
@@ -1842,10 +1932,13 @@ def juego():
     # matriz_1_dibujo = pygame.image.load('resource/matriz_1.png').convert()  ver si hay que quitar una
     # matriz_2_dibujo = pygame.image.load('resource/matriz_2.png').convert()
     # matriz_3_dibujo = pygame.image.load('resource/matriz_3.png').convert()
+
+    #Boton de guardado
     image_save = pygame.image.load('resource/save.jpg').convert()
     image_save = pygame.transform.scale(image_save, [200, 100])
     image_save.set_colorkey(white)
-    save_button = pygame.Rect(775, 250, 200, 100)
+    save_button = pygame.Rect(775, 250,250 , 100)
+
 
     # botones tienda
     sand_button = pygame.Rect(0, 500, 100, 80)
@@ -1861,6 +1954,7 @@ def juego():
     login()
 
     while not game_over:
+        secs_now = int(total_time_in_game-time_to_start+pygame.time.get_ticks()/1000)
         # Fin del juego
         you_lost_game()
         # Eventos
@@ -1923,12 +2017,21 @@ def juego():
             pygame.draw.rect(screen, green, fire_button)
             pygame.draw.rect(screen, purple, water_button)
             pygame.draw.rect(screen, darkpurple, quit_button)
-            pygame.draw.rect(screen, green, save_button)
 
+            # VERIFICAR SI AQUI VA UN DRAW PARA SAVE
+            pygame.draw.rect(screen, green, save_button)
             screen.blit(image_save, [775, 250])
+
+            #Monedas
             text(str(coins), font2, brown, screen, 100, 50)
+
+            #Nivel
             text('Nivel 1', font2, brown, screen, 100, 200)
 
+            #Tiempo
+            text(str( secs_now), font2, brown, screen, 800, 400)
+
+            
             # Pone la cantidad de enemigo y monedas en este nivel
             start_config_level_1()
 
@@ -1974,11 +2077,19 @@ def juego():
             pygame.draw.rect(screen, green, fire_button)
             pygame.draw.rect(screen, purple, water_button)
             pygame.draw.rect(screen, darkpurple, quit_button)
-            text(str(coins), font2, brown, screen, 100, 50)
-            text('Nivel 2', font2, brown, screen, 100, 200)
 
+            #  AQUI VA UN DRAW PARA SAVE
             pygame.draw.rect(screen, white, save_button)
             screen.blit(image_save, [775, 250])
+
+            #Monedas
+            text(str(coins), font2, brown, screen, 100, 50)
+
+            #Nivel
+            text('Nivel 2', font2, brown, screen, 100, 200)
+
+            #Tiempo
+            text(str(secs_now), font2, brown, screen,800, 400)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_2()
@@ -2013,7 +2124,6 @@ def juego():
             if len(avatar_list) == 0 and len(list_avarts_in_game) == 0:
                 levels[1] = False
                 limpiar_matriz()
-                win_ani()
 
         # Tercer Nivel
         elif levels[2]:
@@ -2026,10 +2136,21 @@ def juego():
             pygame.draw.rect(screen, green, fire_button)
             pygame.draw.rect(screen, purple, water_button)
             pygame.draw.rect(screen, darkpurple, quit_button)
-            text(str(coins), font2, brown, screen, 100, 50)
-            text('Nivel 3', font2, brown, screen, 100, 200)
-            # VERIFICAR SI AQUI VA UN DRAW PARA SAVE
+
+            #  AQUI VA UN DRAW PARA SAVE
+            pygame.draw.rect(screen, white, save_button)
             screen.blit(image_save, [775, 250])
+
+            #Monedas
+            text(str(coins), font2, brown, screen, 100, 50)
+
+            #NIVEL
+            text('Nivel 3', font2, brown, screen, 100, 200)
+
+            #Tiempo
+            text(str(secs_now), font2, brown, screen, 800, 400)
+
+
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_3()
@@ -2064,10 +2185,13 @@ def juego():
             if len(avatar_list) == 0 and len(list_avarts_in_game) == 0:
                 levels[2] = False
                 limpiar_matriz()
+
+        #Gano el juego
         else:
             game_over = True
             limpiar_matriz()
-            game_over_ani()
+            high_score_save()
+            win_ani()
 
         clock.tick(60)
         pygame.display.flip()
