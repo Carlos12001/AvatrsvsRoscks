@@ -363,7 +363,7 @@ def start_config_level_1():
     global one_time_upload_levels, num_rook, list_ramdom_secs
     # Creacion de Avatars segun el nivel que se encuentra
     if one_time_upload_levels[0]:
-        list_ramdom_secs = range(1, 14)
+        list_ramdom_secs = range(3, 14)
 
         # Creacion de enemigos
         create_enemy(50, 1)
@@ -382,7 +382,7 @@ def start_config_level_2():
     # Creacion de Avatars segun el nivel que se encuentra
     if one_time_upload_levels[1]:
         # Tiempo de apracion de avatar entre 4 8
-        list_ramdom_secs = range(1, 8)
+        list_ramdom_secs = range(2, 8)
 
         # Creacion de enemigos
         create_enemy(70, 1)
