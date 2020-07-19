@@ -254,20 +254,23 @@ def login():
         load_aux_4(int(line_11))
 
 def load_aux_1(lista):
-    global one_time_upload_levels, levels, list_ramdom_secs
+    global one_time_upload_levels, levels, list_ramdom_secs, num_ramdom
 
     if lista[0]:
         levels = [True, True, True]
         one_time_upload_levels = [False, True, True]
         list_ramdom_secs = range(10, 14)  # Ahorita se quita
+        num_ramdom = random.choice(list_ramdom_secs)
     elif lista[1]:
         levels = [False, True, True]
         one_time_upload_levels = [False, False, True]
         list_ramdom_secs = range(4, 8)  # Ahorita se quita
+        num_ramdom = random.choice(list_ramdom_secs)
     else:
         levels = [False, False, True]
         one_time_upload_levels = [False, False, False]
         list_ramdom_secs = range(1, 3)  # Ahorita se quita
+        num_ramdom = random.choice(list_ramdom_secs)
 
 def load_aux_2(num):
     global total_time_in_game
@@ -413,10 +416,11 @@ def save():
 # ---Funciones para niveles
 
 def start_config_level_1():
-    global one_time_upload_levels, num_rook, list_ramdom_secs
+    global one_time_upload_levels, num_rook, list_ramdom_secs ,num_ramdom
     # Creacion de Avatars segun el nivel que se encuentra
     if one_time_upload_levels[0]:
         list_ramdom_secs = range(3, 14)
+        num_ramdom = random.choice(list_ramdom_secs)
 
         # Creacion de enemigos
         create_enemy(50, 1)
@@ -436,6 +440,7 @@ def start_config_level_2():
     if one_time_upload_levels[1]:
         # Tiempo de apracion de avatar entre 4 8
         list_ramdom_secs = range(2, 8)
+        num_ramdom = random.choice(list_ramdom_secs)
 
         # Creacion de enemigos
         create_enemy(70, 1)
@@ -455,6 +460,7 @@ def start_config_level_3():
     if one_time_upload_levels[2]:
         # Tiempo de apracion de avatar entre 1 3
         list_ramdom_secs = range(1, 3)
+        num_ramdom = random.choice(list_ramdom_secs)
 
         # Creacion de enemigos
         create_enemy(120, 1)
@@ -480,9 +486,9 @@ def create_enemy(how_much, num):
         all_sprites.add(avatar)
 
 def put_new_enemy(list_ramdom_secs):
-    global time_last_time_new_enemy
-    num_ramdom = random.choice(list_ramdom_secs)
+    global time_last_time_new_enemy , num_ramdom
     if num_ramdom <= (pygame.time.get_ticks() // 1000 - time_last_time_new_enemy) // 1:
+        num_ramdom = random.choice(list_ramdom_secs)
         time_last_time_new_enemy = pygame.time.get_ticks() // 1000
         return put_new_enemy_aux()
 
@@ -535,7 +541,7 @@ def atacks_avarts():
         j_now = 0
         for cuadrito in fila:
             if cuadrito[0] != 'Vacio':
-                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero':
+                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero' and atacks_avarts_check(cuadrito[1][0]) :
                     atacking = cuadrito[0].atack(pygame.time.get_ticks())
                     if atacking != '':
                         list_atacks_avart.add(atacking)
@@ -558,7 +564,20 @@ def atacks_avarts():
             j_now += 1
         i_now += 1
 
-
+def atacks_avarts_check(pos_x):
+    global MATRIZ
+    result = False
+    for fila in MATRIZ:
+        for cuadrito in fila:
+            if cuadrito[1][0] == pos_x:
+                if cuadrito[0] != 'Vacio':
+                    if cuadrito[0].type_get() == 'Sand' or cuadrito[0].type_get() == 'Rock' \
+                    or cuadrito[0].type_get() == 'Fire' or cuadrito[0].type_get() == 'Water':
+                        result = True
+                        break
+        if result:
+            break
+    return result
 # ---Funciones para el funcionamiento de las monedas---
 
 def create_new_coins(how_much):
@@ -1272,6 +1291,8 @@ def you_lost_game():
         if enemy_false[0] != 'Vacio':
             if enemy_false[0].type_get() == 'Arquero' or enemy_false[0].type_get() == 'Escudero' or \
                enemy_false[0].type_get() == 'Canival' or enemy_false[0].type_get() == 'Lenador':
+
+                pygame.time.wait(1000)
                 game_over = True
                 limpiar_matriz()
                 levels = [True, True, True]
