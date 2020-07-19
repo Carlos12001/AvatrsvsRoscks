@@ -162,13 +162,6 @@ def create_texto_hg_list():
     #Cierra el archivo
     file_hg_r.close()
 
-
-    #prueba = []
-    #c = -1
-    #for i in range(21):
-      #  prueba.append( (c , f'aaaaaaaaa_{c}') )
-       # c+=100
-
     # Logica para poner el texto
     y_pos = 210
     counter = 0
@@ -199,6 +192,11 @@ def texto_move_hg_list(down_up):
 
 
         #--------------------------------------funciones de ventana juego--------------------------------------
+
+def borrar_lista():
+    for texts in list_name:
+        texts.kill()
+    list_name.empty()
 
 # ---Logica para el guardado
 
@@ -962,7 +960,7 @@ def atacks_rooks():
         for cuadrito in fila:
             if cuadrito[0] != 'Vacio':
                 if not (cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'
-                        or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival'):
+                        or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival') and atacks_rooks_check(cuadrito[1][0]):
                     # Ataque
                     atacking = cuadrito[0].atack(pygame.time.get_ticks(), list_config)
                     if atacking != '':
@@ -971,6 +969,21 @@ def atacks_rooks():
                 else:
                     if cuadrito[0].ps_get() <= 0:
                         cuadrito[0] = 'Vacio'
+
+def atacks_rooks_check(pos_x):
+    global MATRIZ
+    result = False
+    for fila in MATRIZ:
+        for cuadrito in fila:
+            if cuadrito[1][0] == pos_x:
+                if cuadrito[0] !='Vacio':
+                     if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'  \
+                        or cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
+                        result = True
+                        break
+        if result:
+            break
+    return result
 
 def click_posicion(mouse_pos):
     # Identifica la posicion del rook a quitar
@@ -1934,6 +1947,10 @@ def high_score():
                     pass
                 elif event.key == pygame.K_UP :
                     pass
+            #elif boton press
+            #borrar_lista()
+            #run = False
+            #menu()
 
         # Color
         screen.fill(blue_neo)
@@ -1954,6 +1971,7 @@ def high_score():
         text("Salon de la Fama", font, green, screen, 500, 100)
 
         pygame.display.flip()
+
 # ***************************************  Ventana juego  ************************************************
 
 def juego():
@@ -1961,23 +1979,15 @@ def juego():
     global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin
 
     # Matriz de posiciones de juego
-    MATRIZ = [[['Vacio', [250, 0]], ['Vacio', [350, 0]], ['Vacio', [450, 0]], ['Vacio', [550, 0]], ['Vacio', [650, 0]]],
-              [['Vacio', [250, 90]], ['Vacio', [350, 90]], ['Vacio', [450, 90]], ['Vacio', [550, 90]],
-               ['Vacio', [650, 90]]],
-              [['Vacio', [250, 180]], ['Vacio', [350, 180]], ['Vacio', [450, 180]], ['Vacio', [550, 180]],
-               ['Vacio', [650, 180]]],
-              [['Vacio', [250, 270]], ['Vacio', [350, 270]], ['Vacio', [450, 270]], ['Vacio', [550, 270]],
-               ['Vacio', [650, 270]]],
-              [['Vacio', [250, 360]], ['Vacio', [350, 360]], ['Vacio', [450, 360]], ['Vacio', [550, 360]],
-               ['Vacio', [650, 360]]],
-              [['Vacio', [250, 450]], ['Vacio', [350, 450]], ['Vacio', [450, 450]], ['Vacio', [550, 450]],
-               ['Vacio', [650, 450]]],
-              [['Vacio', [250, 540]], ['Vacio', [350, 540]], ['Vacio', [450, 540]], ['Vacio', [550, 540]],
-               ['Vacio', [650, 540]]],
-              [['Vacio', [250, 630]], ['Vacio', [350, 630]], ['Vacio', [450, 630]], ['Vacio', [550, 630]],
-               ['Vacio', [650, 630]]],
-              [['Vacio', [250, 720]], ['Vacio', [350, 720]], ['Vacio', [450, 720]], ['Vacio', [550, 720]],
-               ['Vacio', [650, 720]]]]
+    MATRIZ = [      [['Vacio', [250,   0]],    ['Vacio', [350,   0]],    ['Vacio', [450,   0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
+                    [['Vacio', [250,  90]],    ['Vacio', [350,  90]],    ['Vacio', [450,  90]],    ['Vacio', [550,  90]],    ['Vacio', [650,  90]]],
+                    [['Vacio', [250, 180]],    ['Vacio', [350, 180]],    ['Vacio', [450, 180]],    ['Vacio', [550, 180]],    ['Vacio', [650, 180]]],
+                    [['Vacio', [250, 270]],    ['Vacio', [350, 270]],    ['Vacio', [450, 270]],    ['Vacio', [550, 270]],    ['Vacio', [650, 270]]],
+                    [['Vacio', [250, 360]],    ['Vacio', [350, 360]],    ['Vacio', [450, 360]],    ['Vacio', [550, 360]],    ['Vacio', [650, 360]]],
+                    [['Vacio', [250, 450]],    ['Vacio', [350, 450]],    ['Vacio', [450, 450]],    ['Vacio', [550, 450]],    ['Vacio', [650, 450]]],
+                    [['Vacio', [250, 540]],    ['Vacio', [350, 540]],    ['Vacio', [450, 540]],    ['Vacio', [550, 540]],    ['Vacio', [650, 540]]],
+                    [['Vacio', [250, 630]],    ['Vacio', [350, 630]],    ['Vacio', [450, 630]],    ['Vacio', [550, 630]],    ['Vacio', [650, 630]]],
+                    [['Vacio', [250, 720]],    ['Vacio', [350, 720]],    ['Vacio', [450, 720]],    ['Vacio', [550, 720]],    ['Vacio', [650, 720]]]         ]
 
     # Matriz de monedas
     matrizcoin = [[None], [None], [None], [None], [None], [None], [None], [None], [None], [None], [None], [None],
