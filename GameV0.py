@@ -534,7 +534,6 @@ def kill_coins():
         elif coin_obj != None:
             coin_pos = coin_obj.posicion_get()
             coin_value = coin_obj.value_get()
-            print(matrizcoin)
             if coin_pos[0] <= mouse_pos[0] <= coin_pos[0] + 50 and mouse_click[0] == 1 and coin_pos[1] <= mouse_pos[
                 1] <= coin_pos[1] + 50:
                 if coin_value == 25:
