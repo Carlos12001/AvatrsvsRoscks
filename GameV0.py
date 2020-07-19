@@ -235,7 +235,7 @@ def load_aux_1(lista):
     if lista[0]:
         levels = [True, True, True]
         one_time_upload_levels = [False, True, True]
-        list_ramdom_secs = range(3, 10)  # Ahorita se quita
+        list_ramdom_secs = range(3, 10)
         num_ramdom = random.choice(list_ramdom_secs)
     elif lista[1]:
         levels = [False, True, True]
