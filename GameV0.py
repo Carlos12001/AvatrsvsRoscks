@@ -259,12 +259,12 @@ def load_aux_1(lista):
     if lista[0]:
         levels = [True, True, True]
         one_time_upload_levels = [False, True, True]
-        list_ramdom_secs = range(10, 14)  # Ahorita se quita
+        list_ramdom_secs = range(3, 10)  # Ahorita se quita
         num_ramdom = random.choice(list_ramdom_secs)
     elif lista[1]:
         levels = [False, True, True]
         one_time_upload_levels = [False, False, True]
-        list_ramdom_secs = range(4, 8)  # Ahorita se quita
+        list_ramdom_secs = range(2, 8)  # Ahorita se quita
         num_ramdom = random.choice(list_ramdom_secs)
     else:
         levels = [False, False, True]
@@ -419,7 +419,7 @@ def start_config_level_1():
     global one_time_upload_levels, num_rook, list_ramdom_secs ,num_ramdom
     # Creacion de Avatars segun el nivel que se encuentra
     if one_time_upload_levels[0]:
-        list_ramdom_secs = range(3, 14)
+        list_ramdom_secs = range(3, 10)
         num_ramdom = random.choice(list_ramdom_secs)
 
         # Creacion de enemigos
