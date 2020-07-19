@@ -14,7 +14,7 @@ class New_Coin (pygame.sprite.Sprite):
             self.image.set_colorkey(color)
             self.value = 25
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice(range(200, 800))
+            self.rect.x = random.choice(range(350, 650))
             self.rect.y = random.choice(range(10, 750))
 
         # Moneda de 50
@@ -25,7 +25,7 @@ class New_Coin (pygame.sprite.Sprite):
             self.image.set_colorkey(color)
             self.value = 50
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice(range(200, 800))
+            self.rect.x = random.choice(range(350, 650))
             self.rect.y = random.choice(range(10, 750))
 
         #Leñador
@@ -36,7 +36,7 @@ class New_Coin (pygame.sprite.Sprite):
             self.image.set_colorkey(color)
             self.value = 100
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice(range(200, 800))
+            self.rect.x = random.choice(range(350, 650))
             self.rect.y = random.choice(range(10, 750))
 
     # Obtener posicion en X, y

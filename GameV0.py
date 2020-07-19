@@ -2,6 +2,7 @@ import pygame, sys, random, pickle
 from Objetos import AvartsV0
 from Objetos import CoinsV0
 from Objetos import RooksV0
+from Objetos import Texto_hg
 
 # -------------------------------------------- Colores -------------------------------------------- #
 
@@ -13,8 +14,8 @@ green = (101,220,152)
 brown = (141,137,128)
 white = (255, 255, 255)
 black = (0, 0, 0)
-
-
+cian = (35, 201, 17)
+blue_neo = (13, 0, 65)
 # -------------------------------------------- Inicializar -------------------------------------------- #
 pygame.init()
 pygame.font.init()
@@ -34,6 +35,9 @@ clock = pygame.time.Clock()
 global player_name, list_config
 
 player_name = ""
+
+#Lista de nombre
+list_name = pygame.sprite.Group()
 
 # Lista de objetos en el juego
 list_atacks_avart = pygame.sprite.Group()
@@ -145,7 +149,56 @@ def save_config (final_config):
             save = False
     file.close()
 
-#--------------------------------------funciones de ventana juego--------------------------------------
+
+#--------------------------------------funciones de Ventana configuracion--------------------------------------
+# ---Funcion para guardar configuracion en un .txt
+def create_texto_hg_list():
+    #Archivo para aceder la informacion de quien gano
+    file_hg_r = open('Data/high_score', 'rb')
+
+    #Carga la lista
+    list_hg = pickle.load(file_hg_r)
+
+    #Cierra el archivo
+    file_hg_r.close()
+
+
+    #prueba = []
+    #c = -1
+    #for i in range(21):
+      #  prueba.append( (c , f'aaaaaaaaa_{c}') )
+       # c+=100
+
+    # Logica para poner el texto
+    y_pos = 210
+    counter = 0
+    for texts in list_hg:
+        txt = Texto_hg.Texto_hg_cs( texts, font3, cian, screen, 220, y_pos , counter )
+        y_pos += 40
+        counter += 1
+        list_name.add(txt)
+
+def draw_texts_hg_list():
+    for texts in list_name:
+        texts.draw_me()
+
+def texto_move_hg_list(down_up):
+    firt_name = list_name.sprites()[0]
+    last_name= list_name.sprites()[len(list_name)-1]
+
+    if down_up  == 'down' and last_name.posicion_get()[1] >= 500:
+        for texts in list_name :
+            texts.update(-40)
+    elif  down_up == 'up' and firt_name.posicion_get()[1] <= 180:
+        for texts in list_name:
+            texts.update(40)
+
+
+
+
+
+
+        #--------------------------------------funciones de ventana juego--------------------------------------
 
 # ---Logica para el guardado
 
@@ -358,7 +411,9 @@ def save():
     pygame.quit()
     exit()
 
+
 # ---Funciones para niveles
+
 def start_config_level_1():
     global one_time_upload_levels, num_rook, list_ramdom_secs
     # Creacion de Avatars segun el nivel que se encuentra
@@ -414,6 +469,7 @@ def start_config_level_3():
 
         # No ejecuta esto mas de una vez
         one_time_upload_levels[2] = False
+
 
 # ---Funciones relacionadas con los avarts y monedas
 
@@ -504,6 +560,7 @@ def atacks_avarts():
             j_now += 1
         i_now += 1
 
+
 # ---Funciones para el funcionamiento de las monedas---
 
 def create_new_coins(how_much):
@@ -545,7 +602,6 @@ def draw_coins():
         if coins != None:
             coins.draw_me(screen)
 
-
 def kill_coins():
     global matrizcoin
     global coins
@@ -572,6 +628,7 @@ def kill_coins():
                     moneda[0] = None
                     coins += 100
                     break
+
 
 # ---Funciones para el funcionamiento de los rooks---
 
@@ -1105,6 +1162,7 @@ def quit_rook(quit_pos):
                 if cuadrito[0] != "Vacio" and cuadrito[0].ps_get() <= 0:
                     cuadrito[0] = 'Vacio'
 
+
 # ---Funciones para los ataques
 
 def atacks_move():
@@ -1156,6 +1214,7 @@ def atacks_colsion_check_rook():
                     elif cuadrito[0] == 'Vacio':
                         cuadrito[0] = 'Vacio'
 
+
 # ---Dibuja el los objetos de la matriz
 
 def draw_objetcs_matriz():
@@ -1166,6 +1225,7 @@ def draw_objetcs_matriz():
             if object != 'Vacio':
                 object.draw_me(pygame.time.get_ticks(), screen)
 
+
 # ---Funcion para quitar el nombre de la lista
 
 def quit_name(name):
@@ -1175,6 +1235,7 @@ def quit_name(name):
     for line in file:
         if line == player_name:
             line = ""
+
 
 # ---Limpia la matriz y la lista de objetos
 def limpiar_matriz():
@@ -1189,6 +1250,7 @@ def limpiar_matriz():
             cuadrtito[0] = 'Vacio'
     for sprite in all_sprites:
         sprite.kill()
+
 
 # ---Fin del juego
 def you_lost_game():
@@ -1834,28 +1896,61 @@ def start ():
 #Ventana de high score
 def high_score():
 
+    #Importar imagenes
+    imagen_bg = pygame.image.load('resource/hg_bg.png').convert()
+    imagen_bg.set_colorkey(white)
+    imagen_py =  pygame.image.load('resource/playet_word.png').convert()
+    imagen_py.set_colorkey(black)
+    imagen_py = pygame.transform.scale(imagen_py,[100,40])
+    imagen_time = pygame.image.load('resource/time_word.png').convert()
+    imagen_time.set_colorkey(black)
+    imagen_time = pygame.transform.scale(imagen_time, [100, 40])
+    imagen_pos = pygame.image.load('resource/posicion_word.png').convert()
+    imagen_pos.set_colorkey(black)
+    imagen_pos = pygame.transform.scale(imagen_pos, [100, 40])
+
+
+
+    #Crea el texto a mostar en pantalla
+    create_texto_hg_list()
+
+    #Ahorita revisar
     return_menu = pygame.Rect(380, 650, 220, 50)
     run = True
+
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if read_config().collidepoint(event.pos):
-                    run = False
-                    menu()
-        
-            elif event.type == pygame.KEYDOWN:
-                if active == True:
-                    if event.key == pygame.K_BACKSPACE:
-                        user_name = user_name [0:-1]
-                    elif event.key == pygame.K_TAB:
-                        user_name = user_name
-                    else:
-                        user_name += event.unicode
-        screen.fill(dark)  # color la ventana
 
+            if event.type == pygame.MOUSEBUTTONDOWN :
+                if event.button == 5:
+                    texto_move_hg_list('down')
+                elif event.button == 4:
+                    texto_move_hg_list('up')
+            elif  event.type ==  pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN :
+                    pass
+                elif event.key == pygame.K_UP :
+                    pass
+
+        # Color
+        screen.fill(blue_neo)
+
+
+        #Dibuja en pantalla todos los high score posibles
+        draw_texts_hg_list()
+
+        #Fondo
+        screen.blit(imagen_bg,(0,0))
+
+        #Textos
+        screen.blit(imagen_py, (190, 184))
+        screen.blit(imagen_time, (480, 184))
+        screen.blit(imagen_pos, (680, 184))
+
+        #Texto
         text("Salon de la Fama", font, green, screen, 500, 100)
 
         pygame.display.flip()
@@ -1929,15 +2024,15 @@ def juego():
 
     # Importa imagenes del escenario
     matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
-    # matriz_1_dibujo = pygame.image.load('resource/matriz_1.png').convert()  ver si hay que quitar una
-    # matriz_2_dibujo = pygame.image.load('resource/matriz_2.png').convert()
-    # matriz_3_dibujo = pygame.image.load('resource/matriz_3.png').convert()
+    matriz_1_dibujo = pygame.image.load('resource/matriz_1.png').convert()
+    matriz_2_dibujo = pygame.image.load('resource/matriz_2.png').convert()
+    matriz_3_dibujo = pygame.image.load('resource/matriz_3.png').convert()
 
     #Boton de guardado
     image_save = pygame.image.load('resource/save.jpg').convert()
     image_save = pygame.transform.scale(image_save, [200, 100])
     image_save.set_colorkey(white)
-    save_button = pygame.Rect(775, 250,250 , 100)
+    save_button = pygame.Rect(787, 260, 173 , 80)
 
 
     # botones tienda
@@ -1954,6 +2049,7 @@ def juego():
     login()
 
     while not game_over:
+        #Tiempo de ahorita del juego
         secs_now = int(total_time_in_game-time_to_start+pygame.time.get_ticks()/1000)
         # Fin del juego
         you_lost_game()
@@ -2029,7 +2125,7 @@ def juego():
             text('Nivel 1', font2, brown, screen, 100, 200)
 
             #Tiempo
-            text(str( secs_now), font2, brown, screen, 800, 400)
+            text('Tiempo: '+str( secs_now)+'s', font2, brown, screen, 852, 400)
 
             
             # Pone la cantidad de enemigo y monedas en este nivel
@@ -2039,7 +2135,7 @@ def juego():
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
 
-            screen.blit(matriz_0_dibujo, [250, 0])
+            screen.blit(matriz_1_dibujo, [250, 0])
             draw_objetcs_matriz()
 
             # Parte funcional para que disparen los rooks
@@ -2089,7 +2185,7 @@ def juego():
             text('Nivel 2', font2, brown, screen, 100, 200)
 
             #Tiempo
-            text(str(secs_now), font2, brown, screen,800, 400)
+            text('Tiempo: '+str(secs_now)+'s', font2, brown, screen,852, 400)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_2()
@@ -2098,7 +2194,7 @@ def juego():
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
 
-            screen.blit(matriz_0_dibujo, [250, 0])
+            screen.blit(matriz_2_dibujo, [250, 0])
             draw_objetcs_matriz()
 
             # Parte funcional para que disparen los rooks
@@ -2148,7 +2244,7 @@ def juego():
             text('Nivel 3', font2, brown, screen, 100, 200)
 
             #Tiempo
-            text(str(secs_now), font2, brown, screen, 800, 400)
+            text('Tiempo: '+str(secs_now)+'s', font2, brown, screen, 852, 400)
 
 
 
@@ -2159,7 +2255,7 @@ def juego():
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
 
-            screen.blit(matriz_0_dibujo, [250, 0])
+            screen.blit(matriz_3_dibujo, [250, 0])
             draw_objetcs_matriz()
 
             # Parte funcional para que disparen los rooks
