@@ -9,35 +9,64 @@ class New_Coin (pygame.sprite.Sprite):
         # Moneda de 25
         if self.type_coin == 1:
             # Caracteristicas del pygame
-            Image = pygame.image.load('resource/coin_25.png').convert()
-            self.image = pygame.transform.scale(Image, (50, 50))
-            self.image.set_colorkey(color)
-            self.value = 25
+            self.sheet = pygame.image.load('resource/coin_copper.png').convert()
+            self.sheet.set_colorkey(color)
+            self.sheet.set_clip(pygame.Rect(0, 0, 64, 64))
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(350, 650))
             self.rect.y = random.choice(range(10, 750))
+            self.rect.center = self.rect.x, self.rect.y
+            self.frame = 0
+            self.states = [[0, 0, 64, 64], [64, 0, 64, 64], [128, 0, 64, 64], [192, 0, 64, 64],
+                           [256, 0, 64, 64], [320, 0, 64, 64], [384, 0, 64, 64], [448, 0, 64, 64]]
+            self.value = 25
 
         # Moneda de 50
         elif self.type_coin == 2:
             # Caracteristicas del pygame
-            Image = pygame.image.load('resource/coin_50.png').convert()
-            self.image = pygame.transform.scale(Image, (50, 50))
-            self.image.set_colorkey(color)
-            self.value = 50
+            self.sheet = pygame.image.load('resource/coin_silver.png').convert()
+            self.sheet.set_colorkey(color)
+            self.sheet.set_clip(pygame.Rect(0, 0, 64, 64))
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(350, 650))
             self.rect.y = random.choice(range(10, 750))
+            self.rect.center = self.rect.x, self.rect.y
+            self.frame = 0
+            self.states = [[0, 0, 64, 64], [64, 0, 64, 64], [128, 0, 64, 64], [192, 0, 64, 64],
+                           [256, 0, 64, 64], [320, 0, 64, 64], [384, 0, 64, 64], [448, 0, 64, 64]]
+            self.value = 50
 
         #Leñador
         elif self.type_coin == 3:
             # Caracteristicas del pygame
-            Image = pygame.image.load('resource/coin_100.png').convert()
-            self.image = pygame.transform.scale(Image, (50, 50))
-            self.image.set_colorkey(color)
-            self.value = 100
+            self.sheet = pygame.image.load('resource/coin_gold.png').convert()
+            self.sheet.set_colorkey(color)
+            self.sheet.set_clip(pygame.Rect(0, 0, 64, 64))
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(350, 650))
             self.rect.y = random.choice(range(10, 750))
+            self.rect.center = self.rect.x, self.rect.y
+            self.frame = 0
+            self.states = [[0, 0, 64, 64], [64, 0, 64, 64], [128, 0, 64, 64], [192, 0, 64, 64],
+                           [256, 0, 64, 64], [320, 0, 64, 64], [384, 0, 64, 64], [448, 0, 64, 64]]
+            self.value = 100
+
+    def get_frame(self, frame_set):
+        self.frame += 1
+        if self.frame > (len(frame_set) - 1):
+            self.frame = 0
+        return frame_set[self.frame]
+
+    def clip(self, clipped_rect):
+        self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
+
+    def update(self, screen):
+        self.clip(self.states)
+        self.image = self.sheet.subsurface(self.sheet.get_clip())
+        screen.blit(self.image, self.rect)
 
     # Obtener posicion en X, y
     def posicion_get(self):
@@ -63,3 +92,4 @@ class New_Coin (pygame.sprite.Sprite):
     # Dibujar en pantalla
     def draw_me(self, screen):
         screen.blit(self.image, self.posicion_get())
+
