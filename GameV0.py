@@ -103,6 +103,7 @@ def read_config():
             line = int(line)
             sprite.append(line)
     list_config.append(sprite)
+    print(list_config)
     file.close()
 
 
@@ -117,6 +118,7 @@ def save_config (final_config):
     file = open(ruta, "w")
     for value in final_config:
         value_int = int(value)
+        print(value_int)
         if isinstance(value_int, int) and 1 <= value_int <= 6:
             file.write(value)
             file.write('\n')
@@ -1727,9 +1729,9 @@ def config():
                         atack_rook += event.unicode
 
         # Lista que contien todos los segundos
-        final_config = [speed_f, speed_e, speed_l, speed_c,
-                        atack_f, atack_e, atack_l, atack_c,
-                        atack_rook]
+        final_config = [speed_f,atack_f, speed_e, atack_e,
+                        speed_l, atack_l, speed_c,atack_c
+                        ,atack_rook]
 
         # Se dibujan iconos de musica
         screen.blit(music_on, (850, 730))
