@@ -1331,12 +1331,12 @@ def high_score_save():
 
 def win_ani():
 
-    sprite_win = Animacion.animacion('resource/win.png', (200, 200), 96, 96, 4)
-    sprite_win2 = Animacion.animacion('resource/win.png', (800, 175), 96, 96, 4)
-    sprite_win3 = Animacion.animacion('resource/win.png', (600, 400), 96, 96, 4)
-    sprite_win4 = Animacion.animacion('resource/win.png', (150, 500), 96, 96, 4)
-    sprite_win5 = Animacion.animacion('resource/win.png', (850, 675), 96, 96, 4)
-    sprite_win6 = Animacion.animacion('resource/win.png', (220, 700), 96, 96, 4)
+    sprite_win = Animacion.animacion('resource/win.png', (200, 200), 96, 96, 4, 0.09)
+    sprite_win2 = Animacion.animacion('resource/win.png', (800, 175), 96, 96, 4, 0.08)
+    sprite_win3 = Animacion.animacion('resource/win.png', (600, 400), 96, 96, 4, 0.1)
+    sprite_win4 = Animacion.animacion('resource/win.png', (150, 500), 96, 96, 4, 0.08)
+    sprite_win5 = Animacion.animacion('resource/win.png', (850, 675), 96, 96, 4, 0.1)
+    sprite_win6 = Animacion.animacion('resource/win.png', (220, 700), 96, 96, 4, 0.08)
 
     clock = pygame.time.Clock()
     run = True
@@ -1366,12 +1366,12 @@ def win_ani():
         text("Presiona una tecla 2 para iniciar", font3, brown, screen, 505, 605)
 
         pygame.display.flip()
-        clock.tick(6)
+        clock.tick(60)
 
 # Ventana game over
 def game_over_ani():
 
-    sprite = Animacion.animacion('resource/gameover.png', (500,450), 99, 96, 14)
+    sprite = Animacion.animacion('resource/gameover.png', (500,450), 99, 96, 14, 0.2)
 
     clock = pygame.time.Clock()
     run = True
@@ -1393,11 +1393,11 @@ def game_over_ani():
         text("Presiona una tecla 1 para iniciar", font3, brown, screen, 500, 600)
 
         pygame.display.flip()
-        clock.tick(10)
+        clock.tick(60)
 
 # Ventana configuracion
 def config():
-    screen.fill(dark) # color de la ventana
+    #screen.fill(dark) # color de la ventana
 
     # ------------------------------------ Imagenes ------------------------------------ #
 
@@ -1405,15 +1405,16 @@ def config():
     music_on.set_colorkey(white)
     music_off = pygame.image.load("resource/music_off.png").convert()
     music_off.set_colorkey(white)
-    flechador_raw = pygame.image.load("resource/avatar_flechador.png").convert()
-    flechador_raw.set_colorkey(white)
-    flechadorimg = pygame.transform.scale(flechador_raw, (80, 80))
-    escudero_raw = pygame.image.load("resource/avatar_escudero.png").convert()
-    escudero_raw.set_colorkey(white)
-    escuderoimg = pygame.transform.scale(escudero_raw, (80, 80))
-    leñador_raw = pygame.image.load("resource/avatar_lenador.png").convert()
-    leñador_raw.set_colorkey(white)
-    leñadorimg = pygame.transform.scale(leñador_raw, (80, 80))
+
+    #flechador_raw = pygame.image.load("resource/avatar_flechador.png").convert()
+    #flechador_raw.set_colorkey(white)
+    #flechadorimg = pygame.transform.scale(flechador_raw, (80, 80))
+    #escudero_raw = pygame.image.load("resource/avatar_escudero.png").convert()
+    #escudero_raw.set_colorkey(white)
+    #escuderoimg = pygame.transform.scale(escudero_raw, (80, 80))
+    #leñador_raw = pygame.image.load("resource/avatar_lenador.png").convert()
+    #leñador_raw.set_colorkey(white)
+    #leñadorimg = pygame.transform.scale(leñador_raw, (80, 80))
     carnival_raw = pygame.image.load("resource/avatar_canival.png").convert()
     carnival_raw.set_colorkey(white)
     carnivalimg = pygame.transform.scale(carnival_raw, (80, 80))
@@ -1449,6 +1450,9 @@ def config():
     fire = pygame.Rect(510, 430, 200, 150)
     water = pygame.Rect(730, 430, 200, 150)
 
+    flechador_s = Animacion.animacion("resource/arque_ide.png", (170, 220), 256, 256, 8, 0.05)
+    escudero_s = Animacion.animacion("resource/escudero_ide.png", (387, 216), 150, 150, 15, 0.07)
+    leñador_s = Animacion.animacion("resource/leñador_ide.png", (620, 210), 311.5, 90, 16, 0.07)
     # Entry box speed
     entrybox_f = pygame.Rect(170, 250, 90, 25)
     entrybox_e = pygame.Rect(390, 250, 90, 25)
@@ -1462,51 +1466,38 @@ def config():
     entrybox_c_at = pygame.Rect(830, 295, 90, 25)
     entrybox_rooks = pygame.Rect(320, 600, 600, 30)
 
-    # Se dibuja rectangulos de titulos o botones
-    pygame.draw.rect(screen, green, saveconfig_button)
-    pygame.draw.rect(screen, darkpurple, avatar)
-    pygame.draw.rect(screen, darkpurple, rook)
-    pygame.draw.rect(screen, brown, rook_box)
-    # Se dibuja las cartas de los avatars
-    pygame.draw.rect(screen, brown, flechador)
-    pygame.draw.rect(screen, brown, escudero)
-    pygame.draw.rect(screen, brown, leñador)
-    pygame.draw.rect(screen, brown, carnival)
-    # Se dibuja las cartas de los rooks
-    pygame.draw.rect(screen, brown, sand)
-    pygame.draw.rect(screen, brown, rock)
-    pygame.draw.rect(screen, brown, fire)
-    pygame.draw.rect(screen, brown, water)
+
+
 
     # ------------------------------------ texto en pantalla ------------------------------------ #
     #   Texto de la entry
-    text("Velocidad", font3, dark, screen, flechador.x + 50, flechador.y + 130)
-    text("Ataque", font3, dark, screen, flechador.x + 40, flechador.y + 175)
-    text("Velocidad", font3, dark, screen, escudero.x + 50, escudero.y + 130)
-    text("Ataque", font3, dark, screen, escudero.x + 40, escudero.y + 175)
-    text("Velocidad", font3, dark, screen, carnival.x + 50, carnival.y + 130)
-    text("Ataque", font3, dark, screen, carnival.x + 40, carnival.y + 175)
-    text("Velocidad", font3, dark, screen, carnival.x + 50, carnival.y + 130)
-    text("Ataque", font3, dark, screen, carnival.x + 40, carnival.y + 175)
-    text("Velocidad", font3, dark, screen, leñador.x + 50, leñador.y + 130)
-    text("Ataque", font3, dark, screen, leñador.x + 40, leñador.y + 175)
+    #text("Velocidad", font3, dark, screen, flechador.x + 50, flechador.y + 130)
+    #text("Ataque", font3, dark, screen, flechador.x + 40, flechador.y + 175)
+    #text("Velocidad", font3, dark, screen, escudero.x + 50, escudero.y + 130)
+    #text("Ataque", font3, dark, screen, escudero.x + 40, escudero.y + 175)
+    #text("Velocidad", font3, dark, screen, carnival.x + 50, carnival.y + 130)
+    #text("Ataque", font3, dark, screen, carnival.x + 40, carnival.y + 175)
+    #text("Velocidad", font3, dark, screen, carnival.x + 50, carnival.y + 130)
+    #text("Ataque", font3, dark, screen, carnival.x + 40, carnival.y + 175)
+    #text("Velocidad", font3, dark, screen, leñador.x + 50, leñador.y + 130)
+    #text("Ataque", font3, dark, screen, leñador.x + 40, leñador.y + 175)
 
     #   Texto boton y titulos
 
-    text('Guardar cambios', font2, brown, screen, saveconfig_button.x + 110, saveconfig_button.y + 25)
-    text("Avatars", font, purple, screen, avatar.x + 250, avatar.y + 35)
-    text("Rooks", font, purple, screen, rook.x + 250, rook.y + 35)
-    text("Velocidad de ataque", font3, dark, screen, entrybox_rooks.x - 120, entrybox_rooks.y + 15)
+    #text('Guardar cambios', font2, brown, screen, saveconfig_button.x + 110, saveconfig_button.y + 25)
+    #text("Avatars", font, purple, screen, avatar.x + 250, avatar.y + 35)
+    #text("Rooks", font, purple, screen, rook.x + 250, rook.y + 35)
+    #text("Velocidad de ataque", font3, dark, screen, entrybox_rooks.x - 120, entrybox_rooks.y + 15)
 
     # Texto nombres
-    text("Arquero", font2, purple, screen, flechador.x + 100, flechador.y + 15)
-    text("Escudero", font2, purple, screen, escudero.x + 100, escudero.y + 15)
-    text("Leñador", font2, purple, screen, leñador.x + 100, leñador.y + 15)
-    text("Caníval", font2, purple, screen, carnival.x + 100, carnival.y + 15)
-    text("Arena", font2, purple, screen, sand.x + 100, sand.y + 15)
-    text("Roca", font2, purple, screen, rock.x + 100, rock.y + 15)
-    text("Fuego", font2, purple, screen, fire.x + 100, fire.y + 15)
-    text("Agua", font2, purple, screen, water.x + 100, water.y + 15)
+    #text("Arquero", font2, purple, screen, flechador.x + 100, flechador.y + 15)
+    #text("Escudero", font2, purple, screen, escudero.x + 100, escudero.y + 15)
+    #text("Leñador", font2, purple, screen, leñador.x + 100, leñador.y + 15)
+    #text("Caníval", font2, purple, screen, carnival.x + 100, carnival.y + 15)
+    #text("Arena", font2, purple, screen, sand.x + 100, sand.y + 15)
+    #text("Roca", font2, purple, screen, rock.x + 100, rock.y + 15)
+    #text("Fuego", font2, purple, screen, fire.x + 100, fire.y + 15)
+    #text("Agua", font2, purple, screen, water.x + 100, water.y + 15)
     # Variables que activan los entrybox
     #   Velocidad
     active_f = False
@@ -1531,6 +1522,7 @@ def config():
     atack_l = ""
     atack_c = ""
     atack_rook = ""
+
 
     run = True
     while run:
@@ -1727,17 +1719,41 @@ def config():
                         atack_rook += event.unicode
 
         # Lista que contien todos los segundos
-        final_config = [speed_f, speed_e, speed_l, speed_c,
-                        atack_f, atack_e, atack_l, atack_c,
+        final_config = [speed_f, atack_f, speed_e, atack_e,
+                        speed_l, atack_l, speed_c, atack_c,
                         atack_rook]
 
+        screen.fill(dark)  # color de la ventana
+
+        # draw contenedores
+        pygame.draw.rect(screen, brown, flechador)
+        pygame.draw.rect(screen, brown, escudero)
+        pygame.draw.rect(screen, brown, leñador)
+        pygame.draw.rect(screen, brown, carnival)
+
+        # Se dibuja las cartas de los rooks
+        pygame.draw.rect(screen, brown, sand)
+        pygame.draw.rect(screen, brown, rock)
+        pygame.draw.rect(screen, brown, fire)
+        pygame.draw.rect(screen, brown, water)
+
+        # Se dibuja rectangulos de titulos o botones
+        pygame.draw.rect(screen, green, saveconfig_button)
+        pygame.draw.rect(screen, darkpurple, avatar)
+        pygame.draw.rect(screen, darkpurple, rook)
+        pygame.draw.rect(screen, brown, rook_box)
         # Se dibujan iconos de musica
         screen.blit(music_on, (850, 730))
         screen.blit(music_off, (930, 730))
+
         # Se dibujan avatars
-        screen.blit(flechadorimg, (flechador.x + 60, flechador.y + 35))
-        screen.blit(escuderoimg, (escudero.x + 60, escudero.y + 35))
-        screen.blit(leñadorimg, (leñador.x + 60, leñador.y + 35))
+
+        flechador_s.update(screen)
+        escudero_s.update(screen)
+        leñador_s.update(screen)
+
+        #screen.blit(escuderoimg, (escudero.x + 60, escudero.y + 35))
+        #screen.blit(leñadorimg, (leñador.x + 60, leñador.y + 35))
         screen.blit(carnivalimg, (carnival.x + 60, carnival.y + 35))
         # Se dibujan rook
         screen.blit(sandimg, (sand.x + 60, sand.y + 40))
@@ -1757,6 +1773,34 @@ def config():
         pygame.draw.rect(screen, white, entrybox_c_at)
         pygame.draw.rect(screen, white, entrybox_rooks)
 
+        #   Texto de la entry
+        text("Velocidad", font3, dark, screen, flechador.x + 50, flechador.y + 130)
+        text("Ataque", font3, dark, screen, flechador.x + 40, flechador.y + 175)
+        text("Velocidad", font3, dark, screen, escudero.x + 50, escudero.y + 130)
+        text("Ataque", font3, dark, screen, escudero.x + 40, escudero.y + 175)
+        text("Velocidad", font3, dark, screen, carnival.x + 50, carnival.y + 130)
+        text("Ataque", font3, dark, screen, carnival.x + 40, carnival.y + 175)
+        text("Velocidad", font3, dark, screen, carnival.x + 50, carnival.y + 130)
+        text("Ataque", font3, dark, screen, carnival.x + 40, carnival.y + 175)
+        text("Velocidad", font3, dark, screen, leñador.x + 50, leñador.y + 130)
+        text("Ataque", font3, dark, screen, leñador.x + 40, leñador.y + 175)
+
+        #   Texto boton y titulos
+
+        text('Guardar cambios', font2, brown, screen, saveconfig_button.x + 110, saveconfig_button.y + 25)
+        text("Avatars", font, purple, screen, avatar.x + 250, avatar.y + 35)
+        text("Rooks", font, purple, screen, rook.x + 250, rook.y + 35)
+        text("Velocidad de ataque", font3, dark, screen, entrybox_rooks.x - 120, entrybox_rooks.y + 15)
+
+        # Texto nombres
+        text("Arquero", font2, purple, screen, flechador.x + 100, flechador.y + 15)
+        text("Escudero", font2, purple, screen, escudero.x + 100, escudero.y + 15)
+        text("Leñador", font2, purple, screen, leñador.x + 100, leñador.y + 15)
+        text("Caníval", font2, purple, screen, carnival.x + 100, carnival.y + 15)
+        text("Arena", font2, purple, screen, sand.x + 100, sand.y + 15)
+        text("Roca", font2, purple, screen, rock.x + 100, rock.y + 15)
+        text("Fuego", font2, purple, screen, fire.x + 100, fire.y + 15)
+        text("Agua", font2, purple, screen, water.x + 100, water.y + 15)
         # Se dibuja text de speed avatar
         text(speed_f, font3, dark, screen, entrybox_f.x + 45, entrybox_f.y + 12)
         text(speed_e, font3, dark, screen, entrybox_e.x + 45, entrybox_e.y + 12)
@@ -1959,6 +2003,7 @@ def high_score():
 
 # ***************************************  Ventana juego  ************************************************
 
+
 def juego():
     # Variables globales para el juego
     global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin
@@ -2036,6 +2081,8 @@ def juego():
 
     # Revisa si hay una partida por cargar
     login()
+
+
 
     while not game_over:
         #Tiempo de ahorita del juego

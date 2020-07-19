@@ -55,13 +55,15 @@ class New_Coin (pygame.sprite.Sprite):
             self.value = 100
 
     def get_frame(self, frame_set):
-        self.frame += 1
+        self.frame += 0.2
+        frames = self.frame % 8
         if self.frame > (len(frame_set) - 1):
             self.frame = 0
-        return frame_set[self.frame]
+        return frame_set[int(frames)]
 
     def clip(self, clipped_rect):
         self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
+
 
     def update(self, screen):
         self.clip(self.states)
