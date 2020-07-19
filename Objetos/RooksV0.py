@@ -4,7 +4,6 @@ import pygame
 #Primero funcion crear dibuja en cada cuadrito de la matriz y revisa que no halla ningun personaje en dicho espacio
 
 
-white = (255, 255, 255)
 class New_Rook (pygame.sprite.Sprite):
     def __init__( self, tipo, posicion, num, white, list_config):
         super().__init__()

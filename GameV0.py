@@ -2,6 +2,7 @@ import pygame, sys, random, pickle
 from Objetos import AvartsV0
 from Objetos import CoinsV0
 from Objetos import RooksV0
+from Objetos import Animacion
 
 # -------------------------------------------- Colores -------------------------------------------- #
 
@@ -47,31 +48,6 @@ list_rooks_in_game = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
 # --------------------------------------------- Clases General ---------------------------------------------- #
-class animacion (pygame.sprite.Sprite):
-    def __init__(self, image, position, width, height,frames_t):
-        super().__init__()
-        self.sheet = pygame.image.load(image) # cambiar nombre
-        self.sheet.set_clip(pygame.Rect(0, 0, width, height))
-        self.image = self.sheet.subsurface(self.sheet.get_clip())
-        self.rect = self.image.get_rect()
-        self.rect.center = position
-        self.frame = 0
-        self.states = []
-        for frame in range(frames_t):
-            self.states.append([width * frame, 0, width, height])
-
-    def get_frame(self, frame_set):
-        self.frame += 1
-        if self.frame > (len(frame_set) - 1):
-            self.frame = 0
-        return frame_set[self.frame]
-
-    def clip(self, clipped_rect):
-        self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
-
-    def update(self):
-        self.clip(self.states)
-        self.image = self.sheet.subsurface(self.sheet.get_clip())
 
 # --------------------------------------------- Funciones ---------------------------------------------- #
 # General-
@@ -511,7 +487,7 @@ def create_new_coins(how_much):
     global coin_list
     coin_list = []
     for i in range(how_much):
-        coin = CoinsV0.New_Coin(random.randint(1, 3), white)
+        coin = CoinsV0.New_Coin(random.randint(1, 3), black)
         coin_list.append(coin)
         all_sprites.add(coin)
 
@@ -543,7 +519,7 @@ def draw_coins():
     for moneda in matrizcoin:
         coins = moneda[0]
         if coins != None:
-            coins.draw_me(screen)
+            coins.update(screen)
 
 
 def kill_coins():
@@ -558,6 +534,7 @@ def kill_coins():
         elif coin_obj != None:
             coin_pos = coin_obj.posicion_get()
             coin_value = coin_obj.value_get()
+            print(matrizcoin)
             if coin_pos[0] <= mouse_pos[0] <= coin_pos[0] + 50 and mouse_click[0] == 1 and coin_pos[1] <= mouse_pos[
                 1] <= coin_pos[1] + 50:
                 if coin_value == 25:
@@ -1258,18 +1235,13 @@ def high_score_save():
 # Ventana win
 
 def win_ani():
-    pos1 = random.randint(48, 952)
-    pos2 = random.randint(48, 952)
-    pos3 = random.randint(48, 952)
-    pos4 = random.randint(48, 952)
-    pos5 = random.randint(48, 952)
-    pos6 = random.randint(48, 952)
-    sprite_win = animacion('resource/win.png', (pos1, pos2), 96, 96, 4)
-    sprite_win2 = animacion('resource/win.png', (pos3, pos4), 96, 96, 4)
-    sprite_win3 = animacion('resource/win.png', (pos5, pos6), 96, 96, 4)
-    sprite_win4 = animacion('resource/win.png', (pos3, pos2), 96, 96, 4)
-    sprite_win5 = animacion('resource/win.png', (pos6, pos1), 96, 96, 4)
-    sprite_win6 = animacion('resource/win.png', (pos5, pos5), 96, 96, 4)
+
+    sprite_win = Animacion.animacion('resource/win.png', (200, 200), 96, 96, 4)
+    sprite_win2 = Animacion.animacion('resource/win.png', (800, 175), 96, 96, 4)
+    sprite_win3 = Animacion.animacion('resource/win.png', (600, 400), 96, 96, 4)
+    sprite_win4 = Animacion.animacion('resource/win.png', (150, 500), 96, 96, 4)
+    sprite_win5 = Animacion.animacion('resource/win.png', (850, 675), 96, 96, 4)
+    sprite_win6 = Animacion.animacion('resource/win.png', (220, 700), 96, 96, 4)
 
     clock = pygame.time.Clock()
     run = True
@@ -1287,19 +1259,13 @@ def win_ani():
                     start()
 
         screen.fill(dark)  # color la ventana
-        sprite_win.update()
-        sprite_win2.update()
-        sprite_win3.update()
-        sprite_win4.update()
-        sprite_win5.update()
-        sprite_win6.update()
+        sprite_win.update(screen)
+        sprite_win2.update(screen)
+        sprite_win3.update(screen)
+        sprite_win4.update(screen)
+        sprite_win5.update(screen)
+        sprite_win6.update(screen)
 
-        screen.blit(sprite_win.image, sprite_win.rect)
-        screen.blit(sprite_win2.image, sprite_win2.rect)
-        screen.blit(sprite_win3.image, sprite_win3.rect)
-        screen.blit(sprite_win4.image, sprite_win4.rect)
-        screen.blit(sprite_win5.image, sprite_win5.rect)
-        screen.blit(sprite_win6.image, sprite_win6.rect)
         text("Felicidades", font4, darkpurple, screen, 500, 100)
         text("has ganado", font5, darkpurple, screen, 500, 200)
         text("Presiona una tecla 2 para iniciar", font3, brown, screen, 505, 605)
@@ -1310,7 +1276,7 @@ def win_ani():
 # Ventana game over
 def game_over_ani():
 
-    sprite = animacion('resource/gameover.png', (480,450), 99, 96, 14)
+    sprite = Animacion.animacion('resource/gameover.png', (500,450), 99, 96, 14)
 
     clock = pygame.time.Clock()
     run = True
@@ -1325,12 +1291,11 @@ def game_over_ani():
                     sprite.kill()
                     start()
 
-        sprite.update()
-        screen.fill(dark)  # color la ventana
-        screen.blit(sprite.image, sprite.rect)
 
-        text("Game Over", font4, darkpurple, screen, 505, 305)
-        text("Presiona una tecla 1 para iniciar", font3, brown, screen, 505, 605)
+        screen.fill(dark)  # color la ventana
+        sprite.update(screen)
+        text("Game Over", font4, darkpurple, screen, 500, 300)
+        text("Presiona una tecla 1 para iniciar", font3, brown, screen, 500, 600)
 
         pygame.display.flip()
         clock.tick(10)
@@ -1915,13 +1880,7 @@ def juego():
 
     time_last_time_new_coin = time_to_start
 
-
-
-
     global quit_rook_var, game_over, shop_open
-
-
-
 
     shop_open = True
     game_over = False
