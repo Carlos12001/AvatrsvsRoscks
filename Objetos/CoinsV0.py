@@ -59,13 +59,13 @@ class New_Coin (pygame.sprite.Sprite):
         frames = self.frame % 8
         if self.frame > (len(frame_set) - 1):
             self.frame = 0
-        return frame_set[int(frames)]
+        return frame_set[int(frames)] # lista de cortes []
 
     def clip(self, clipped_rect):
         self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
 
 
-    def update(self, screen):
+    def update(self, screen): # cambiar nombre
         self.clip(self.states)
         self.image = self.sheet.subsurface(self.sheet.get_clip())
         screen.blit(self.image, self.rect)
