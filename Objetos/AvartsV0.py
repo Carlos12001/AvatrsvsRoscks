@@ -202,12 +202,12 @@ class New_Avart (pygame.sprite.Sprite):
             self.rect.y = posicion[1]
             self.ps = ps
 
-   # def get_frame(self, frame_set):
-        #self.frame += self.speed
-        #frames = self.frame % self.frames_t
-        #if self.frame > (len(frame_set) - 1):
+    def get_frame(self, frame_set):
+        self.frame += self.speed
+        frames = self.frame % self.frames_t
+        if self.frame > (len(frame_set) - 1):
             self.frame = 0
-        #return frame_set[int(frames)]
+        return frame_set[int(frames)]
 
     def clip(self, clipped_rect):
         self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
