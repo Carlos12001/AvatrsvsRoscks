@@ -519,12 +519,13 @@ def atacks_avarts():
         j_now = 0
         for cuadrito in fila:
             if cuadrito[0] != 'Vacio':
-                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero' and atacks_avarts_check(cuadrito[1][0]) :
-                    atacking = cuadrito[0].atack(pygame.time.get_ticks())
-                    if atacking != '':
-                        list_atacks_avart.add(atacking)
-                        all_sprites.add(atacking)
-                        break
+                if cuadrito[0].type_get() == 'Arquero' or cuadrito[0].type_get() == 'Escudero'  :
+                    if  atacks_avarts_check(cuadrito[1][0]):
+                        atacking = cuadrito[0].atack(pygame.time.get_ticks())
+                        if atacking != '':
+                            list_atacks_avart.add(atacking)
+                            all_sprites.add(atacking)
+                            break
                 elif cuadrito[0].type_get() == 'Lenador' or cuadrito[0].type_get() == 'Canival':
                     if i_now - 1 >= 0 and MATRIZ[i_now - 1][j_now][0] != 'Vacio':
                         if MATRIZ[i_now - 1][j_now][0].type_get() == 'Sand' \
