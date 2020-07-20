@@ -458,7 +458,8 @@ def start_config_level_3():
 def create_enemy(how_much, num):
     global avart_list
     for i in range(how_much):
-        avatar = AvartsV0.New_Avart(random.randint(1, 4), num, white, size, list_config)
+        random.randint(1, 4)
+        avatar = AvartsV0.New_Avart(1, num, white, size, list_config)
         avatar_list.append(avatar)
         num += 1
         all_sprites.add(avatar)
@@ -1439,10 +1440,10 @@ def config():
     fire = pygame.Rect(510, 430, 200, 150)
     water = pygame.Rect(730, 430, 200, 150)
 
-    flechador_s = Animacion.animacion("resource/arque_ide.png", (170, 220), 256, 256, 8, 0.05)
-    escudero_s = Animacion.animacion("resource/escudero_ide.png", (387, 216), 150, 150, 15, 0.07)
-    leñador_s = Animacion.animacion("resource/leñador_ide.png", (620, 210), 311.5, 90, 16, 0.07)
-    canival_s = Animacion.animacion("resource/canival_ide.png", (830, 183), 175.1, 180, 6, 0.04)
+    flechador_s = Animacion.animacion("resource/arque_ide.png", (170, 220), 256, 256, 8, 0.2)
+    escudero_s = Animacion.animacion("resource/escudero_ide.png", (387, 216), 150, 150, 15, 0.3)
+    leñador_s = Animacion.animacion("resource/leñador_ide.png", (620, 210), 311.5, 90, 16, 0.2)
+    canival_s = Animacion.animacion("resource/canival_ide.png", (830, 183), 175.1, 180, 6, 0.1)
     # Entry box speed
     entrybox_f = pygame.Rect(170, 250, 90, 25)
     entrybox_e = pygame.Rect(390, 250, 90, 25)

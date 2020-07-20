@@ -1,5 +1,5 @@
 import pygame,sys,random
-
+white = (255, 255, 255)
 # Hacer documentacion
 #
 #
@@ -17,10 +17,28 @@ class New_Avart (pygame.sprite.Sprite):
         # Arquero
         if self.type_avatar == 1:
             # Caracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_flechador.png').convert()
+
+            # 256, 256, 8, 0.2
+            self.sheet = pygame.image.load("resource/arque_g.png")
+            self.sheet.set_clip(pygame.Rect(80, 0, 70, 79))
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
+            self.speed = 0.2
+            self.frames_t = 8
+            self.frame = 0
+            self.states = []
+
+            for frame in range(self.frames_t):
+                self.states.append([256 * self.frame, 0, 256, 256])
+
+
+
+
+
+
             self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
-            self.rect.x = random.choice( range(250, 750, 100))
+
+            self.rect.x = 450#random.choice( range(250, 750, 100))
             self.rect.y = size[1]-100
 
             # Carrete de imagenes
@@ -158,9 +176,15 @@ class New_Avart (pygame.sprite.Sprite):
             self.last_time_move = time_now
             self.last_time_atack = time_now
 
-        if not self.ps <= 0:
+        if not self.ps <= 0 and self.type_avatar == 1:
+            self.clip(self.states)
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
             # agregar lineas de clip()
             screen.blit(self.image, self.posicion_get())
+
+        elif not self.ps <= 0:
+            screen.blit(self.image, self.posicion_get())
+            
         else:
             self.kill()
 
@@ -177,6 +201,18 @@ class New_Avart (pygame.sprite.Sprite):
             self.rect.x = posicion[0]
             self.rect.y = posicion[1]
             self.ps = ps
+
+   # def get_frame(self, frame_set):
+        #self.frame += self.speed
+        #frames = self.frame % self.frames_t
+        #if self.frame > (len(frame_set) - 1):
+            self.frame = 0
+        #return frame_set[int(frames)]
+
+    def clip(self, clipped_rect):
+        self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
+
+
 
 # Atacks
 class Attack_Avatar(pygame.sprite.Sprite):
