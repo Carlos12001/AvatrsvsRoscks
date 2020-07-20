@@ -1989,7 +1989,7 @@ def juego():
     list_ramdom_secs = 0
 
     # Numero de Moendas en el juego
-    coins = 100
+    coins = 100000
 
     # Lista de avarts que faltan de poner
     avatar_list = []

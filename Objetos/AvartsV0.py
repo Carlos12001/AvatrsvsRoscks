@@ -18,7 +18,7 @@ class New_Avart (pygame.sprite.Sprite):
         if self.type_avatar == 1:
             # Caracteristicas del pygame
             self.image = pygame.image.load('resource/avatar_flechador.png').convert()
-            self.image.set_colorkey(color)
+           # self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
             self.rect.x = random.choice( range(250, 750, 100))
             self.rect.y = size[1]-100
@@ -36,7 +36,7 @@ class New_Avart (pygame.sprite.Sprite):
         elif self.type_avatar == 2:
             # Caracteristicas del pygame
             self.image = pygame.image.load('resource/avatar_escudero.png').convert()
-            self.image.set_colorkey(color)
+            #self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
             self.rect.y = size[1] - 100
@@ -51,7 +51,7 @@ class New_Avart (pygame.sprite.Sprite):
         elif self.type_avatar == 3:
             # Craracteristicas del pygame
             self.image = pygame.image.load('resource/avatar_lenador.png').convert()
-            self.image.set_colorkey(color)
+            #self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
             self.rect.y = size[1] - 100
@@ -66,7 +66,7 @@ class New_Avart (pygame.sprite.Sprite):
         elif self.type_avatar == 4:
             # Craracteristicas del pygame
             self.image = pygame.image.load('resource/avatar_canival.png').convert()
-            self.image.set_colorkey(color)
+            #self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
             self.rect.y = size[1] - 100
