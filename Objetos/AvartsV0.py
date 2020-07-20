@@ -13,27 +13,29 @@ class New_Avart (pygame.sprite.Sprite):
         self.type_avatar = type_avatar
         self.num = num
         self.atacker = False
+        self.frame = 0
         #  Tipo de Avatar a crear
 
         # Arquero
         if self.type_avatar == 1:
+
+            self.speed = 0.1
             # Caracteristicas del pygame
 
-            self.sheet = pygame.image.load("resource/arque_g.png")
-            #self.sheet_atack = pygame.image.load("resource/arch_atack.png")
-            self.sheet.set_clip(pygame.Rect(80, 0, 70, 79))
-            #self.sheet_atack.set_clip(pygame.Rect(100, 0, 52, 81))
-            self.image = self.sheet.subsurface(self.sheet.get_clip())
-            self.speed = 0.4
+            self.sheet_1 = pygame.image.load("resource/arque_g.png")
+            self.sheet_1.set_clip(pygame.Rect(80, 0, 70, 79))
             self.frames_t = 8
-            self.frames_at = 10
-            self.frame = 0
             self.states = list_de_frames( 80, 0, 70, 79, 256, 8)
-            self.states_atack = list_de_frames(100, 73, 52, 81, 360, 10)
-            #self.states_atack = [[100, 0, 52, 81], [100 + 360 * 1, 0, 52, 81], [100 + 360 * 2, 0, 52, 81], [100 + 360 * 3, 0, 52, 81], [100 + 360 * 4, 0, 52, 81]
-             #                   [100+ 360 * 5, 0, 52, 81], [100+ 360 * 1, 0, 52, 81], [100, 0, 52, 81], [100, 0, 52, 81], [100, 0, 52, 81]]
-           
 
+
+            self.sheet_2 = pygame.image.load("resource/arch_atack.png")
+            self.sheet_2.set_clip(pygame.Rect(100, 0, 52, 81))
+            self.frames_at = 10
+            self.states_atack = list_de_frames(80, 0, 52, 81, 300, 10)
+
+            #Imagen
+            self.image= self.sheet_1.subsurface(self.sheet_1.get_clip())
+            
             self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
 
@@ -110,10 +112,6 @@ class New_Avart (pygame.sprite.Sprite):
         elif self.type_avatar == 4:
             return 'Canival'
 
-    # Obtener imagen
-    def image_get(self):
-        return self.image
-
     # Obtener vida
     def ps_get(self):
         if self.ps <= 0:
@@ -147,6 +145,7 @@ class New_Avart (pygame.sprite.Sprite):
         if (time_now - self.last_time_atack) // 1000 >= self.speed_atack and self.ps > 0:
             self.last_time_atack = time_now
             self.atacker = True
+            self.frame = 0
             # Quien realiza el ataque
             if self.type_avatar == 1:
 
@@ -175,17 +174,22 @@ class New_Avart (pygame.sprite.Sprite):
 
         #Cuando no ataca se queda animacion inmovil
         if not self.ps <= 0 and not self.atacker:
-            self.clip(self.states_atack )
-            self.image = self.sheet.subsurface(self.sheet.get_clip())
+            self.clip(self.states)
+
+            self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
+
             # agregar lineas de clip()
             screen.blit(self.image, self.posicion_get())
 
         #Cuando ataca solo dibuja el sripite
         elif  self.ps > 0:
             self.clip(self.states_atack)
-            self.image = self.sheet.subsurface(self.sheet.get_clip())
+            self.image = self.sheet_2.subsurface(self.sheet_2.get_clip())
+
+
+
             screen.blit(self.image, self.posicion_get())
-            
+
         else:
             self.kill()
 
@@ -209,14 +213,21 @@ class New_Avart (pygame.sprite.Sprite):
         if self.frame > (len(frames_list) - 1):
             self.frame = 0
             self.atacker = False
-            
-        frames = self.frame % self.frames_t
-        
+
+        if not self.atacker:
+            frames = self.frame % self.frames_t
+        else:
+            frames = self.frame % self.frames_at
+
+
         return frames_list[int(frames)]
 
     #Animacio_2
     def clip(self, frames_list):
-        self.sheet.set_clip(pygame.Rect(self.get_frame(frames_list)))
+        if not self.atacker:
+            self.sheet_1.set_clip(pygame.Rect(self.get_frame(frames_list)))
+        else:
+            self.sheet_2.set_clip(pygame.Rect(self.get_frame(frames_list)))
 
 
 
@@ -293,7 +304,9 @@ class Attack_Avatar(pygame.sprite.Sprite):
 #Funciones
 def list_de_frames(x1,y1,x2,y2,espacio,frame):
     result  = []
+    c= 0
     for frame in range(frame):
-        result.append([x1 + espacio * frame, y1, x2, y2])
+        result.append([x1 + espacio * c, y1, x2, y2])
+        c+=1
 
     return result
