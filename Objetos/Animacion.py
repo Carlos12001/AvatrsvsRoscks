@@ -25,7 +25,7 @@ class animacion (pygame.sprite.Sprite):
     def clip(self, clipped_rect):
         self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
 
-    def update(self, screen):
+    def update(self, screen): # cambiar nombre
         self.clip(self.states)
         self.image = self.sheet.subsurface(self.sheet.get_clip())
         screen.blit(self.image, self.rect)

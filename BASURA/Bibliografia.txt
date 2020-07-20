@@ -24,3 +24,7 @@ https://fontmeme.com/fuentes/fuente-avengero/#previewtool
 CDD740
 size 65
 
+# Cosas por hacer
+# ayuda
+# creditos
+

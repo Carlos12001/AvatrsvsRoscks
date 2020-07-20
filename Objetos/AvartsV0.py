@@ -159,6 +159,7 @@ class New_Avart (pygame.sprite.Sprite):
             self.last_time_atack = time_now
 
         if not self.ps <= 0:
+            # agregar lineas de clip()
             screen.blit(self.image, self.posicion_get())
         else:
             self.kill()
