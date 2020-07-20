@@ -103,7 +103,6 @@ def read_config():
             line = int(line)
             sprite.append(line)
     list_config.append(sprite)
-    print(list_config)
     file.close()
 
 
@@ -118,7 +117,6 @@ def save_config (final_config):
     file = open(ruta, "w")
     for value in final_config:
         value_int = int(value)
-        print(value_int)
         if isinstance(value_int, int) and 1 <= value_int <= 6:
             file.write(value)
             file.write('\n')
@@ -486,7 +484,6 @@ def put_new_enemy_aux():
             else:
                 if estado[0].ps_get() <= 0:
                     estado[0] = 'Vacio'
-                    print('\n Error corregido')
         if done:
             break
 
@@ -1774,6 +1771,7 @@ def config():
 
         pygame.display.flip()
         clock.tick(60)
+
 # Ventana menu
 def menu():
     screen.fill(dark)  # color de la ventana
