@@ -88,19 +88,19 @@ class New_Avart (pygame.sprite.Sprite):
         # Leñador
         elif self.type_avatar == 3:
             # Craracteristicas del pygame
-            self.speed = 0.1
+            self.speed = 0.3
             # Caracteristicas del pygame
 
             self.sheet_1 = pygame.image.load("resource/leñador_ide.png")
-            self.sheet_1.set_clip(pygame.Rect(110, 0, 70, 84))
+            self.sheet_1.set_clip(pygame.Rect(110, 0, 70, 90))
             self.frames_t = 16
-            self.states = list_de_frames( 80, 0, 70, 79, 310, 16)
+            self.states = list_de_frames(110, 0, 70, 90, 311.5, 16)
 
 
             self.sheet_2 = pygame.image.load("resource/lenador_attack.png")
-            self.sheet_2.set_clip(pygame.Rect(106, 0 , 75, 87))
-            self.frames_at = 30
-            self.states_atack = list_de_frames(106, 0, 75, 87, 301.83, 30)
+            self.sheet_2.set_clip(pygame.Rect(110, 0 , 109, 90)) 
+            self.frames_at = 30                                 #Okas ya lo voy a probar y te enseno
+            self.states_atack = list_de_frames(110, 0, 109, 90, 312.23, 30)
 
             #Imagen
             self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
@@ -124,16 +124,16 @@ class New_Avart (pygame.sprite.Sprite):
             self.speed = 0.1
             # Caracteristicas del pygame
 
-            self.sheet_1 = pygame.image.load("resource/lenador_ide.png")
-            self.sheet_1.set_clip(pygame.Rect( 53, 0, 70, 87 ))
+            self.sheet_1 = pygame.image.load("resource/canival_ide.png")
+            self.sheet_1.set_clip(pygame.Rect( 106, 0, 60, 87 ))
             self.frames_t = 6
-            self.states = list_de_frames( 53, 0, 70, 87, 180, 6)
+            self.states = list_de_frames( 106, 0, 60, 87, 188.33, 6)
 
 
-            self.sheet_2 = pygame.image.load("resource/arque_atack.png")
-            self.sheet_2.set_clip(pygame.Rect(95, 0 , 55, 80))
-            self.frames_at = 10
-            self.states_atack = list_de_frames(95, 0, 55, 80, 360, 10)
+            self.sheet_2 = pygame.image.load("resource/canival_attack2.png")
+            self.sheet_2.set_clip(pygame.Rect(65, 0 , 58, 86))
+            self.frames_at = 6
+            self.states_atack = list_de_frames(65, 0, 58, 86, 204, 6)
 
             #Imagen
             self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
