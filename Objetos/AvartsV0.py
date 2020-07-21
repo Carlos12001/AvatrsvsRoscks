@@ -121,20 +121,20 @@ class New_Avart (pygame.sprite.Sprite):
         elif self.type_avatar == 4:
 
             # Craracteristicas del pygame
-            self.speed = 0.1
+            self.speed = 0.07
             # Caracteristicas del pygame
 
-            self.sheet_1 = pygame.image.load("resource/canival_ide.png")
-            self.sheet_1.set_clip(pygame.Rect( 106, 0, 60, 87 ))
+            self.sheet_1 = pygame.image.load("resource/canival_g.png")
+            self.sheet_1.set_clip(pygame.Rect( 120, 0, 62, 87 ))
             self.frames_t = 6
-            self.states = list_de_frames( 106, 0, 60, 87, 188.33, 6)
+            self.states = list_de_frames( 120, 0, 62, 87, 171, 6)
 
 
             self.sheet_2 = pygame.image.load("resource/canival_attack2.png")
-            self.sheet_2.set_clip(pygame.Rect(65, 0 , 58, 86))
-            self.frames_at = 6
-            self.states_atack = list_de_frames(65, 0, 58, 86, 204, 6)
-
+            self.sheet_2.set_clip(pygame.Rect(24, 0 , 159, 86))
+            self.frames_at = 6                      #okis okis   
+            self.states_atack = list_de_frames(24, 0, 159, 86, 204, 6)
+    
             #Imagen
             self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
             self.image.set_colorkey(color)
