@@ -99,7 +99,7 @@ class New_Avart (pygame.sprite.Sprite):
 
             self.sheet_2 = pygame.image.load("resource/lenador_attack.png")
             self.sheet_2.set_clip(pygame.Rect(110, 0 , 109, 90)) 
-            self.frames_at = 30                                 #Okas ya lo voy a probar y te enseno
+            self.frames_at = 30                                 
             self.states_atack = list_de_frames(110, 0, 109, 90, 312.23, 30)
 
             #Imagen
@@ -349,6 +349,8 @@ class Attack_Avatar(pygame.sprite.Sprite):
     # Hace el trayecto
     def update(self):
         if self.rect.y > -50:
+            #
+            #
             self.rect.y -= self.speed
         else:
             self.kill()

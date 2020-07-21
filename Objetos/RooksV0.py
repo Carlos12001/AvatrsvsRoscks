@@ -179,10 +179,23 @@ class Attack_Rook (pygame.sprite.Sprite):
         self.type = tipo
         #Arena
         if self.type == 5 :
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (20, 40))
+ 
+            
+            # Craracteristicas del pygame
+            self.speed = 1
+            # Caracteristicas del pygame
 
-            #self.rect = self.image.get_rect()
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect(175, 392, 12, 53))
+            self.frames_t = 6
+            self.states = list_de_frames(175, 392, 12, 53, 12.8, 5)
+
+            #Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
+
+            #self.image = pygame.image.load('resource/bala.png').convert()
+            #self.image = pygame.transform.scale(self.image, (20, 40))
+
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
@@ -192,8 +205,20 @@ class Attack_Rook (pygame.sprite.Sprite):
 
         #Roca
         elif self.type == 6 :
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            self.speed = 0.07
+            # Caracteristicas del pygame
+
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect( 176, 392, 12, 53 ))
+            self.frames_t = 6
+            self.states = list_de_frames( 176, 392, 12, 53, 12.8, 5)
+
+            #Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
+
+            #self.image = pygame.image.load('resource/bala.png').convert()
+            #self.image = pygame.transform.scale(self.image, (20, 40))
 
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
@@ -206,8 +231,20 @@ class Attack_Rook (pygame.sprite.Sprite):
 
         #Fuego
         elif self.type == 7 :
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            self.speed = 0.07
+            # Caracteristicas del pygame
+
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect( 0, 0, 52, 100 ))
+            self.frames_t = 6
+            self.states = list_de_frames( 0, 0, 52, 100, 51.8, 5)
+
+            #Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
+
+            #self.image = pygame.image.load('resource/bala.png').convert()
+            #self.image = pygame.transform.scale(self.image, (20, 40))
 
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
@@ -220,8 +257,21 @@ class Attack_Rook (pygame.sprite.Sprite):
 
         #Agua
         elif self.type == 8 :
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (20, 40))
+
+            # Craracteristicas del pygame
+            self.speed = 0.07
+            # Caracteristicas del pygame
+
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect( 12, 179, 18, 61 ))
+            self.frames_t = 6
+            self.states = list_de_frames( 12, 179, 18, 61, 29, 5)
+
+            #Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
+           
+            #self.image = pygame.image.load('resource/bala.png').convert()
+            #self.image = pygame.transform.scale(self.image, (20, 40))
 
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
@@ -235,6 +285,8 @@ class Attack_Rook (pygame.sprite.Sprite):
     #Trayectoria del ataque
     def update( self, size ):
         if self.rect.y < size[1]:
+            self.clip(self.states)
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
             self.rect.y += self.speed
         else:
             self.kill()
@@ -247,3 +299,27 @@ class Attack_Rook (pygame.sprite.Sprite):
     def get_damage( self ):
         return self.pa
 
+    def get_frame(self, frame_set):
+        self.frame += self.speed
+        frames = self.frame % self.frames_t
+        if self.frame > (len(frame_set) - 1):
+            self.frame = 0
+        return frame_set[int(frames)]
+
+    def clip(self, clipped_rect):
+        self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
+
+    def dibujar2(self, screen): # cambiar nombre
+        self.clip(self.states)
+        self.image = self.sheet.subsurface(self.sheet.get_clip())
+        screen.blit(self.image, self.rect)
+
+#Funciones
+def list_de_frames(x1,y1,x2,y2,espacio,frame):
+    result  = []
+    c= 0
+    for frame in range(frame):
+        result.append([x1 + espacio * c, y1, x2, y2])
+        c+=1
+
+    return result
