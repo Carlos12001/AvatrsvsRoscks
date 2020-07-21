@@ -457,7 +457,7 @@ def create_enemy(how_much, num):
     global avart_list
     for i in range(how_much):
         random.randint(1, 4)
-        avatar = AvartsV0.New_Avart(1, num, white, size, list_config)
+        avatar = AvartsV0.New_Avart(3, num, white, size, list_config)
         avatar_list.append(avatar)
         num += 1
         all_sprites.add(avatar)

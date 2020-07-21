@@ -23,7 +23,7 @@ class New_Avart (pygame.sprite.Sprite):
             # Caracteristicas del pygame
 
             self.sheet_1 = pygame.image.load("resource/arque_g.png")
-            self.sheet_1.set_clip(pygame.Rect(80, 0, 70, 79))
+            self.sheet_1.set_clip(pygame.Rect(54, 0, 65, 82))
             self.frames_t = 8
             self.states = list_de_frames( 80, 0, 70, 79, 256, 8)
 
@@ -55,19 +55,19 @@ class New_Avart (pygame.sprite.Sprite):
             # Caracteristicas del pygame
 
             #"",  150, 150, , 0.3
-             self.speed = 0.1
+            self.speed = 0.1
             # Caracteristicas del pygame
 
-            self.sheet_1 = pygame.image.load("resource/escudero_ide.png")
-            self.sheet_1.set_clip(pygame.Rect( 57, 34, 150, 150))
+            self.sheet_1 = pygame.image.load("resource/escudero_g.png")
+            self.sheet_1.set_clip(pygame.Rect( 55, 0, 63, 79))
             self.frames_t = 15
-            self.states = list_de_frames( 80, 0, 70, 79, 256, 8)
+            self.states = list_de_frames( 55, 0, 63, 79, 154, 15)
 
 
-            self.sheet_2 = pygame.image.load("resource/arque_atack.png")
-            self.sheet_2.set_clip(pygame.Rect(95, 0 , 55, 80))
-            self.frames_at = 10
-            self.states_atack = list_de_frames(95, 0, 55, 80, 360, 10)
+            self.sheet_2 = pygame.image.load("resource/escudero_attack.png")
+            self.sheet_2.set_clip(pygame.Rect(126, 0 , 66, 87))
+            self.frames_at = 22
+            self.states_atack = list_de_frames(126, 0, 66, 87, 338.59, 22)
 
             #Imagen
             self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
@@ -88,8 +88,25 @@ class New_Avart (pygame.sprite.Sprite):
         # Leñador
         elif self.type_avatar == 3:
             # Craracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_lenador.png').convert()
+            self.speed = 0.1
+            # Caracteristicas del pygame
+
+            self.sheet_1 = pygame.image.load("resource/leñador_ide.png")
+            self.sheet_1.set_clip(pygame.Rect(110, 0, 70, 84))
+            self.frames_t = 16
+            self.states = list_de_frames( 80, 0, 70, 79, 310, 16)
+
+
+            self.sheet_2 = pygame.image.load("resource/lenador_attack.png")
+            self.sheet_2.set_clip(pygame.Rect(106, 0 , 75, 87))
+            self.frames_at = 30
+            self.states_atack = list_de_frames(106, 0, 75, 87, 301.83, 30)
+
+            #Imagen
+            self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
             self.image.set_colorkey(color)
+
+            #Posiciones
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
             self.rect.y = size[1] - 100
@@ -102,9 +119,27 @@ class New_Avart (pygame.sprite.Sprite):
 
         # Canival
         elif self.type_avatar == 4:
+
             # Craracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_canival.png').convert()
+            self.speed = 0.1
+            # Caracteristicas del pygame
+
+            self.sheet_1 = pygame.image.load("resource/lenador_ide.png")
+            self.sheet_1.set_clip(pygame.Rect( 53, 0, 70, 87 ))
+            self.frames_t = 6
+            self.states = list_de_frames( 53, 0, 70, 87, 180, 6)
+
+
+            self.sheet_2 = pygame.image.load("resource/arque_atack.png")
+            self.sheet_2.set_clip(pygame.Rect(95, 0 , 55, 80))
+            self.frames_at = 10
+            self.states_atack = list_de_frames(95, 0, 55, 80, 360, 10)
+
+            #Imagen
+            self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
             self.image.set_colorkey(color)
+
+            #Posiciones
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
             self.rect.y = size[1] - 100
@@ -119,6 +154,7 @@ class New_Avart (pygame.sprite.Sprite):
     def posicion_get(self):
         return [self.rect.x, self.rect.y]
 
+    #Setiadea la posicion
     def posicion_set(self, posicion):
         self.rect.x = posicion[0]
         self.rect.y = posicion[1]
