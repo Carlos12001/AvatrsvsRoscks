@@ -255,7 +255,6 @@ class New_Avart (pygame.sprite.Sprite):
     def who(self):
         return self.num
 
-
     # Metodo que sirve para Cargar todos los estado de guardado en la Matriz
     def set_guardado(self, posicion, ps):
         if ps <= 0:
@@ -285,7 +284,7 @@ class New_Avart (pygame.sprite.Sprite):
         #Si esta son atacar
         if not self.atacker:
             self.sheet_1.set_clip(pygame.Rect(self.get_frame(frames_list)))
-        
+
         #Si esta atacando
         else:
             self.sheet_2.set_clip(pygame.Rect(self.get_frame(frames_list)))
@@ -300,8 +299,19 @@ class Attack_Avatar(pygame.sprite.Sprite):
 
         # Flechador
         if self.type == 1:
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (20, 40))
+            # Craracteristicas del pygame
+            self.speed_f = 0.07
+            # Caracteristicas del pygame
+
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect(175, 283, 12, 53))
+            self.frame = 0
+            self.frames_t = 6
+            self.states = list_de_frames(175, 283, 12, 53, 12.8, 5)
+
+
+            #Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
 
             self.rect = self.image.get_rect()
 
@@ -312,8 +322,20 @@ class Attack_Avatar(pygame.sprite.Sprite):
 
         # Escuedero
         elif self.type == 2:
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (20, 40))
+            # Craracteristicas del pygame
+            self.speed_f = 0.07
+            # Caracteristicas del pygame
+
+            self.sheet = pygame.image.load("resource/shield.png")
+            self.sheet.set_clip(pygame.Rect(20, 0, 59, 55))
+            self.frame = 0
+            self.frames_t = 9
+            self.states = list_de_frames(20, 0, 55, 59, 75.33, 9)
+
+
+
+            #Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
 
             self.rect = self.image.get_rect()
 
@@ -324,9 +346,18 @@ class Attack_Avatar(pygame.sprite.Sprite):
 
         # Leñador
         elif self.type == 3:
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (1, 1))
+            self.speed_f = 0.07
+            # Caracteristicas del pygame
 
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect(175, 283, 12, 53))
+            self.frame = 0
+            self.frames_t = 6
+            self.states = list_de_frames(175, 283, 12, 53, 12.8, 5)
+
+            # Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
+            
             self.rect = self.image.get_rect()
 
             self.speed = 1
@@ -336,8 +367,17 @@ class Attack_Avatar(pygame.sprite.Sprite):
 
         # Canival
         elif self.type == 4:
-            self.image = pygame.image.load('resource/bala.png').convert()
-            self.image = pygame.transform.scale(self.image, (1, 1))
+            self.speed_f = 0.07
+            # Caracteristicas del pygame
+
+            self.sheet = pygame.image.load("resource/balas.png")
+            self.sheet.set_clip(pygame.Rect(175, 283, 12, 53))
+            self.frame = 0
+            self.frames_t = 6
+            self.states = list_de_frames(175, 283, 12, 53, 12.8, 5)
+
+            # Imagen
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
 
             self.rect = self.image.get_rect()
 
@@ -346,11 +386,11 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect.y = pos[1]
             self.pa = 12
 
-    # Hace el trayecto
+    # Hace el trayecto  y Cambia de animacion
     def update(self):
         if self.rect.y > -50:
-            #
-            #
+            self.clip(self.states)
+            self.image = self.sheet.subsurface(self.sheet.get_clip())
             self.rect.y -= self.speed
         else:
             self.kill()
@@ -362,6 +402,19 @@ class Attack_Avatar(pygame.sprite.Sprite):
     # Obtiene el dano e la bala
     def get_damage(self):
         return self.pa
+
+
+    def get_frame(self, frame_set):
+        self.frame += self.speed_f
+        frames = self.frame % self.frames_t
+        if self.frame > (len(frame_set) - 1):
+            self.frame = 0
+        return frame_set[int(frames)]
+
+    def clip(self, clipped_rect):
+        self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
+
+
 
 
 #Funciones

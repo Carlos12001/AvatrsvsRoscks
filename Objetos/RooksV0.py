@@ -195,8 +195,7 @@ class Attack_Rook (pygame.sprite.Sprite):
             #Imagen
             self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-            #self.image = pygame.image.load('resource/bala.png').convert()
-            #self.image = pygame.transform.scale(self.image, (20, 40))
+
 
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
@@ -220,8 +219,7 @@ class Attack_Rook (pygame.sprite.Sprite):
             #Imagen
             self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-            #self.image = pygame.image.load('resource/bala.png').convert()
-            #self.image = pygame.transform.scale(self.image, (20, 40))
+
 
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
@@ -247,9 +245,6 @@ class Attack_Rook (pygame.sprite.Sprite):
             #Imagen
             self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-            #self.image = pygame.image.load('resource/bala.png').convert()
-            #self.image = pygame.transform.scale(self.image, (20, 40))
-
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
             self.rect.y = posicion[1]
@@ -274,9 +269,7 @@ class Attack_Rook (pygame.sprite.Sprite):
 
             #Imagen
             self.image = self.sheet.subsurface(self.sheet.get_clip())
-           
-            #self.image = pygame.image.load('resource/bala.png').convert()
-            #self.image = pygame.transform.scale(self.image, (20, 40))
+
 
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]+25
@@ -304,6 +297,7 @@ class Attack_Rook (pygame.sprite.Sprite):
     def get_damage( self ):
         return self.pa
 
+    #Obtiene el frem a poner
     def get_frame(self, frame_set):
         self.frame += self.speed
         frames = self.frame % self.frames_t
@@ -311,13 +305,10 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.frame = 0
         return frame_set[int(frames)]
 
+#Escoge el frem
     def clip(self, clipped_rect):
         self.sheet.set_clip(pygame.Rect(self.get_frame(clipped_rect)))
 
-    def dibujar2(self, screen): # cambiar nombre
-        self.clip(self.states)
-        self.image = self.sheet.subsurface(self.sheet.get_clip())
-        screen.blit(self.image, self.rect)
 
 #Funciones
 def list_de_frames(x1,y1,x2,y2,espacio,frame):
