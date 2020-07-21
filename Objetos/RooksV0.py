@@ -182,7 +182,7 @@ class Attack_Rook (pygame.sprite.Sprite):
  
             
             # Craracteristicas del pygame
-            self.speed = 0.07
+            self.speed = 0.005
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
@@ -207,7 +207,7 @@ class Attack_Rook (pygame.sprite.Sprite):
         #Roca
         elif self.type == 6 :
 
-            self.speed = 0.07
+            self.speed = 0.01
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
@@ -234,7 +234,7 @@ class Attack_Rook (pygame.sprite.Sprite):
         #Fuego
         elif self.type == 7 :
 
-            self.speed = 0.07
+            self.speed = 0.007
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
@@ -262,7 +262,7 @@ class Attack_Rook (pygame.sprite.Sprite):
         elif self.type == 8 :
 
             # Craracteristicas del pygame
-            self.speed = 0.01
+            self.speed = 0.001
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
