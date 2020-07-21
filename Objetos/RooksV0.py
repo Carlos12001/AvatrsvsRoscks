@@ -182,11 +182,12 @@ class Attack_Rook (pygame.sprite.Sprite):
  
             
             # Craracteristicas del pygame
-            self.speed = 1
+            self.speed = 0.07
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
             self.sheet.set_clip(pygame.Rect(175, 392, 12, 53))
+            self.frame = 0
             self.frames_t = 6
             self.states = list_de_frames(175, 392, 12, 53, 12.8, 5)
 
@@ -210,9 +211,10 @@ class Attack_Rook (pygame.sprite.Sprite):
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
-            self.sheet.set_clip(pygame.Rect( 176, 392, 12, 53 ))
+            self.sheet.set_clip(pygame.Rect( 10, 283, 18, 61 ))
+            self.frame = 0
             self.frames_t = 6
-            self.states = list_de_frames( 176, 392, 12, 53, 12.8, 5)
+            self.states = list_de_frames( 10, 283, 18, 61, 28, 5)
 
             #Imagen
             self.image = self.sheet.subsurface(self.sheet.get_clip())
@@ -236,9 +238,10 @@ class Attack_Rook (pygame.sprite.Sprite):
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
-            self.sheet.set_clip(pygame.Rect( 0, 0, 52, 100 ))
+            self.sheet.set_clip(pygame.Rect( 0, 0, 52, 60 ))
+            self.frame = 0
             self.frames_t = 6
-            self.states = list_de_frames( 0, 0, 52, 100, 51.8, 5)
+            self.states = list_de_frames( 0, 0, 52, 60, 51.8, 5)
 
             #Imagen
             self.image = self.sheet.subsurface(self.sheet.get_clip())
@@ -259,11 +262,12 @@ class Attack_Rook (pygame.sprite.Sprite):
         elif self.type == 8 :
 
             # Craracteristicas del pygame
-            self.speed = 0.07
+            self.speed = 0.01
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
             self.sheet.set_clip(pygame.Rect( 12, 179, 18, 61 ))
+            self.frame = 0
             self.frames_t = 6
             self.states = list_de_frames( 12, 179, 18, 61, 29, 5)
 
