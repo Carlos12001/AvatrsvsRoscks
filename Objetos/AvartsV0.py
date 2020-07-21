@@ -28,7 +28,7 @@ class New_Avart (pygame.sprite.Sprite):
             self.states = list_de_frames( 80, 0, 70, 79, 256, 8)
 
 
-            self.sheet_2 = pygame.image.load("resource/arch_atack.png")
+            self.sheet_2 = pygame.image.load("resource/arque_atack.png")
             self.sheet_2.set_clip(pygame.Rect(100, 0, 52, 81))
             self.frames_at = 10
             self.states_atack = list_de_frames(80, 0, 52, 81, 300, 10)
