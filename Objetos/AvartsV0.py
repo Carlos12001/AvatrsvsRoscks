@@ -29,12 +29,12 @@ class New_Avart (pygame.sprite.Sprite):
 
 
             self.sheet_2 = pygame.image.load("resource/arque_atack.png")
-            self.sheet_2.set_clip(pygame.Rect(100, 0, 52, 81))
+            self.sheet_2.set_clip(pygame.Rect(95, 0 , 55, 80))
             self.frames_at = 10
-            self.states_atack = list_de_frames(80, 0, 52, 81, 300, 10)
+            self.states_atack = list_de_frames(95, 0, 55, 80, 360, 10)
 
             #Imagen
-            self.image= self.sheet_1.subsurface(self.sheet_1.get_clip())
+            self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
             
             self.image.set_colorkey(color)
             self.rect = self.image.get_rect()
@@ -49,10 +49,30 @@ class New_Avart (pygame.sprite.Sprite):
             self.speed_atack = list_config[0][1]
 
          # Escudero
+        
+        #Escuedero
         elif self.type_avatar == 2:
             # Caracteristicas del pygame
-            self.image = pygame.image.load('resource/avatar_escudero.png').convert()
+             self.speed = 0.1
+            # Caracteristicas del pygame
+
+            self.sheet_1 = pygame.image.load("resource/arque_g.png")
+            self.sheet_1.set_clip(pygame.Rect(80, 0, 70, 79))
+            self.frames_t = 8
+            self.states = list_de_frames( 80, 0, 70, 79, 256, 8)
+
+
+            self.sheet_2 = pygame.image.load("resource/arque_atack.png")
+            self.sheet_2.set_clip(pygame.Rect(95, 0 , 55, 80))
+            self.frames_at = 10
+            self.states_atack = list_de_frames(95, 0, 55, 80, 360, 10)
+
+            #Imagen
+            self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
             self.image.set_colorkey(color)
+            
+            
+            #Posiciones
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
             self.rect.y = size[1] - 100
@@ -224,8 +244,11 @@ class New_Avart (pygame.sprite.Sprite):
 
     #Animacio_2
     def clip(self, frames_list):
+        #Si esta son atacar
         if not self.atacker:
             self.sheet_1.set_clip(pygame.Rect(self.get_frame(frames_list)))
+        
+        #Si esta atacando
         else:
             self.sheet_2.set_clip(pygame.Rect(self.get_frame(frames_list)))
 
