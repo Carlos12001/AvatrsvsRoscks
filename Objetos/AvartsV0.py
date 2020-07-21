@@ -53,12 +53,14 @@ class New_Avart (pygame.sprite.Sprite):
         #Escuedero
         elif self.type_avatar == 2:
             # Caracteristicas del pygame
+
+            #"",  150, 150, , 0.3
              self.speed = 0.1
             # Caracteristicas del pygame
 
-            self.sheet_1 = pygame.image.load("resource/arque_g.png")
-            self.sheet_1.set_clip(pygame.Rect(80, 0, 70, 79))
-            self.frames_t = 8
+            self.sheet_1 = pygame.image.load("resource/escudero_ide.png")
+            self.sheet_1.set_clip(pygame.Rect( 57, 34, 150, 150))
+            self.frames_t = 15
             self.states = list_de_frames( 80, 0, 70, 79, 256, 8)
 
 
@@ -71,7 +73,7 @@ class New_Avart (pygame.sprite.Sprite):
             self.image = self.sheet_1.subsurface(self.sheet_1.get_clip())
             self.image.set_colorkey(color)
             
-            
+
             #Posiciones
             self.rect = self.image.get_rect()
             self.rect.x = random.choice(range(250, 750, 100))
