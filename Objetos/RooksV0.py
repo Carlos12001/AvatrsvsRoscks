@@ -183,7 +183,7 @@ class Attack_Rook (pygame.sprite.Sprite):
  
             
             # Craracteristicas del pygame
-            self.speed = 0.005
+            self.speed = 0.07
             # Caracteristicas del pygame
 
             self.sheet = pygame.image.load("resource/balas.png")
@@ -213,7 +213,7 @@ class Attack_Rook (pygame.sprite.Sprite):
             self.sheet = pygame.image.load("resource/balas.png")
             self.sheet.set_clip(pygame.Rect( 10, 283, 18, 61 ))
             self.frame = 0
-            self.frames_t = 6
+            self.frames_t = 5
             self.states = list_de_frames( 10, 283, 18, 61, 28, 5)
 
             #Imagen

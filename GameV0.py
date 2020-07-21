@@ -17,6 +17,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 cian = (35, 201, 17)
 blue_neo = (13, 0, 65)
+red = (134,0,41)
 # -------------------------------------------- Inicializar -------------------------------------------- #
 pygame.init()
 pygame.font.init()
@@ -2018,18 +2019,26 @@ def juego():
     matriz_2_dibujo = pygame.image.load('resource/matriz_2.png').convert()
     matriz_3_dibujo = pygame.image.load('resource/matriz_3.png').convert()
 
+    # Importar imagenes de los rooks
+    sand_raw = pygame.image.load('resource/rook_sand.png').convert()
+    sand_raw.set_colorkey(white)
+    sand = pygame.transform.scale(sand_raw, (60, 60))
+    rock = pygame.image.load('resource/rook_rock.png').convert()
+    fire = pygame.image.load('resource/rook_fire.png').convert()
+    water = pygame.image.load('resource/rook_water.png').convert()
+
     #Boton de guardado
-    image_save = pygame.image.load('resource/save.jpg').convert()
+    image_save = pygame.image.load('resource/save2.png').convert()
     image_save = pygame.transform.scale(image_save, [200, 100])
-    image_save.set_colorkey(white)
+    image_save.set_colorkey(black)
     save_button = pygame.Rect(787, 260, 173 , 80)
 
 
     # botones tienda
-    sand_button = pygame.Rect(0, 500, 100, 80)
-    rock_button = pygame.Rect(0, 580, 100, 80)
-    fire_button = pygame.Rect(0, 660, 100, 80)
-    water_button = pygame.Rect(0, 740, 100, 80)
+    sand_button = pygame.Rect(0, 600, 125, 100)
+    rock_button = pygame.Rect(125, 600, 125, 100)
+    fire_button = pygame.Rect(0, 700, 125, 100)
+    water_button = pygame.Rect(125, 700, 125, 100)
     quit_button = pygame.Rect(900, 500, 100, 80)
 
     # Cosas que necesita rooks
@@ -2097,18 +2106,24 @@ def juego():
         # Primer Nivel
         if levels[0]:
 
-            screen.fill(white)
+            screen.fill(red)
 
             # Dibujos de botones
             pygame.draw.rect(screen, brown, sand_button)
-            pygame.draw.rect(screen, lightgreen, rock_button)
-            pygame.draw.rect(screen, green, fire_button)
-            pygame.draw.rect(screen, purple, water_button)
+            pygame.draw.rect(screen, dark, rock_button)
+            pygame.draw.rect(screen, dark, fire_button)
+            pygame.draw.rect(screen, brown, water_button)
             pygame.draw.rect(screen, darkpurple, quit_button)
 
             # VERIFICAR SI AQUI VA UN DRAW PARA SAVE
             pygame.draw.rect(screen, green, save_button)
             screen.blit(image_save, [775, 250])
+
+            # Dibuja los rook de la tienda
+            screen.blit(sand, [sand_button.x + 25, sand_button.y + 25])
+            #screen.blit(image_save, [775, 250])
+            #screen.blit(image_save, [775, 250])
+            #screen.blit(image_save, [775, 250])
 
             #Monedas
             text(str(coins), font2, brown, screen, 100, 50)
