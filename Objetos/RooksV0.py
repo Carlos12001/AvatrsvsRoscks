@@ -177,6 +177,7 @@ class Attack_Rook (pygame.sprite.Sprite):
         super().__init__()
 
         self.type = tipo
+        self.frame = 0
         #Arena
         if self.type == 5 :
  
