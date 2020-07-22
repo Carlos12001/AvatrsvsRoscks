@@ -2232,7 +2232,7 @@ def juego():
             text("Monedas: " + str(coins), font2, dark, screen, 120, 500)
 
             # Nivel
-            text('Nivel 1', font5, dark, screen, 100, 50)
+            text('Nivel 2', font5, dark, screen, 100, 50)
 
             # Tiempo
             text('Tiempo: ' + str(secs_now) + 's', font2, dark, screen, 870, 500)
@@ -2314,7 +2314,7 @@ def juego():
             text("Monedas: " + str(coins), font2, brown, screen, 120, 500)
 
             # Nivel
-            text('Nivel 1', font5, brown, screen, 100, 50)
+            text('Nivel 3', font5, brown, screen, 100, 50)
 
             # Tiempo
             text('Tiempo: ' + str(secs_now) + 's', font2, brown, screen, 870, 500)
