@@ -1427,7 +1427,7 @@ def config():
     avatar = pygame.Rect(0, 40, 500, 70)
     rook = pygame.Rect(0, 340, 500, 70)
     rook_box = pygame.Rect(70, 590, 860, 50)
-
+    decoration = pygame.Rect(850, 725, 150, 75)
     # Avatars
     flechador = pygame.Rect(70, 130, 200, 200)
     escudero = pygame.Rect(290, 130, 200, 200)
@@ -1697,6 +1697,8 @@ def config():
         pygame.draw.rect(screen, darkpurple, avatar)
         pygame.draw.rect(screen, darkpurple, rook)
         pygame.draw.rect(screen, brown, rook_box)
+        pygame.draw.rect(screen, brown, decoration)
+        pygame.draw.polygon(screen, brown, [(850, 725), (800, 800), (850, 800)])
 
         # Se dibujan iconos de musica
         screen.blit(music_on, (850, 730))
@@ -1777,11 +1779,11 @@ def config():
 # Ventana menu
 def menu():
 
-    game_button = pygame.Rect(400, 150, 200, 50)
-    config_button = pygame.Rect(400, 250, 200, 50)
-    salon_button = pygame.Rect(400, 350, 200, 50)
-    help_button = pygame.Rect(400, 450, 200, 50)
-    credi_button = pygame.Rect(400, 550, 200, 50)
+    game_button = pygame.Rect(400, 250, 200, 50)
+    config_button = pygame.Rect(400, 350, 200, 50)
+    salon_button = pygame.Rect(400, 450, 200, 50)
+    help_button = pygame.Rect(400, 550, 200, 50)
+    credi_button = pygame.Rect(400, 650, 200, 50)
 
     #pygame.display.flip()
     run = True
@@ -1816,6 +1818,8 @@ def menu():
         pygame.draw.rect(screen, darkpurple, help_button)
         pygame.draw.rect(screen, darkpurple, credi_button)
 
+        text("Menu", font4, darkpurple, screen, 505, 105)
+        text("Menu", font4, green, screen, 500, 100)
         text('Jugar', font2, green, screen, game_button.x + 100, game_button.y + 25)
         text('Configuración', font2, green, screen, config_button.x + 100, config_button.y + 25)
         text('Salon de la fama', font2, green, screen, salon_button.x + 100, salon_button.y + 25)
@@ -1829,7 +1833,10 @@ def menu():
 def creditos():
 
     return_button = pygame.Rect(400, 650, 200, 50)
-
+    ignacio_raw = pygame.image.load("resource/ignacio_img.gif")
+    ignacio_img = pygame.transform.scale(ignacio_raw, (275, 275))
+    carlos_raw = pygame.image.load("resource/carlos_img.jpg")
+    carlos_img = pygame.transform.scale(carlos_raw, (275, 275))
     run = True
     while run:
         for event in pygame.event.get():
@@ -1842,8 +1849,17 @@ def creditos():
                     menu()
         screen.fill(dark)  # color de la ventana
         pygame.draw.rect(screen, darkpurple, return_button)
+        text("Créditos", font4, darkpurple, screen, 505, 105)
         text("Créditos", font4, purple, screen, 500, 100)
+        text("Carlos Calderón Mata", font2, green, screen, 250, 200)
+        text("Ignacio Calderón Díaz", font2, green, screen, 750, 200)
+        text("Version 3.6", font2, brown, screen, 500, 550)
+        text("Costa Rica | Instituto tecnológico de Costa Rica", font2, brown, screen, 500, 600)
         text("Volver", font2, green, screen, return_button.x + 100, return_button.y + 25)
+
+        # Se dibujan las imaenes
+        screen.blit(ignacio_img, (615, 240))
+        screen.blit(carlos_img, (115, 240))
         pygame.display.flip()
 # Ventana de login
 
