@@ -5,7 +5,7 @@ import pygame
 
 
 class New_Rook (pygame.sprite.Sprite):
-    def __init__( self, tipo, posicion, num, white, list_config):
+    def __init__( self, tipo, posicion, num, black, list_config):
         super().__init__()
         self.type_rook = tipo
         self.num = num
@@ -15,7 +15,7 @@ class New_Rook (pygame.sprite.Sprite):
         if self.type_rook == 5:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_sand.png").convert()
-            self.image.set_colorkey(white)
+            self.image.set_colorkey(black)
             self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
@@ -31,7 +31,7 @@ class New_Rook (pygame.sprite.Sprite):
         elif self.type_rook == 6:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_rock.png").convert()
-            self.image.set_colorkey(white)
+            self.image.set_colorkey(black)
             self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
@@ -47,7 +47,7 @@ class New_Rook (pygame.sprite.Sprite):
         elif self.type_rook == 7:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_fire.png").convert()
-            self.image.set_colorkey(white)
+            self.image.set_colorkey(black)
             self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]
@@ -63,7 +63,7 @@ class New_Rook (pygame.sprite.Sprite):
         elif self.type_rook == 8:
             # cargar imagen
             self.image = pygame.image.load("resource/rook_water.png").convert()
-            self.image.set_colorkey(white)
+            self.image.set_colorkey(black)
             self.image = pygame.transform.scale(self.image, (100, 90))
             self.rect = self.image.get_rect()
             self.rect.x = posicion[0]

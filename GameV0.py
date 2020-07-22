@@ -31,6 +31,7 @@ font2 = pygame.font.SysFont("Times New Roman", 30)
 font3 = pygame.font.SysFont("Times New Roman", 20)
 font4 = pygame.font.SysFont("Castellar", 70)
 font5 = pygame.font.SysFont("Castellar", 45)
+font6 = pygame.font.SysFont("Times New Roman", 18)
 clock = pygame.time.Clock()
 
 # ----------------------------------------- Variables globales ----------------------------------------- #
@@ -306,7 +307,7 @@ def load_aux_3(m, num1, num2):
                 # Logica para ponersi es rook
                 elif 5 <= tipo <= 8 and (cuadrito[1][0] == elements[1][0]) and (
                         cuadrito[1][1] == elements[1][1]) and num2_aux != 1000:
-                    rook = RooksV0.New_Rook(tipo, cuadrito[1], num2_aux, white, list_config)
+                    rook = RooksV0.New_Rook(tipo, cuadrito[1], num2_aux, black, list_config)
                     num2_aux -= 1
                     rook.set_guardado(elements[2])
                     list_rooks_in_game.add(rook)
@@ -941,13 +942,13 @@ def new_rook(tipo, pos):
     global num_rook
     rook = []
     if tipo == 5:
-        rook = RooksV0.New_Rook(tipo, pos, num_rook, white, list_config)
+        rook = RooksV0.New_Rook(tipo, pos, num_rook, black, list_config)
     if tipo == 6:
-        rook = RooksV0.New_Rook(tipo, pos, num_rook, white, list_config)
+        rook = RooksV0.New_Rook(tipo, pos, num_rook, black, list_config)
     if tipo == 7:
-        rook = RooksV0.New_Rook(tipo, pos, num_rook, white, list_config)
+        rook = RooksV0.New_Rook(tipo, pos, num_rook, black, list_config)
     if tipo == 8:
-        rook = RooksV0.New_Rook(tipo, pos, num_rook, white, list_config)
+        rook = RooksV0.New_Rook(tipo, pos, num_rook, black, list_config)
     num_rook += 1
     return rook
 
@@ -1408,16 +1409,16 @@ def config():
     music_off.set_colorkey(white)
 
     sand_raw = pygame.image.load("resource/rook_sand.png").convert()
-    sand_raw.set_colorkey(white)
+    sand_raw.set_colorkey(black)
     sandimg = pygame.transform.scale(sand_raw, (80, 80))
     rock_raw = pygame.image.load("resource/rook_rock.png").convert()
-    rock_raw.set_colorkey(white)
+    rock_raw.set_colorkey(black)
     rockimg = pygame.transform.scale(rock_raw, (80, 80))
     fire_raw = pygame.image.load("resource/rook_fire.png").convert()
-    fire_raw.set_colorkey(white)
+    fire_raw.set_colorkey(black)
     fireimg = pygame.transform.scale(fire_raw, (80, 80))
     water_raw = pygame.image.load("resource/rook_water.png").convert()
-    water_raw.set_colorkey(white)
+    water_raw.set_colorkey(black)
     waterimg = pygame.transform.scale(water_raw, (80, 80))
 
     # ------------------------------------ Dibujos ------------------------------------ #
@@ -2014,18 +2015,24 @@ def juego():
     quit_rook_var = False
 
     # Importa imagenes del escenario
-    matriz_0_dibujo = pygame.image.load('resource/matriz_0.png').convert()
+
     matriz_1_dibujo = pygame.image.load('resource/matriz_1.png').convert()
     matriz_2_dibujo = pygame.image.load('resource/matriz_2.png').convert()
     matriz_3_dibujo = pygame.image.load('resource/matriz_3.png').convert()
 
     # Importar imagenes de los rooks
     sand_raw = pygame.image.load('resource/rook_sand.png').convert()
-    sand_raw.set_colorkey(white)
+    sand_raw.set_colorkey(black)
     sand = pygame.transform.scale(sand_raw, (60, 60))
-    rock = pygame.image.load('resource/rook_rock.png').convert()
-    fire = pygame.image.load('resource/rook_fire.png').convert()
-    water = pygame.image.load('resource/rook_water.png').convert()
+    rock_raw = pygame.image.load('resource/rook_rock.png').convert()
+    rock_raw.set_colorkey(black)
+    rock = pygame.transform.scale(rock_raw, (60, 60))
+    fire_raw = pygame.image.load('resource/rook_fire.png').convert()
+    fire_raw.set_colorkey(black)
+    fire = pygame.transform.scale(fire_raw, (60, 60))
+    water_raw = pygame.image.load('resource/rook_water.png').convert()
+    water_raw.set_colorkey(black)
+    water = pygame.transform.scale(water_raw, (60, 60))
 
     #Boton de guardado
     image_save = pygame.image.load('resource/save2.png').convert()
@@ -2039,7 +2046,7 @@ def juego():
     rock_button = pygame.Rect(125, 600, 125, 100)
     fire_button = pygame.Rect(0, 700, 125, 100)
     water_button = pygame.Rect(125, 700, 125, 100)
-    quit_button = pygame.Rect(900, 500, 100, 80)
+    quit_button = pygame.Rect(750, 700, 250, 100)
 
     # Cosas que necesita rooks
     tipo = 0
@@ -2113,28 +2120,44 @@ def juego():
             pygame.draw.rect(screen, dark, rock_button)
             pygame.draw.rect(screen, dark, fire_button)
             pygame.draw.rect(screen, brown, water_button)
-            pygame.draw.rect(screen, darkpurple, quit_button)
+            pygame.draw.rect(screen, dark, quit_button)
 
             # VERIFICAR SI AQUI VA UN DRAW PARA SAVE
             pygame.draw.rect(screen, green, save_button)
             screen.blit(image_save, [775, 250])
 
             # Dibuja los rook de la tienda
-            screen.blit(sand, [sand_button.x + 25, sand_button.y + 25])
-            #screen.blit(image_save, [775, 250])
-            #screen.blit(image_save, [775, 250])
-            #screen.blit(image_save, [775, 250])
+            screen.blit(sand, [sand_button.x + 30, sand_button.y + 20])
+            screen.blit(rock, [rock_button.x + 30, rock_button.y + 20])
+            screen.blit(fire, [fire_button.x + 30, fire_button.y + 20])
+            screen.blit(water, [water_button.x + 30, water_button.y + 20])
+
+            # texto info de rooks
+
+            text("Arena", font6, dark, screen, sand_button.x + 62, sand_button.y + 10)
+            text("ps 7  | pa 2", font6, dark, screen, sand_button.x + 62, sand_button.y + 85)
+
+            text("Roca", font6, brown, screen, rock_button.x + 62, rock_button.y + 10)
+            text("ps 14 | pa 4", font6, brown, screen, rock_button.x + 62, rock_button.y + 85)
+
+            text("Fuego", font6, brown, screen, fire_button.x + 62, fire_button.y + 10)
+            text("ps 16 | pa 8", font6, brown, screen, fire_button.x + 62, fire_button.y + 85)
+
+            text("Agua", font6, dark, screen, water_button.x + 62, water_button.y + 10)
+            text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
 
             #Monedas
-            text(str(coins), font2, brown, screen, 100, 50)
+            text( "Monedas: " + str(coins), font2, brown, screen, 120, 500)
 
             #Nivel
-            text('Nivel 1', font2, brown, screen, 100, 200)
+            text('Nivel 1', font5, brown, screen, 100, 50)
 
             #Tiempo
-            text('Tiempo: '+str( secs_now)+'s', font2, brown, screen, 852, 400)
+            text('Tiempo: '+ str( secs_now)+'s', font2, brown, screen, 870, 500)
 
-            
+            # Texto boton quitar rook
+            text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
+
             # Pone la cantidad de enemigo y monedas en este nivel
             start_config_level_1()
 
@@ -2176,23 +2199,46 @@ def juego():
 
             # Dibujos de botones y texto
             pygame.draw.rect(screen, brown, sand_button)
-            pygame.draw.rect(screen, lightgreen, rock_button)
-            pygame.draw.rect(screen, green, fire_button)
-            pygame.draw.rect(screen, purple, water_button)
-            pygame.draw.rect(screen, darkpurple, quit_button)
+            pygame.draw.rect(screen, dark, rock_button)
+            pygame.draw.rect(screen, dark, fire_button)
+            pygame.draw.rect(screen, brown, water_button)
+            pygame.draw.rect(screen, dark, quit_button)
 
             #  AQUI VA UN DRAW PARA SAVE
             pygame.draw.rect(screen, white, save_button)
             screen.blit(image_save, [775, 250])
 
-            #Monedas
-            text(str(coins), font2, brown, screen, 100, 50)
+            # Dibuja los rook de la tienda
+            screen.blit(sand, [sand_button.x + 30, sand_button.y + 20])
+            screen.blit(rock, [rock_button.x + 30, rock_button.y + 20])
+            screen.blit(fire, [fire_button.x + 30, fire_button.y + 20])
+            screen.blit(water, [water_button.x + 30, water_button.y + 20])
 
-            #Nivel
-            text('Nivel 2', font2, brown, screen, 100, 200)
+            # texto info de rooks
 
-            #Tiempo
-            text('Tiempo: '+str(secs_now)+'s', font2, brown, screen,852, 400)
+            text("Arena", font6, dark, screen, sand_button.x + 62, sand_button.y + 10)
+            text("ps 7  | pa 2", font6, dark, screen, sand_button.x + 62, sand_button.y + 85)
+
+            text("Roca", font6, brown, screen, rock_button.x + 62, rock_button.y + 10)
+            text("ps 14 | pa 4", font6, brown, screen, rock_button.x + 62, rock_button.y + 85)
+
+            text("Fuego", font6, brown, screen, fire_button.x + 62, fire_button.y + 10)
+            text("ps 16 | pa 8", font6, brown, screen, fire_button.x + 62, fire_button.y + 85)
+
+            text("Agua", font6, dark, screen, water_button.x + 62, water_button.y + 10)
+            text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
+
+            # Monedas
+            text("Monedas: " + str(coins), font2, dark, screen, 120, 500)
+
+            # Nivel
+            text('Nivel 1', font5, dark, screen, 100, 50)
+
+            # Tiempo
+            text('Tiempo: ' + str(secs_now) + 's', font2, dark, screen, 870, 500)
+
+            # Texto boton quitar rook
+            text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_2()
@@ -2235,25 +2281,46 @@ def juego():
 
             # Dibujos de botones y texto
             pygame.draw.rect(screen, brown, sand_button)
-            pygame.draw.rect(screen, lightgreen, rock_button)
-            pygame.draw.rect(screen, green, fire_button)
-            pygame.draw.rect(screen, purple, water_button)
-            pygame.draw.rect(screen, darkpurple, quit_button)
+            pygame.draw.rect(screen, dark, rock_button)
+            pygame.draw.rect(screen, dark, fire_button)
+            pygame.draw.rect(screen, brown, water_button)
+            pygame.draw.rect(screen, dark, quit_button)
 
             #  AQUI VA UN DRAW PARA SAVE
             pygame.draw.rect(screen, white, save_button)
             screen.blit(image_save, [775, 250])
 
-            #Monedas
-            text(str(coins), font2, brown, screen, 100, 50)
+            # Dibuja los rook de la tienda
+            screen.blit(sand, [sand_button.x + 30, sand_button.y + 20])
+            screen.blit(rock, [rock_button.x + 30, rock_button.y + 20])
+            screen.blit(fire, [fire_button.x + 30, fire_button.y + 20])
+            screen.blit(water, [water_button.x + 30, water_button.y + 20])
 
-            #NIVEL
-            text('Nivel 3', font2, brown, screen, 100, 200)
+            # texto info de rooks
 
-            #Tiempo
-            text('Tiempo: '+str(secs_now)+'s', font2, brown, screen, 852, 400)
+            text("Arena", font6, dark, screen, sand_button.x + 62, sand_button.y + 10)
+            text("ps 7  | pa 2", font6, dark, screen, sand_button.x + 62, sand_button.y + 85)
 
+            text("Roca", font6, brown, screen, rock_button.x + 62, rock_button.y + 10)
+            text("ps 14 | pa 4", font6, brown, screen, rock_button.x + 62, rock_button.y + 85)
 
+            text("Fuego", font6, brown, screen, fire_button.x + 62, fire_button.y + 10)
+            text("ps 16 | pa 8", font6, brown, screen, fire_button.x + 62, fire_button.y + 85)
+
+            text("Agua", font6, dark, screen, water_button.x + 62, water_button.y + 10)
+            text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
+
+            # Monedas
+            text("Monedas: " + str(coins), font2, brown, screen, 120, 500)
+
+            # Nivel
+            text('Nivel 1', font5, brown, screen, 100, 50)
+
+            # Tiempo
+            text('Tiempo: ' + str(secs_now) + 's', font2, brown, screen, 870, 500)
+
+            # Texto boton quitar rook
+            text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_3()
