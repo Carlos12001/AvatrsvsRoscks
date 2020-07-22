@@ -1366,7 +1366,7 @@ def win_ani():
 
         text("Felicidades", font4, darkpurple, screen, 500, 100)
         text("has ganado", font5, darkpurple, screen, 500, 200)
-        text("Presiona una tecla 2 para iniciar", font3, brown, screen, 505, 605)
+        text("Presiona una tecla 2 para iniciar", font3, brown, screen, 500, 600)
 
         pygame.display.flip()
         clock.tick(60)
@@ -1776,14 +1776,14 @@ def config():
 
 # Ventana menu
 def menu():
-    screen.fill(dark)  # color de la ventana
 
     game_button = pygame.Rect(400, 150, 200, 50)
     config_button = pygame.Rect(400, 250, 200, 50)
     salon_button = pygame.Rect(400, 350, 200, 50)
     help_button = pygame.Rect(400, 450, 200, 50)
+    credi_button = pygame.Rect(400, 550, 200, 50)
 
-    pygame.display.flip()
+    #pygame.display.flip()
     run = True
     while run:
         for event in pygame.event.get():
@@ -1804,25 +1804,53 @@ def menu():
                 elif help_button.collidepoint(event.pos):
                     # hacer ayuda
                     pass
+                elif credi_button.collidepoint(event.pos):
+                    run = False
+                    creditos()
+
+        screen.fill(dark)  # color de la ventana
 
         pygame.draw.rect(screen, darkpurple, game_button)
         pygame.draw.rect(screen, darkpurple, config_button)
         pygame.draw.rect(screen, darkpurple, salon_button)
         pygame.draw.rect(screen, darkpurple, help_button)
+        pygame.draw.rect(screen, darkpurple, credi_button)
 
         text('Jugar', font2, green, screen, game_button.x + 100, game_button.y + 25)
         text('Configuración', font2, green, screen, config_button.x + 100, config_button.y + 25)
         text('Salon de la fama', font2, green, screen, salon_button.x + 100, salon_button.y + 25)
         text('Ayuda', font2, green, screen, help_button.x + 100, help_button.y + 25)
+        text('Creditos', font2, green, screen, credi_button.x + 100, credi_button.y + 25)
 
         pygame.display.flip()
 
+# Ventana de creditos
+
+def creditos():
+
+    return_button = pygame.Rect(400, 650, 200, 50)
+
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if return_button.collidepoint(event.pos):
+                    run = False
+                    menu()
+        screen.fill(dark)  # color de la ventana
+        pygame.draw.rect(screen, darkpurple, return_button)
+        text("Créditos", font4, purple, screen, 500, 100)
+        text("Volver", font2, green, screen, return_button.x + 100, return_button.y + 25)
+        pygame.display.flip()
 # Ventana de login
 
 def name():
     global user_name
-    entrybox = pygame.Rect(400,300,200,50)
-    button = pygame.Rect(440, 400, 140, 50)
+    entrybox = pygame.Rect(300,350,400,50)
+    button = pygame.Rect(400, 650, 200, 50)
     user_name = ""
     active = False
     run = True
@@ -1850,11 +1878,11 @@ def name():
                         user_name += event.unicode
         screen.fill(dark)  # color la ventana
         pygame.draw.rect(screen, brown,entrybox)
-        pygame.draw.rect(screen, green, button)
-        text("Ingrese su nombre", font, darkpurple, screen, 505, 105)
-        text("Ingrese su nombre", font, green, screen, 500, 100)
-        text(user_name, font2, white,screen, entrybox.x + 100, entrybox.y + 25)
-        text("Guardar", font2, dark, screen, button.x + 70, button.y + 25)
+        pygame.draw.rect(screen, darkpurple, button)
+        text("Ingrese su nombre", font5, darkpurple, screen, 505, 105)
+        text("Ingrese su nombre", font5, green, screen, 500, 100)
+        text(user_name, font2, white,screen, entrybox.x + 200, entrybox.y + 25)
+        text("Guardar", font2, green, screen, button.x + 100, button.y + 25)
 
         pygame.display.flip()
 
@@ -1863,9 +1891,9 @@ def name():
 def start ():
     #titulo = pygame.image.load("resource/titulo.png").convert()
     screen.fill(dark) # color de la ventana
-    text("Avatar vs Rooks", font, darkpurple, screen, 505, 105)
-    text("Avatar vs Rooks", font, green, screen, 500, 100)
-    text("Presione una tecla para iniciar", font2, brown, screen, 500, 300)
+    text("Avatar vs Rooks", font4, darkpurple, screen, 505, 105)
+    text("Avatar vs Rooks", font4, green, screen, 500, 100)
+    text("Presione una tecla para iniciar", font2, brown, screen, 500, 600)
     pygame.display.flip()
     run = True
     while run:
