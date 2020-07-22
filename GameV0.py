@@ -2008,7 +2008,7 @@ def high_score():
 
 def juego():
     # Variables globales para el juego
-    global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin
+    global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin, player_name
 
     # Matriz de posiciones de juego
     MATRIZ = [      [['Vacio', [250,   0]],    ['Vacio', [350,   0]],    ['Vacio', [450,   0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
@@ -2202,6 +2202,9 @@ def juego():
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
+            # Texto jugador
+            text(player_name, font2, green, screen, 100, 100)
+
             # Pone la cantidad de enemigo y monedas en este nivel
             start_config_level_1()
 
@@ -2284,6 +2287,9 @@ def juego():
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
+            # Texto jugador
+            text(player_name, font2, green, screen, 100, 100)
+
             # Pone la cantidad de enemigo en este nivel
             start_config_level_2()
 
@@ -2365,6 +2371,9 @@ def juego():
 
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
+
+            # Texto jugador
+            text(player_name, font2, green, screen, 100, 100)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_3()
