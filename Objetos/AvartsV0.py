@@ -385,7 +385,8 @@ class Attack_Avatar(pygame.sprite.Sprite):
             self.rect.x = pos[0] + 40
             self.rect.y = pos[1]
             self.pa = 12
-
+        pygame.mixer.music.load(f'sounds/mix_0{self.type}.wav')
+        pygame.mixer.music.play()
     # Hace el trayecto  y Cambia de animacion
     def update(self):
         if self.rect.y > -50:

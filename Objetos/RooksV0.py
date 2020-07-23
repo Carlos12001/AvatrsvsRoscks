@@ -279,6 +279,8 @@ class Attack_Rook (pygame.sprite.Sprite):
 
 
             self.speed = 2
+        pygame.mixer.music.load(f'sounds/mix_0{self.type}.wav')
+        pygame.mixer.music.play()
 
     #Trayectoria del ataque
     def update( self, size ):
