@@ -576,6 +576,8 @@ def atacks_avarts_check(pos_x):
         if result:
             break
     return result
+
+
 # ---Funciones para el funcionamiento de las monedas---
 
 def create_new_coins(how_much):
@@ -1937,9 +1939,15 @@ def start ():
     text("Avatar vs Rooks", font4, darkpurple, screen, 505, 105)
     text("Avatar vs Rooks", font4, green, screen, 500, 100)
     text("Presione una tecla para iniciar", font2, brown, screen, 500, 600)
+    # Importar imagenes
+    #imagen_bg = pygame.image.load('resource/help.png').convert()
+    #imagen_bg.set_colorkey(white)
+    #imagen_bg = pygame.transform.scale(imagen_bg,[400,400])
+    #screen.blit(imagen_bg, (0, 14) )
     pygame.display.flip()
     run = True
     while run:
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -1963,6 +1971,7 @@ def start ():
                 else:
                     run = False
                     name()
+        
 
 #Ventana de high score
 def high_score():
@@ -1979,6 +1988,7 @@ def high_score():
     imagen_pos = pygame.image.load('resource/posicion_word.png').convert()
     imagen_pos.set_colorkey(black)
     imagen_pos = pygame.transform.scale(imagen_pos, [100, 40])
+    
 
 
 
@@ -2068,7 +2078,7 @@ def juego():
     list_ramdom_secs = 0
 
     # Numero de Moendas en el juego
-    coins = 9999
+    coins = 100
 
     # Lista de avarts que faltan de poner
     avatar_list = []
@@ -2248,8 +2258,7 @@ def juego():
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
-            # Texto jugador
-            text(player_name, font2, green, screen, 100, 100)
+
 
             # Pone la cantidad de enemigo y monedas en este nivel
             start_config_level_1()
@@ -2338,8 +2347,6 @@ def juego():
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
-            # Texto jugador
-            text(player_name, font2, green, screen, 100, 100)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_2()
@@ -2428,8 +2435,6 @@ def juego():
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
 
-            # Texto jugador
-            text(player_name, font2, green, screen, 100, 100)
 
             # Pone la cantidad de enemigo en este nivel
             start_config_level_3()
@@ -2478,6 +2483,6 @@ def juego():
 # Iniciar el juevo
 
 
-pygame.mixer.music.load("sounds/song1.wav")
-pygame.mixer.music.play(loops=-1)
+#pygame.mixer.music.load("sounds/song1.wav")
+#pygame.mixer.music.play(loops=-1)
 start()
