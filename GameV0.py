@@ -32,6 +32,7 @@ font3 = pygame.font.SysFont("Times New Roman", 20)
 font4 = pygame.font.SysFont("Castellar", 70)
 font5 = pygame.font.SysFont("Castellar", 45)
 font6 = pygame.font.SysFont("Times New Roman", 18)
+font7 = pygame.font.SysFont('Georgia Bold', 45)
 clock = pygame.time.Clock()
 
 # ----------------------------------------- Variables globales ----------------------------------------- #
@@ -113,20 +114,38 @@ def read_config():
 # ---Funcion para guardar configuracion en un .txt
 
 def save_config (final_config):
-    global save
-    save = None
+    global  salir_confi
+    salir_confi = False
     ruta = "configuracion.txt"
     file = open(ruta, "w")
+    c = 0
     for value in final_config:
-        value_int = int(value)
-        if isinstance(value_int, int) and 1 <= value_int <= 6:
-            file.write(value)
-            file.write('\n')
-            save = True
-        else:
-            save = False
+        try:
+            value_int = int(value)
+            if isinstance(value_int, int) and 2<value_int:
+                file.write(value)
+                file.write('\n')
+                salir_confi = True
+                if c ==8 and  4<value_int:
+                    salir_confi = False
+                    #
+                    break
+
+            else:
+                salir_confi = False
+                #
+                break
+
+        except:
+            salir_confi = False
+            #
+            break
+
     file.close()
 
+def error_text(num):
+    #global active_error
+    pass
 
 #--------------------------------------funciones de Ventana configuracion--------------------------------------
 # ---Funcion para guardar configuracion en un .txt
@@ -1583,18 +1602,25 @@ def config():
                     active_c_at = False
                     active_rook_at = True
                 elif 850 < mouse_pos[0] < 914 and 730 < mouse_pos[1] < 794:
-                    pygame.mixer.music.load("resource/song1.wav")
+                    pygame.mixer.music.load("sounds/song1.wav")
                     pygame.mixer.music.play(loops=-1)
                 elif 930 < mouse_pos[0] < 994 and 730 < mouse_pos[1] < 794:
                     pygame.mixer.music.stop()
                 elif saveconfig_button.collidepoint(event.pos):
-                    global save
-                    save_config(final_config)
-                    if save:
-                        run = False
-                        menu()
+                    global salir_confi
+                    print(final_config)
+                    salir_confi = True
+
+                    if  salir_confi :
+                        save_config(final_config)
+                        if salir_confi:
+                            run = False
+                            menu()
+
+
                     else:
                         text("Favor introducir valores entre 1 y 6 segundos", font2, green, screen, 500, 750)
+                        text("Favor introducir todos los valores ", font2, green, screen, 500, 750)
                 else:
                     active_f = False
                     active_e = False
@@ -1677,6 +1703,7 @@ def config():
         final_config = [speed_f,atack_f, speed_e, atack_e,
                         speed_l, atack_l, speed_c,atack_c
                         ,atack_rook]
+
 
         screen.fill(dark)  # color de la ventana
 
@@ -1958,8 +1985,10 @@ def high_score():
     #Crea el texto a mostar en pantalla
     create_texto_hg_list()
 
-    #Ahorita revisar
-    return_menu = pygame.Rect(380, 650, 220, 50)
+    #Boton de salida
+    return_button = pygame.Rect(20, 20, 120, 40)
+
+
     run = True
 
     while run:
@@ -1978,10 +2007,13 @@ def high_score():
                     pass
                 elif event.key == pygame.K_UP :
                     pass
-            #elif boton press
-            #borrar_lista()
-            #run = False
-            #menu()
+            else:
+                pass
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if return_button.collidepoint(event.pos):
+                    borrar_lista()
+                    run = False
+                    menu()
 
         # Color
         screen.fill(blue_neo)
@@ -1997,7 +2029,8 @@ def high_score():
         screen.blit(imagen_py, (190, 184))
         screen.blit(imagen_time, (480, 184))
         screen.blit(imagen_pos, (680, 184))
-
+        pygame.draw.rect(screen, (235, 127, 110), return_button)
+        text("Volver", font7, black, screen, 80, 40)
         #Texto
         text("Salon de la Fama", font, green, screen, 500, 100)
 
@@ -2008,7 +2041,7 @@ def high_score():
 
 def juego():
     # Variables globales para el juego
-    global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin
+    global MATRIZ, matrizcoin, save, time_to_start, time_last_time_new_enemy, num_rook, levels, one_time_upload_levels, list_ramdom_secs, avatar_list, coins, coin_list,total_time_in_game,time_last_time_new_coin, player_name
 
     # Matriz de posiciones de juego
     MATRIZ = [      [['Vacio', [250,   0]],    ['Vacio', [350,   0]],    ['Vacio', [450,   0]],    ['Vacio', [550,   0]],    ['Vacio', [650,   0]]],
@@ -2027,7 +2060,7 @@ def juego():
 
     # Variables con la funcionalidad de los niveles
 
-    levels = [True, True, True]
+    levels = [ True, True, True]
 
     one_time_upload_levels = [True, True, True]
 
@@ -2035,7 +2068,7 @@ def juego():
     list_ramdom_secs = 0
 
     # Numero de Moendas en el juego
-    coins = 10000
+    coins = 9999
 
     # Lista de avarts que faltan de poner
     avatar_list = []
@@ -2052,17 +2085,26 @@ def juego():
 
     time_last_time_new_coin = time_to_start
 
-    global quit_rook_var, game_over, shop_open
+    global quit_rook_var, game_over, shop_open, num_ramdom
+
+    num_ramdom = 2
 
     shop_open = True
     game_over = False
     quit_rook_var = False
 
     # Importa imagenes del escenario
+    bg_1 = pygame.image.load('resource/BG.png').convert()
+    bg_2 = pygame.image.load('resource/BG.png').convert()
+    bg_3 = pygame.image.load('resource/BG.png').convert()
+    bg_aux_1 = bg_1.set_clip(pygame.Rect(0, 0, 1000, 800))
+    bg_2_aux = bg_2.set_clip(pygame.Rect(1003, 0, 2003, 800))
+    bg_3_aux = bg_3.set_clip(pygame.Rect(2000, 0, 3000, 800))
 
-    matriz_1_dibujo = pygame.image.load('resource/matriz_1.png').convert()
-    matriz_2_dibujo = pygame.image.load('resource/matriz_2.png').convert()
-    matriz_3_dibujo = pygame.image.load('resource/matriz_3.png').convert()
+    
+    matriz_1_dibujo = bg_1.subsurface(bg_1.get_clip())
+    matriz_2_dibujo = bg_2.subsurface(bg_2.get_clip())
+    matriz_3_dibujo = bg_3.subsurface(bg_3.get_clip())
 
     # Importar imagenes de los rooks
     sand_raw = pygame.image.load('resource/rook_sand.png').convert()
@@ -2157,7 +2199,7 @@ def juego():
         # Primer Nivel
         if levels[0]:
 
-            screen.fill(red)
+            screen.blit(matriz_1_dibujo, [0, 0])
 
             # Dibujos de botones
             pygame.draw.rect(screen, brown, sand_button)
@@ -2191,13 +2233,17 @@ def juego():
             text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
 
             #Monedas
-            text( "Monedas: " + str(coins), font2, brown, screen, 120, 500)
+            text( "Monedas: " + str(coins), font7, brown, screen, 120, 150)
 
             #Nivel
-            text('Nivel 1', font5, brown, screen, 100, 50)
+            text('Nivel 1', font7, brown, screen, 100, 50)
+
+            # Nombre
+            text('Jugador:', font7, brown, screen, 870, 50)
+            text(str(player_name), font7, brown, screen, 870, 85)
 
             #Tiempo
-            text('Tiempo: '+ str( secs_now)+'s', font2, brown, screen, 870, 500)
+            text('Tiempo: '+ str( secs_now)+'s', font7, brown, screen, 870, 150)
 
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
@@ -2209,7 +2255,7 @@ def juego():
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
 
-            screen.blit(matriz_1_dibujo, [250, 0])
+
             draw_objetcs_matriz()
 
             # Parte funcional para que disparen los rooks
@@ -2239,7 +2285,7 @@ def juego():
         # Segundo Nivel
         elif levels[1]:
 
-            screen.fill(purple)
+            screen.blit(matriz_2_dibujo, [0, 0])
 
             # Dibujos de botones y texto
             pygame.draw.rect(screen, brown, sand_button)
@@ -2273,13 +2319,18 @@ def juego():
             text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
 
             # Monedas
-            text("Monedas: " + str(coins), font2, dark, screen, 120, 500)
+            text("Monedas: " + str(coins), font7, white, screen, 120, 150)
 
             # Nivel
-            text('Nivel 2', font5, dark, screen, 100, 50)
+            text('Nivel 2', font7, white, screen, 100, 50)
+
+            #Nombre
+
+            text('Jugador:', font7, white, screen, 870, 50)
+            text(str(player_name), font7, white, screen, 870, 85)
 
             # Tiempo
-            text('Tiempo: ' + str(secs_now) + 's', font2, dark, screen, 870, 500)
+            text('Tiempo: ' + str(secs_now) + 's', font7, white, screen, 870, 150)
 
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
@@ -2291,7 +2342,7 @@ def juego():
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
 
-            screen.blit(matriz_2_dibujo, [250, 0])
+
             draw_objetcs_matriz()
 
             # Parte funcional para que disparen los rooks
@@ -2320,8 +2371,8 @@ def juego():
 
         # Tercer Nivel
         elif levels[2]:
+            screen.blit(matriz_3_dibujo, [0, 0])
 
-            screen.fill(darkpurple)
 
             # Dibujos de botones y texto
             pygame.draw.rect(screen, brown, sand_button)
@@ -2355,13 +2406,18 @@ def juego():
             text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
 
             # Monedas
-            text("Monedas: " + str(coins), font2, brown, screen, 120, 500)
+            text("Monedas: " + str(coins), font7, white, screen, 120, 150)
 
             # Nivel
-            text('Nivel 3', font5, brown, screen, 100, 50)
+            text('Nivel 3', font7, white, screen, 100, 50)
+
+            # Nombre
+            text(str(player_name), font7, white, screen, 870, 85)
+
+            text('Jugador:', font7, white, screen, 870, 50)
 
             # Tiempo
-            text('Tiempo: ' + str(secs_now) + 's', font2, brown, screen, 870, 500)
+            text('Tiempo: ' + str(secs_now) + 's', font7, white, screen, 870, 150)
 
             # Texto boton quitar rook
             text("Elimiar rook", font2, brown, screen, quit_button.x + 125, quit_button.y + 50)
@@ -2373,7 +2429,7 @@ def juego():
             atacks_colsion_check_avart()
             atacks_colsion_check_rook()
 
-            screen.blit(matriz_3_dibujo, [250, 0])
+
             draw_objetcs_matriz()
 
             # Parte funcional para que disparen los rooks
@@ -2412,5 +2468,7 @@ def juego():
 
 # Iniciar el juevo
 
-start()
 
+pygame.mixer.music.load("sounds/song1.wav")
+pygame.mixer.music.play(loops=-1)
+start()
