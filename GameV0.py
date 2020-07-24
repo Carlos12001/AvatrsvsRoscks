@@ -147,8 +147,8 @@ def error_text(num):
     #global active_error
     pass
 
-#--------------------------------------funciones de Ventana configuracion--------------------------------------
-# ---Funcion para guardar configuracion en un .txt
+#--------------------------------------funciones de Ventana High Score--------------------------------------
+
 def create_texto_hg_list():
     #Archivo para aceder la informacion de quien gano
     file_hg_r = open('Data/high_score', 'rb')
@@ -194,6 +194,10 @@ def borrar_lista():
     for texts in list_name:
         texts.kill()
     list_name.empty()
+
+
+
+#--------------------------------------funciones de Ventana Juego--------------------------------------
 
 # ---Logica para el guardado
 
@@ -1833,8 +1837,8 @@ def menu():
                     run = False
                     high_score()
                 elif help_button.collidepoint(event.pos):
-                    # hacer ayuda
-                    pass
+                    run = False
+                    help()
                 elif credi_button.collidepoint(event.pos):
                     run = False
                     creditos()
@@ -1953,24 +1957,8 @@ def start ():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                if event.key == pygame.K_5:
-                    run = False
-                    juego()
-                elif event.key == pygame.K_9:
-                    run = False
-                    config()
-                elif event.key == pygame.K_6:
-                    run = False
-                    menu()
-                elif event.key == pygame.K_7:
-                    run = False
-                    game_over_ani()
-                elif event.key == pygame.K_8:
-                    run = False
-                    win_ani()
-                else:
-                    run = False
-                    name()
+                run = False
+                name()
         
 
 #Ventana de high score
@@ -2046,6 +2034,63 @@ def high_score():
 
         pygame.display.flip()
 
+
+#Ventana de ayuda
+def help():
+
+    # Importar imagenes
+    #imagen_bg = pygame.image.load('resource/hg_bg.png').convert()
+    #imagen_bg.set_colorkey(white)
+    imagen_h1 = pygame.image.load('resource/help_1.png').convert()
+    imagen_h2 = pygame.image.load('resource/help_2.png').convert()
+
+    pos_b1 =   (760  , 740 , 160, 40)
+    pos_b2 = (20, 740 , 160, 40)
+    # Boton de salida
+    return_button = pygame.Rect(10, 10, 120, 40)
+    button_1 = pygame.Rect(pos_b1)
+    button_2 = pygame.Rect(pos_b2)
+
+    run = True
+    slide_who = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if return_button.collidepoint(event.pos):
+                    borrar_lista()
+                    run = False
+                    menu()
+                elif button_1.collidepoint(event.pos):
+                    slide_who = False
+                elif button_2.collidepoint(event.pos):
+                   slide_who = True
+
+        # Color
+        screen.fill((168, 191, 174))
+
+        #
+        #siguiente_paso(imagen_h1, imagen_h2, buttonn_1, button_2)
+        # Textos
+
+        if slide_who:
+            screen.blit(imagen_h1, (0, 0))
+            pygame.draw.rect(screen, (81, 201, 113), button_1)
+            text("Siguiente", font7,  black, screen,  pos_b1[0]+80, pos_b1[1]+20)
+        else:
+            screen.blit(imagen_h2, (0, 0))
+            pygame.draw.rect(screen, (81, 201, 113), button_2)
+            text("Anterior", font7, black, screen, pos_b2[0] + 80, pos_b2[1] + 20)
+
+        pygame.draw.rect(screen, (235, 127, 110), return_button)
+        text("Volver", font7, black, screen, 70, 30)
+        pygame.display.flip()
+
+
 # ***************************************  Ventana juego  ************************************************
 
 
@@ -2070,7 +2115,7 @@ def juego():
 
     # Variables con la funcionalidad de los niveles
 
-    levels = [ True, True, True]
+    levels = [  True, True, True]
 
     one_time_upload_levels = [True, True, True]
 
