@@ -18,6 +18,7 @@ black = (0, 0, 0)
 cian = (35, 201, 17)
 blue_neo = (13, 0, 65)
 red = (134,0,41)
+
 # -------------------------------------------- Inicializar -------------------------------------------- #
 pygame.init()
 pygame.font.init()
@@ -31,7 +32,7 @@ font2 = pygame.font.SysFont("Times New Roman", 30)
 font3 = pygame.font.SysFont("Times New Roman", 20)
 font4 = pygame.font.SysFont("Castellar", 70)
 font5 = pygame.font.SysFont("Castellar", 45)
-font6 = pygame.font.SysFont("Times New Roman", 18)
+font6 = pygame.font.SysFont("Times New Roman", 16)
 font7 = pygame.font.SysFont('Georgia Bold', 45)
 clock = pygame.time.Clock()
 
@@ -54,7 +55,6 @@ list_rooks_in_game = pygame.sprite.Group()
 
 all_sprites = pygame.sprite.Group()
 
-# --------------------------------------------- Clases General ---------------------------------------------- #
 
 # --------------------------------------------- Funciones ---------------------------------------------- #
 # General-
@@ -106,6 +106,7 @@ def read_config():
             line = int(line)
             sprite.append(line)
     list_config.append(sprite)
+    print(list_config)
     file.close()
 
 
@@ -143,19 +144,17 @@ def save_config2 (final_config):
     file.close()
 
 def save_config (final_config):
-    global  salir_confi
-    salir_confi = False
+    global  completo
     ruta = "configuracion.txt"
     file = open(ruta, "w")
-    c = 0
     for value in final_config:
         if value == "2" or value == "3" or value == "4" or value == "5" or value == "6" or value == "7":
-            value_int = int(value)
             file.write(value)
             file.write('\n')
+            completo = True
         else:
-            text("El valor ingresado debe ser un numero entero entre 2 y 7", font2, brown, screen, 500, 750)
-            run = 
+            completo = False
+            break
     file.close()
 
 def error_text(num):
@@ -1510,7 +1509,7 @@ def config():
     active_rook_at = False
 
     # ------------------------------------ variables de texto ------------------------------------ #
-    global speed_f, speed_e, speed_l, speed_c, atack_f, atack_e, atack_l, atack_c, atack_rook
+    global speed_f, speed_e, speed_l, speed_c, atack_f, atack_e, atack_l, atack_c, atack_rook, completo
     speed_f = ""
     speed_e = ""
     speed_l = ""
@@ -1520,7 +1519,7 @@ def config():
     atack_l = ""
     atack_c = ""
     atack_rook = ""
-
+    completo = None
     clock = pygame.time.Clock()
     run = True
     while run:
@@ -1628,17 +1627,14 @@ def config():
                 elif 930 < mouse_pos[0] < 994 and 730 < mouse_pos[1] < 794:
                     pygame.mixer.music.stop()
                 elif saveconfig_button.collidepoint(event.pos):
-                    global salir_confi
-                    salir_confi = True
-                    if  salir_confi :
-                        save_config(final_config)
+                    save_config(final_config)
+                    if  completo :
                         run = False
                         menu()
+                    #elif completo == False:
+                     #   print("bien")
+                      #  text("Favor ingresar valores entre 1 y 6", font2, green, screen, 500, 750)
 
-
-                    else:
-                        text("Favor introducir valores entre 1 y 6 segundos", font2, green, screen, 500, 750)
-                        text("Favor introducir todos los valores ", font2, green, screen, 500, 750)
                 else:
                     active_f = False
                     active_e = False
@@ -1817,6 +1813,11 @@ def config():
         text(atack_c, font3, dark, screen, entrybox_c_at.x + 45, entrybox_c_at.y + 12)
         # Se dibuja text de atack rook
         text(atack_rook, font3, dark, screen, entrybox_rooks.x + 300, entrybox_rooks.y + 15)
+
+        if completo == False:
+            text("Favor ingresar valores entre 2 y 6", font2, green, screen, 500, 750)
+        else:
+            pass
 
         pygame.display.flip()
         clock.tick(60)
@@ -2288,16 +2289,16 @@ def juego():
             # texto info de rooks
 
             text("Arena", font6, dark, screen, sand_button.x + 62, sand_button.y + 10)
-            text("ps 7  | pa 2", font6, dark, screen, sand_button.x + 62, sand_button.y + 85)
+            text("ps 7  | pa 2 | $ 50", font6, dark, screen, sand_button.x + 62, sand_button.y + 85)
 
             text("Roca", font6, brown, screen, rock_button.x + 62, rock_button.y + 10)
-            text("ps 14 | pa 4", font6, brown, screen, rock_button.x + 62, rock_button.y + 85)
+            text("ps 14 | pa 4 | $ 100", font6, brown, screen, rock_button.x + 62, rock_button.y + 85)
 
             text("Fuego", font6, brown, screen, fire_button.x + 62, fire_button.y + 10)
-            text("ps 16 | pa 8", font6, brown, screen, fire_button.x + 62, fire_button.y + 85)
+            text("ps 16 | pa 8 | $ 150", font6, brown, screen, fire_button.x + 62, fire_button.y + 85)
 
             text("Agua", font6, dark, screen, water_button.x + 62, water_button.y + 10)
-            text("ps 16 | pa 8", font6, dark, screen, water_button.x + 62, water_button.y + 85)
+            text("ps 16 | pa 8 | $ 150", font6, dark, screen, water_button.x + 62, water_button.y + 85)
 
             #Monedas
             text( "Monedas: " + str(coins), font7, brown, screen, 120, 150)
