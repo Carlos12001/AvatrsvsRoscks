@@ -113,7 +113,7 @@ def read_config():
 #--------------------------------------funciones de Ventana configuracion--------------------------------------
 # ---Funcion para guardar configuracion en un .txt
 
-def save_config (final_config):
+def save_config2 (final_config):
     global  salir_confi
     salir_confi = False
     ruta = "configuracion.txt"
@@ -140,6 +140,22 @@ def save_config (final_config):
             #
             break
 
+    file.close()
+
+def save_config (final_config):
+    global  salir_confi
+    salir_confi = False
+    ruta = "configuracion.txt"
+    file = open(ruta, "w")
+    c = 0
+    for value in final_config:
+        if value == "2" or value == "3" or value == "4" or value == "5" or value == "6" or value == "7":
+            value_int = int(value)
+            file.write(value)
+            file.write('\n')
+        else:
+            text("El valor ingresado debe ser un numero entero entre 2 y 7", font2, brown, screen, 500, 750)
+            run = 
     file.close()
 
 def error_text(num):
@@ -1616,7 +1632,6 @@ def config():
                     salir_confi = True
                     if  salir_confi :
                         save_config(final_config)
-                        #if salir_confi:
                         run = False
                         menu()
 
