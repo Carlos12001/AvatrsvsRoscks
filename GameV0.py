@@ -122,15 +122,14 @@ def save_config (final_config):
     for value in final_config:
         try:
             value_int = int(value)
-            if isinstance(value_int, int) and 2<value_int:
+            if isinstance(value_int, int) and 2 < value_int:
                 file.write(value)
                 file.write('\n')
                 salir_confi = True
-                if c ==8 and  4<value_int:
+                if c == 8 and 4 < value_int:
                     salir_confi = False
                     #
                     break
-
             else:
                 salir_confi = False
                 #
@@ -1614,14 +1613,12 @@ def config():
                     pygame.mixer.music.stop()
                 elif saveconfig_button.collidepoint(event.pos):
                     global salir_confi
-                    print(final_config)
                     salir_confi = True
-
                     if  salir_confi :
                         save_config(final_config)
-                        if salir_confi:
-                            run = False
-                            menu()
+                        #if salir_confi:
+                        run = False
+                        menu()
 
 
                     else:

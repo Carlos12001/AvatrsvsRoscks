@@ -45,8 +45,11 @@ class New_Avart (pygame.sprite.Sprite):
             #Caracteristicas del arquero
             self.ps = 5
 
-            self.speed_walk = list_config[0][0]
-            self.speed_atack = list_config[0][1]
+            #self.speed_walk = list_config[0][0]
+            #self.speed_atack = list_config[0][1]
+
+            self.speed_walk = list_config[0]
+            self.speed_atack = list_config[1]
 
          # Escudero
         
