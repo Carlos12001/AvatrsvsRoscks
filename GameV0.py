@@ -1972,6 +1972,7 @@ def start ():
             if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                 run = False
                 name()
+
         
 
 #Ventana de high score
