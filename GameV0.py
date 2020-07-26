@@ -106,7 +106,6 @@ def read_config():
             line = int(line)
             sprite.append(line)
     list_config.append(sprite)
-    print(list_config)
     file.close()
 
 
@@ -114,34 +113,6 @@ def read_config():
 #--------------------------------------funciones de Ventana configuracion--------------------------------------
 # ---Funcion para guardar configuracion en un .txt
 
-def save_config2 (final_config):
-    global  salir_confi
-    salir_confi = False
-    ruta = "configuracion.txt"
-    file = open(ruta, "w")
-    c = 0
-    for value in final_config:
-        try:
-            value_int = int(value)
-            if isinstance(value_int, int) and 2 < value_int:
-                file.write(value)
-                file.write('\n')
-                salir_confi = True
-                if c == 8 and 4 < value_int:
-                    salir_confi = False
-                    #
-                    break
-            else:
-                salir_confi = False
-                #
-                break
-
-        except:
-            salir_confi = False
-            #
-            break
-
-    file.close()
 
 def save_config (final_config):
     global  completo
@@ -1204,8 +1175,6 @@ def quit_rook(quit_pos):
                         cuadrito[0].type_get() == "Fire" or cuadrito[0].type_get() == "Water":
                     cuadrito[0].kill()
                     cuadrito[0] = "Vacio"
-                else:
-                    print("no se puede eliminar avatar")  # ver como indicar esto
             elif cuadrito[0] == "Vacio":
                 pass
             else:
@@ -1349,7 +1318,6 @@ def high_score_save():
 
     #Revisa si tiene agregar un elmento o no
     if not mismo:
-        print('No cambio\n\n')
         #Agrega la nueva tupla
         list_hg.append( ( time, names_player ) )
 
@@ -1631,9 +1599,6 @@ def config():
                     if  completo :
                         run = False
                         menu()
-                    #elif completo == False:
-                     #   print("bien")
-                      #  text("Favor ingresar valores entre 1 y 6", font2, green, screen, 500, 750)
 
                 else:
                     active_f = False
@@ -2542,6 +2507,5 @@ def juego():
 # Iniciar el juevo
 
 
-#pygame.mixer.music.load("sounds/song1.wav")
-#pygame.mixer.music.play(loops=-1)
+
 start()
